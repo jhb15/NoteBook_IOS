@@ -16,7 +16,30 @@
                     <view key="view" contentMode="scaleToFill" id="KR7-8R-Dnp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RXV-gv-q5w">
+                                <rect key="frame" x="16" y="82" width="343" height="32"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Notes Here..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="uZf-fB-xoN">
+                                <rect key="frame" x="16" y="131" width="343" height="232"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" red="0.93197457900000003" green="0.85455971880000003" blue="0.020839172990000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="XWq-NM-5JJ" firstAttribute="trailing" secondItem="RXV-gv-q5w" secondAttribute="trailing" constant="16" id="19V-9G-bR9"/>
+                            <constraint firstItem="uZf-fB-xoN" firstAttribute="top" secondItem="RXV-gv-q5w" secondAttribute="bottom" constant="17" id="1p7-jB-Sq6"/>
+                            <constraint firstItem="XWq-NM-5JJ" firstAttribute="trailing" secondItem="uZf-fB-xoN" secondAttribute="trailing" constant="16" id="Ja4-g1-Wj4"/>
+                            <constraint firstItem="XWq-NM-5JJ" firstAttribute="bottom" secondItem="uZf-fB-xoN" secondAttribute="bottom" constant="255" id="NZT-j5-ZGi"/>
+                            <constraint firstItem="RXV-gv-q5w" firstAttribute="leading" secondItem="XWq-NM-5JJ" secondAttribute="leading" constant="16" id="fXn-Ve-wY1"/>
+                            <constraint firstItem="RXV-gv-q5w" firstAttribute="top" secondItem="XWq-NM-5JJ" secondAttribute="top" constant="18" id="g2i-Yt-szd"/>
+                            <constraint firstItem="uZf-fB-xoN" firstAttribute="leading" secondItem="XWq-NM-5JJ" secondAttribute="leading" constant="16" id="zXJ-vM-WxI"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="XWq-NM-5JJ"/>
                     </view>
                     <navigationItem key="navigationItem" title="New Note" id="waO-Y5-t9P"/>
@@ -35,14 +58,14 @@
                         <color key="backgroundColor" red="0.93197457900000003" green="0.85455971880000003" blue="0.020839172990000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </tabBar>
                     <connections>
-                        <segue destination="QVN-Lw-6xt" kind="relationship" relationship="viewControllers" id="Noo-A1-8VD"/>
                         <segue destination="bBq-eG-nX6" kind="relationship" relationship="viewControllers" id="74L-Sz-oUd"/>
+                        <segue destination="QVN-Lw-6xt" kind="relationship" relationship="viewControllers" id="Noo-A1-8VD"/>
                         <segue destination="JbZ-QM-KJ2" kind="relationship" relationship="viewControllers" id="z6d-Wx-SVr"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W36-Ot-kiD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1348" y="-336"/>
+            <point key="canvasLocation" x="-1278" y="-537"/>
         </scene>
         <!--New Note-->
         <scene sceneID="N3M-Bd-VWP">
@@ -138,7 +161,7 @@
                     <view key="view" contentMode="scaleToFill" id="qWo-KY-w64">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.93197457900000003" green="0.85455971880000003" blue="0.020839172990000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <viewLayoutGuide key="safeArea" id="MrI-Ib-Qb7"/>
                     </view>
                     <navigationItem key="navigationItem" title="About" id="71Z-Z2-18z"/>
