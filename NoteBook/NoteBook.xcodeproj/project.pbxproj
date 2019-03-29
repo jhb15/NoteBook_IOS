@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		C1EF1B33224CE8F3005264C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EF1B32224CE8F3005264C8 /* AppDelegate.swift */; };
-		C1EF1B35224CE8F3005264C8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EF1B34224CE8F3005264C8 /* ViewController.swift */; };
 		C1EF1B38224CE8F3005264C8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1EF1B36224CE8F3005264C8 /* Main.storyboard */; };
 		C1EF1B3B224CE8F3005264C8 /* NoteBook.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C1EF1B39224CE8F3005264C8 /* NoteBook.xcdatamodeld */; };
 		C1EF1B3D224CE8F4005264C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1EF1B3C224CE8F4005264C8 /* Assets.xcassets */; };
@@ -37,7 +36,6 @@
 /* Begin PBXFileReference section */
 		C1EF1B2F224CE8F3005264C8 /* NoteBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoteBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1EF1B32224CE8F3005264C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C1EF1B34224CE8F3005264C8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C1EF1B37224CE8F3005264C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C1EF1B3A224CE8F3005264C8 /* NoteBook.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NoteBook.xcdatamodel; sourceTree = "<group>"; };
 		C1EF1B3C224CE8F4005264C8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -100,7 +98,6 @@
 			isa = PBXGroup;
 			children = (
 				C1EF1B32224CE8F3005264C8 /* AppDelegate.swift */,
-				C1EF1B34224CE8F3005264C8 /* ViewController.swift */,
 				C1EF1B36224CE8F3005264C8 /* Main.storyboard */,
 				C1EF1B3C224CE8F4005264C8 /* Assets.xcassets */,
 				C1EF1B3E224CE8F4005264C8 /* LaunchScreen.storyboard */,
@@ -259,7 +256,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C1EF1B35224CE8F3005264C8 /* ViewController.swift in Sources */,
 				C1EF1B33224CE8F3005264C8 /* AppDelegate.swift in Sources */,
 				C1EF1B3B224CE8F3005264C8 /* NoteBook.xcdatamodeld in Sources */,
 			);
@@ -439,6 +435,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LHS5HNJHA6;
 				INFOPLIST_FILE = NoteBook/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -457,6 +454,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LHS5HNJHA6;
 				INFOPLIST_FILE = NoteBook/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
