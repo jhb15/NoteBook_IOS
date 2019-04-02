@@ -12,7 +12,7 @@
         <!--New Note-->
         <scene sceneID="kXZ-gb-lu6">
             <objects>
-                <viewController id="Uwx-t8-gaH" sceneMemberID="viewController">
+                <viewController id="Uwx-t8-gaH" customClass="NewNoteController" customModule="NoteBook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KR7-8R-Dnp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -43,6 +43,10 @@
                         <viewLayoutGuide key="safeArea" id="XWq-NM-5JJ"/>
                     </view>
                     <navigationItem key="navigationItem" title="New Note" id="waO-Y5-t9P"/>
+                    <connections>
+                        <outlet property="noteContent" destination="uZf-fB-xoN" id="tL0-XW-mGk"/>
+                        <outlet property="noteTitle" destination="RXV-gv-q5w" id="rrG-S1-CGt"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wjX-MN-5Z5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -110,7 +114,7 @@
         <!--My Notes-->
         <scene sceneID="5FN-lf-cGA">
             <objects>
-                <tableViewController id="6q5-fI-i8C" sceneMemberID="viewController">
+                <tableViewController id="6q5-fI-i8C" customClass="MyNotesController" customModule="NoteBook" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="i9Y-ZI-cNJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -157,7 +161,7 @@
         <!--About-->
         <scene sceneID="UwP-qS-G6K">
             <objects>
-                <viewController id="TNd-H3-7yO" sceneMemberID="viewController">
+                <viewController id="TNd-H3-7yO" customClass="AboutController" customModule="NoteBook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qWo-KY-w64">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
