@@ -29,16 +29,16 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sZg-df-twr">
+                                <rect key="frame" x="16" y="375" width="60" height="30"/>
+                                <state key="normal" title="Add Link"/>
+                            </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sCk-D3-ogQ">
                                 <rect key="frame" x="16" y="413" width="343" height="187"/>
                                 <connections>
                                     <segue destination="Wea-ZK-KoM" kind="embed" id="hnX-YW-VOb"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sZg-df-twr">
-                                <rect key="frame" x="16" y="375" width="60" height="30"/>
-                                <state key="normal" title="Add Link"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.93197457900000003" green="0.85455971880000003" blue="0.020839172990000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
