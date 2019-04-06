@@ -7,40 +7,67 @@
 //
 
 import UIKit
+import CoreData
 
 class MyNotesController: UITableViewController {
-
+    
+    var managedContext: NSManagedObjectContext?
+    
+    var fetchedResultsController: NSFetchedResultsController<Note>?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
+            print("error - unable to access failure")
+            exit(EXIT_FAILURE)
+        }
+        managedContext = delegate.persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<Note>(entityName: "Note")
+        let sortDescriptor = NSSortDescriptor(key: "created_at", ascending: true, selector: #selector(NSString.localizedCompare(_:)))
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedContext!, sectionNameKeyPath: nil, cacheName: nil)
+        performFetchForController()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        performFetchForController()
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return fetchedResultsController?.fetchedObjects?.count ?? 0
     }
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+    
+     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "NoteCell", for: indexPath)
+     
+        let note = fetchedResultsController?.object(at: indexPath)
+        cell.textLabel?.text = note?.title ?? "Unknown"
+     
         return cell
+     }
+    
+    func performFetchForController() {
+        do {
+            try fetchedResultsController?.performFetch()
+            tableView.reloadData()
+        }
+        catch let error as NSError {
+            print("The error was: \(error)")
+            
+        }
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
@@ -77,14 +104,15 @@ class MyNotesController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        
+        if let view = segue.destination as? NoteDetailController,
+            let indexPath = tableView.indexPathForSelectedRow {
+            view.noteItem = fetchedResultsController?.object(at: indexPath)
+        }
     }
-    */
 
 }

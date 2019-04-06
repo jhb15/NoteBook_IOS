@@ -11,6 +11,7 @@
 		C182FFAD22536EFB00B8CF97 /* AboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C182FFAC22536EFB00B8CF97 /* AboutController.swift */; };
 		C182FFAF22536F2C00B8CF97 /* MyNotesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C182FFAE22536F2C00B8CF97 /* MyNotesController.swift */; };
 		C182FFB1225370C100B8CF97 /* GuardianAPIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C182FFB0225370C100B8CF97 /* GuardianAPIController.swift */; };
+		C1DE0F5F225914530035B488 /* NoteDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DE0F5E225914530035B488 /* NoteDetailController.swift */; };
 		C1EF1B33224CE8F3005264C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EF1B32224CE8F3005264C8 /* AppDelegate.swift */; };
 		C1EF1B38224CE8F3005264C8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1EF1B36224CE8F3005264C8 /* Main.storyboard */; };
 		C1EF1B3B224CE8F3005264C8 /* NoteBook.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C1EF1B39224CE8F3005264C8 /* NoteBook.xcdatamodeld */; };
@@ -42,6 +43,7 @@
 		C182FFAC22536EFB00B8CF97 /* AboutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutController.swift; sourceTree = "<group>"; };
 		C182FFAE22536F2C00B8CF97 /* MyNotesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNotesController.swift; sourceTree = "<group>"; };
 		C182FFB0225370C100B8CF97 /* GuardianAPIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardianAPIController.swift; sourceTree = "<group>"; };
+		C1DE0F5E225914530035B488 /* NoteDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailController.swift; sourceTree = "<group>"; };
 		C1EF1B2F224CE8F3005264C8 /* NoteBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoteBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1EF1B32224CE8F3005264C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C1EF1B37224CE8F3005264C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -82,6 +84,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C128022F22590BA600BA9901 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				C182FFAA22536EE900B8CF97 /* NewNoteController.swift */,
+				C182FFAC22536EFB00B8CF97 /* AboutController.swift */,
+				C182FFAE22536F2C00B8CF97 /* MyNotesController.swift */,
+				C1DE0F5E225914530035B488 /* NoteDetailController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		C128023022590BD900BA9901 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C182FFB0225370C100B8CF97 /* GuardianAPIController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		C1EF1B26224CE8F2005264C8 = {
 			isa = PBXGroup;
 			children = (
@@ -105,16 +126,14 @@
 		C1EF1B31224CE8F3005264C8 /* NoteBook */ = {
 			isa = PBXGroup;
 			children = (
+				C128023022590BD900BA9901 /* Controllers */,
+				C128022F22590BA600BA9901 /* ViewControllers */,
 				C1EF1B32224CE8F3005264C8 /* AppDelegate.swift */,
 				C1EF1B36224CE8F3005264C8 /* Main.storyboard */,
 				C1EF1B3C224CE8F4005264C8 /* Assets.xcassets */,
 				C1EF1B3E224CE8F4005264C8 /* LaunchScreen.storyboard */,
 				C1EF1B41224CE8F4005264C8 /* Info.plist */,
 				C1EF1B39224CE8F3005264C8 /* NoteBook.xcdatamodeld */,
-				C182FFAA22536EE900B8CF97 /* NewNoteController.swift */,
-				C182FFAC22536EFB00B8CF97 /* AboutController.swift */,
-				C182FFAE22536F2C00B8CF97 /* MyNotesController.swift */,
-				C182FFB0225370C100B8CF97 /* GuardianAPIController.swift */,
 			);
 			path = NoteBook;
 			sourceTree = "<group>";
@@ -274,6 +293,7 @@
 				C1EF1B33224CE8F3005264C8 /* AppDelegate.swift in Sources */,
 				C1EF1B3B224CE8F3005264C8 /* NoteBook.xcdatamodeld in Sources */,
 				C182FFAD22536EFB00B8CF97 /* AboutController.swift in Sources */,
+				C1DE0F5F225914530035B488 /* NoteDetailController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

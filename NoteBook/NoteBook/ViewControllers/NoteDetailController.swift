@@ -1,22 +1,25 @@
 //
-//  NewNoteController.swift
+//  NoteDetailController.swift
 //  NoteBook
 //
-//  Created by jhb15 on 02/04/2019.
+//  Created by jhb15 on 06/04/2019.
 //  Copyright © 2019 jhb15. All rights reserved.
 //
 
 import UIKit
 
-class NewNoteController: UIViewController {
+class NoteDetailController: UIViewController {
     
-    @IBOutlet weak var noteTitle: UITextField!
-    @IBOutlet weak var noteContent: UITextView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var contentTextArea: UITextView!
     
+    var noteItem: Note?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        titleLabel.text = noteItem?.title
+        contentTextArea.text = noteItem?.content
     }
     
 
