@@ -58,6 +58,31 @@ class MyNotesController: UITableViewController {
         return cell
      }
     
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let edit = UITableViewRowAction(style: .normal, title: "Edit") {
+            action, index in
+            print("Editing")
+        }
+        edit.backgroundColor = UIColor.lightGray
+        let delete = UITableViewRowAction(style: .normal, title: "Delete") {
+            action, index in
+            if let note = self.fetchedResultsController?.object(at: index),
+                let context = self.managedContext {
+                do {
+                    context.delete(note)
+                    try context.save()
+                    //self.performFetchForController()
+                    tableView.deleteRows(at: [index], with: .fade)
+                }
+                catch {
+                    print("unable to delete entry")
+                }
+            }
+        }
+        delete.backgroundColor = UIColor.red
+        return [delete, edit]
+    }
+    
     func performFetchForController() {
         do {
             try fetchedResultsController?.performFetch()
