@@ -13,7 +13,6 @@ class NewNoteController: UIViewController {
     
     @IBOutlet weak var noteTitle: UITextField!
     @IBOutlet weak var noteContent: UITextView!
-    @IBOutlet weak var links: UIView!
     
     var managedContext: NSManagedObjectContext?
     

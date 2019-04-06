@@ -20,7 +20,7 @@
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Notes Here..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="uZf-fB-xoN">
                                 <rect key="frame" x="16" y="140" width="343" height="272"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.90850696710000001" green="0.92308937820000003" blue="0.75596813939999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -36,6 +36,7 @@
                             </containerView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RXV-gv-q5w">
                                 <rect key="frame" x="16" y="89" width="343" height="32"/>
+                                <color key="backgroundColor" red="0.90850696710000001" green="0.92308937820000003" blue="0.75596813939999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -212,22 +213,32 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="VgS-Ke-PqC">
-                                <rect key="frame" x="16" y="138" width="343" height="186"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="VgS-Ke-PqC">
+                                <rect key="frame" x="16" y="138" width="343" height="211"/>
                                 <color key="backgroundColor" red="0.9085069670933914" green="0.92308937823834203" blue="0.75596813941260232" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZJp-Ti-Yvp">
+                                <rect key="frame" x="16" y="367" width="343" height="236"/>
+                                <connections>
+                                    <segue destination="Wea-ZK-KoM" kind="embed" id="CHT-e1-Hk1"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" red="0.93333333330000001" green="0.85098039219999999" blue="0.031372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="VgS-Ke-PqC" firstAttribute="top" secondItem="rAk-xM-amv" secondAttribute="bottom" constant="24.5" id="8WX-wT-ejK"/>
+                            <constraint firstItem="VgS-Ke-PqC" firstAttribute="top" secondItem="rAk-xM-amv" secondAttribute="bottom" constant="24.5" id="4BP-Y1-Cnp"/>
+                            <constraint firstItem="Tp3-eI-JM7" firstAttribute="bottom" secondItem="ZJp-Ti-Yvp" secondAttribute="bottom" constant="15" id="Aax-iz-QlF"/>
                             <constraint firstItem="rAk-xM-amv" firstAttribute="top" secondItem="Tp3-eI-JM7" secondAttribute="top" constant="17" id="Hxe-8W-i6l"/>
+                            <constraint firstItem="Tp3-eI-JM7" firstAttribute="bottom" secondItem="VgS-Ke-PqC" secondAttribute="bottom" constant="269" id="ObD-MW-wQV"/>
                             <constraint firstItem="Tp3-eI-JM7" firstAttribute="trailing" secondItem="rAk-xM-amv" secondAttribute="trailing" constant="16" id="c0l-sw-HFR"/>
-                            <constraint firstItem="Tp3-eI-JM7" firstAttribute="bottom" secondItem="VgS-Ke-PqC" secondAttribute="bottom" constant="294" id="cFg-9U-FTJ"/>
                             <constraint firstItem="VgS-Ke-PqC" firstAttribute="leading" secondItem="Tp3-eI-JM7" secondAttribute="leading" constant="16" id="eXc-IY-PJB"/>
                             <constraint firstItem="rAk-xM-amv" firstAttribute="leading" secondItem="Tp3-eI-JM7" secondAttribute="leading" constant="16" id="eqz-pF-kQu"/>
+                            <constraint firstItem="Tp3-eI-JM7" firstAttribute="trailing" secondItem="ZJp-Ti-Yvp" secondAttribute="trailing" constant="16" id="nLE-pF-o6P"/>
                             <constraint firstItem="Tp3-eI-JM7" firstAttribute="trailing" secondItem="VgS-Ke-PqC" secondAttribute="trailing" constant="16" id="pL4-PK-uXD"/>
+                            <constraint firstItem="ZJp-Ti-Yvp" firstAttribute="top" secondItem="VgS-Ke-PqC" secondAttribute="bottom" constant="18" id="pXQ-uf-m67"/>
+                            <constraint firstItem="ZJp-Ti-Yvp" firstAttribute="leading" secondItem="Tp3-eI-JM7" secondAttribute="leading" constant="16" id="ybW-3V-vqH"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Tp3-eI-JM7"/>
                     </view>
@@ -251,7 +262,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ReA-ci-CWs">
                                 <rect key="frame" x="0.0" y="0.0" width="343" height="187"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.90850696710000001" green="0.92308937820000003" blue="0.75596813939999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="9YF-7L-xTb">
                                         <rect key="frame" x="0.0" y="28" width="343" height="44"/>
@@ -260,6 +271,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.90850696710000001" green="0.92308937820000003" blue="0.75596813939999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -270,7 +282,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hSO-Fo-VvA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2281" y="-1075"/>
+            <point key="canvasLocation" x="2567" y="-923"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="hnX-YW-VOb"/>
+    </inferredMetricsTieBreakers>
 </document>
