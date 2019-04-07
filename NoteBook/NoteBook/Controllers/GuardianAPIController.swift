@@ -12,12 +12,16 @@ class GuardianAPIController {
     
     var session:URLSession?
     
+    var query:QueryObject?
+    
     func initialize() {
         if session == nil {
             let config = URLSessionConfiguration.default
             
             session = URLSession(configuration: config)
         }
+        
+        query = QueryObject()
     }
     
     /*

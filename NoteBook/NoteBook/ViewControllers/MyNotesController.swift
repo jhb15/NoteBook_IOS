@@ -71,8 +71,8 @@ class MyNotesController: UITableViewController {
                 do {
                     context.delete(note)
                     try context.save()
-                    //self.performFetchForController()
-                    tableView.deleteRows(at: [index], with: .fade)
+                    self.performFetchForController()
+                    print("Note Deleted with index \(index)")
                 }
                 catch {
                     print("unable to delete entry")
