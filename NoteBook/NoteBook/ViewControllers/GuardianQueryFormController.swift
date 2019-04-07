@@ -10,7 +10,16 @@ import UIKit
 
 class GuardianQueryFormController: UITableViewController {
     
-    var fields = ["query", "date_from", "date_to", "order_by"]
+    enum FieldType:String {
+        case SerchTextCell
+        case DateCell
+        case ListOptionsCell
+    }
+    
+    var fields = [["name": "query", "type": FieldType.SerchTextCell],
+                  ["name": "date_from", "type": FieldType.DateCell],
+                  ["name": "date_to", "type": FieldType.DateCell],
+                  ["name": "order_by", "type": FieldType.ListOptionsCell]]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,23 +35,26 @@ class GuardianQueryFormController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return fields.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let field = fields[indexPath.row]
+        if let identifier = field["type"] as? FieldType {
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifier.rawValue, for: indexPath)
 
-        // Configure the cell...
+            
 
-        return cell
+            return cell
+        }
+        return tableView.dequeueReusableCell(withIdentifier: "ErrorCell", for: indexPath)
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
