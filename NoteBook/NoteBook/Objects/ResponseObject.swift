@@ -27,12 +27,19 @@ class ResponseObject {
             let pageSize = json["pageSize"] as? Int,
             let currentPage = json["currentPage"] as? Int,
             let pages = json["pages"] as? Int,
-            let orderBy = json["orderBy"] as? String//,
-            //let resultsJSON = json["results"] as? [String] //TODO Implement
+            let orderBy = json["orderBy"] as? String,
+            let resultsJSON = json["results"] as? [Any]
             else {
                 return nil
         }
         
+        for resultJSON in resultsJSON {
+            guard let res = ResultObject(json: resultJSON as! [String : Any]) else {
+                return nil
+            }
+            
+            self.results?.append(res)
+        }
         
         self.status = status
         self.userTier = userTeir

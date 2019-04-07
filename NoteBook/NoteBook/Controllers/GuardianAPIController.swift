@@ -25,12 +25,15 @@ class GuardianAPIController {
     }
     
     /*
-     Placeholder.
-    */
-    func performSearch() {
+     This function will be called by the query GuardianQueryFormController and will be used to construct and perform
+     an API request.
+     */
+    func performSearch(query: QueryObject) {
         initialize()
         
-        let searchURL = URL(string: "https://content.guardianapis.com/search")
+        let queryString = query.toString()
+        
+        let searchURL = URL(string: "https://content.guardianapis.com/search" + queryString)
         let searchTask = session!.dataTask(with: searchURL!, completionHandler: {
             (data: Data?, response: URLResponse?, error: Error?) -> Void in
             
