@@ -37,12 +37,13 @@ class GuardianAPIController {
         let searchTask = session!.dataTask(with: searchURL!, completionHandler: {
             (data: Data?, response: URLResponse?, error: Error?) -> Void in
             
-            if let errorResult = error {
-                
-            }
-            
             if let downloadedData = data {
+                let text = "Completed with response: \(String(describing: response))\ndata length: \(downloadedData.count)\nerror: \(String(describing: error))"
+                print(text)
+                print(NSString(data: downloadedData, encoding: String.Encoding.utf8.rawValue)!)
                 
+            } else {
+                print("No data recieved!")
             }
         })
         searchTask.resume()
