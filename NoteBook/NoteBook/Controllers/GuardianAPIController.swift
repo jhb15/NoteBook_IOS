@@ -41,7 +41,7 @@ class GuardianAPIController {
                 
             }
             
-            if let data = data {
+            if let downloadedData = data {
                 
             }
         })
