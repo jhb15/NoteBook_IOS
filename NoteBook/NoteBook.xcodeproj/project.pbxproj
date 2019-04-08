@@ -7,14 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C1266222225B927B0078C5C6 /* SearchTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1266221225B927B0078C5C6 /* SearchTextCell.swift */; };
-		C1266225225B92AC0078C5C6 /* DatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1266224225B92AC0078C5C6 /* DatePickerCell.swift */; };
-		C1266227225B92B90078C5C6 /* PickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1266226225B92B90078C5C6 /* PickerCell.swift */; };
 		C182FFAB22536EE900B8CF97 /* NewNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C182FFAA22536EE900B8CF97 /* NewNoteController.swift */; };
 		C182FFAD22536EFB00B8CF97 /* AboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C182FFAC22536EFB00B8CF97 /* AboutController.swift */; };
 		C182FFAF22536F2C00B8CF97 /* MyNotesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C182FFAE22536F2C00B8CF97 /* MyNotesController.swift */; };
 		C182FFB1225370C100B8CF97 /* GuardianAPIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C182FFB0225370C100B8CF97 /* GuardianAPIController.swift */; };
-		C1C94685225A63FA009243EE /* GuardianQueryFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C94684225A63FA009243EE /* GuardianQueryFormController.swift */; };
 		C1C94688225A66CF009243EE /* QueryObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C94687225A66CF009243EE /* QueryObject.swift */; };
 		C1C9468A225A6CFC009243EE /* ResultObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C94689225A6CFC009243EE /* ResultObject.swift */; };
 		C1C9468C225A7378009243EE /* ResponseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C9468B225A7378009243EE /* ResponseObject.swift */; };
@@ -47,14 +43,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		C1266221225B927B0078C5C6 /* SearchTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextCell.swift; sourceTree = "<group>"; };
-		C1266224225B92AC0078C5C6 /* DatePickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerCell.swift; sourceTree = "<group>"; };
-		C1266226225B92B90078C5C6 /* PickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerCell.swift; sourceTree = "<group>"; };
 		C182FFAA22536EE900B8CF97 /* NewNoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNoteController.swift; sourceTree = "<group>"; };
 		C182FFAC22536EFB00B8CF97 /* AboutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutController.swift; sourceTree = "<group>"; };
 		C182FFAE22536F2C00B8CF97 /* MyNotesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNotesController.swift; sourceTree = "<group>"; };
 		C182FFB0225370C100B8CF97 /* GuardianAPIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardianAPIController.swift; sourceTree = "<group>"; };
-		C1C94684225A63FA009243EE /* GuardianQueryFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardianQueryFormController.swift; sourceTree = "<group>"; };
 		C1C94687225A66CF009243EE /* QueryObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryObject.swift; sourceTree = "<group>"; };
 		C1C94689225A6CFC009243EE /* ResultObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultObject.swift; sourceTree = "<group>"; };
 		C1C9468B225A7378009243EE /* ResponseObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseObject.swift; sourceTree = "<group>"; };
@@ -100,21 +92,9 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C1266223225B92830078C5C6 /* GuardianQueyPage */ = {
-			isa = PBXGroup;
-			children = (
-				C1C94684225A63FA009243EE /* GuardianQueryFormController.swift */,
-				C1266221225B927B0078C5C6 /* SearchTextCell.swift */,
-				C1266224225B92AC0078C5C6 /* DatePickerCell.swift */,
-				C1266226225B92B90078C5C6 /* PickerCell.swift */,
-			);
-			path = GuardianQueyPage;
-			sourceTree = "<group>";
-		};
 		C128022F22590BA600BA9901 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				C1266223225B92830078C5C6 /* GuardianQueyPage */,
 				C182FFAA22536EE900B8CF97 /* NewNoteController.swift */,
 				C182FFAC22536EFB00B8CF97 /* AboutController.swift */,
 				C182FFAE22536F2C00B8CF97 /* MyNotesController.swift */,
@@ -337,11 +317,7 @@
 				C1EF1B33224CE8F3005264C8 /* AppDelegate.swift in Sources */,
 				C1EF1B3B224CE8F3005264C8 /* NoteBook.xcdatamodeld in Sources */,
 				C182FFAD22536EFB00B8CF97 /* AboutController.swift in Sources */,
-				C1266222225B927B0078C5C6 /* SearchTextCell.swift in Sources */,
 				C1DE0F5F225914530035B488 /* NoteDetailController.swift in Sources */,
-				C1C94685225A63FA009243EE /* GuardianQueryFormController.swift in Sources */,
-				C1266225225B92AC0078C5C6 /* DatePickerCell.swift in Sources */,
-				C1266227225B92B90078C5C6 /* PickerCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
