@@ -22,15 +22,18 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
     @IBOutlet weak var orderByPicker: UIPickerView!
     @IBOutlet weak var showFieldSelector: UITableView!
     
+    //Global Vars
     let dateFormatter = DateFormatter()
+    let guarApiController = GuardianContentClient(apiKey: "42573d7e-fb83-4aef-956f-2c52a9bca421")
+    var orderOptions = GuardianContentOrderFilter.allCases
+    //var showFieldOptions = ["trailText", "headline", "body", "lastModified"] //TODO may need more fields?
+    var showFieldOptions = GuardianContentShowFields.allCases
     
+    //Global Value Holders
     var fromDate: Date?
     var toDate: Date?
     var orderBy: String?
     var showFields: [String]?
-    
-    var orderOptions = ["newest", "oldest", "relevance"]
-    var showFieldOptions = ["trailText", "headline", "body", "lastModified"] //TODO may need more fields?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,9 +62,22 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
             queryObj = QueryObject(queryText: serchText.text!, dateFrom: fromDate!, dateTo: toDate!,
                                    orderBy: orderBy!, showFields: showFields!)
             print(queryObj.toString())
+            
+            //TODO Build GuardianFiltersObject!!!
+            
+            //TODO Perform Network Request
+            //guarApiController.
+            
+            //TODO Display Result
+            
+            dismiss(animated: true, completion: nil)
         } else {
-            print("Invalid Input")
+            print("Invalid Input") //TODO More Detailed Validation Error Messages Needed
         }
+    }
+    
+    @IBAction func cancelSearch(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
     
     func validateForm() -> Bool {
@@ -159,12 +175,12 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return orderOptions[row]
+        return orderOptions[row].rawValue
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        orderBy = orderOptions[row]
-        orderByLabel.text = "Order By: " + orderOptions[row]
+        orderBy = orderOptions[row].rawValue
+        orderByLabel.text = "Order By: " + orderOptions[row].rawValue
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -174,7 +190,7 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "OptionCell", for: indexPath)
         
-        cell.textLabel?.text = showFieldOptions[indexPath.row]
+        cell.textLabel?.text = showFieldOptions[indexPath.row].rawValue
         cell.accessoryType = UITableViewCell.AccessoryType.none
         
         return cell

@@ -20,8 +20,6 @@ class GuardianAPIController {
             
             session = URLSession(configuration: config)
         }
-        
-        //query = QueryObject()
     }
     
     /*
@@ -31,9 +29,12 @@ class GuardianAPIController {
     func performSearch(query: QueryObject) {
         initialize()
         
-        let queryString = query.toString()
+        let queryString = query.toQuery()
         
-        let searchURL = URL(string: "https://content.guardianapis.com/search" + queryString)
+        let url = "https://content.guardianapis.com/search" + queryString + "&api-key=42573d7e-fb83-4aef-956f-2c52a9bca421"
+        let searchURL = URL(string: url)
+        print(searchURL?.absoluteString ?? "Unknown")                                           ////DEBUG CODE
+        
         let searchTask = session!.dataTask(with: searchURL!, completionHandler: {
             (data: Data?, response: URLResponse?, error: Error?) -> Void in
             
@@ -42,8 +43,19 @@ class GuardianAPIController {
                 print(text)
                 print(NSString(data: downloadedData, encoding: String.Encoding.utf8.rawValue)!)
                 
+                do {
+                    let decoder = JSONDecoder()
+                    let decodedData = try decoder.decode(GuardianOpenPlatformData.self, from: downloadedData)
+                    
+                    print(decodedData)
+                    //TODO Implement
+                    
+                } catch let error as NSError {
+                    print("Error decoding JSON response, Description: \(error.localizedDescription)")
+                }
+                
             } else {
-                print("No data recieved!")
+                print("No data recieved! \(String(describing: error?.localizedDescription))")
             }
         })
         searchTask.resume()

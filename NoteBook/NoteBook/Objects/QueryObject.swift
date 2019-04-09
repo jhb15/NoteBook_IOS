@@ -15,29 +15,41 @@ struct QueryObject {
     var orderBy: String
     var showFields: [String]
     
-    /*init() {
-        //TODO Constructor for query
-    }
-    
-    func reset() {
-        //TODO Implement resetting query
-    }*/
-    
     /*
-     This function will build the query to be appended to the Guardian API endpoint.
-     TODO change from debugging to actual output!
+     This function creates human readable string representing th content of the query.
      */
     func toString() -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy/MM/dd" //Guardian Date Format
+        dateFormatter.dateFormat = "yyyy-MM-dd" //Guardian Date Format
         
         var options: String = "["
         for opt in showFields {
             options += opt + ", "
         }
+        options += "]"
         
-        return "[q: " + queryText + ", dateFrom: " + dateFormatter.string(from: dateFrom) + ", dateTo: " + dateFormatter.string(from: dateFrom)
+        let string = "[q: " + queryText + ", dateFrom: " + dateFormatter.string(from: dateFrom) + ", dateTo: " + dateFormatter.string(from: dateFrom)
             + ", orderBy: " + orderBy + ", showFields: " + options + "]"
+        
+        return string
+    }
+    
+    /*
+     This function builds the query to add onto the end of an API Endpoint
+     */
+    func toQuery() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd" //Guardian Date Format
+        
+        let escapedQuery = queryText.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
+        let options = showFields.joined(separator: ",")
+        
+        let to = dateFormatter.string(from: dateTo); let from = dateFormatter.string(from: dateFrom)
+        
+        var query = "?q=" + escapedQuery! + "&format=json&from-date=" + from + "&to-date=" + to
+        query += "&order-by=" + orderBy + "&show-fields=" + options
+        
+        return query
     }
     
     /*enum ORDER: String {
