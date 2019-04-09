@@ -98,7 +98,7 @@
             <objects>
                 <viewController id="Rrx-A2-l2b" customClass="GuardianQueryController" customModule="NoteBook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xxr-Sf-lma">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="3667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1800"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search Text..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4sR-fN-Umk">
@@ -109,14 +109,17 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pLJ-KS-gZG">
-                                <rect key="frame" x="101" y="3617" width="173" height="30"/>
+                                <rect key="frame" x="101" y="1750" width="173" height="30"/>
                                 <state key="normal" title="Search Guardian Website"/>
+                                <connections>
+                                    <action selector="searchGuardianAPI:" destination="Rrx-A2-l2b" eventType="touchUpInside" id="4My-2t-N2O"/>
+                                </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O8g-VQ-Ltb">
-                                <rect key="frame" x="16" y="112" width="343" height="3488"/>
+                                <rect key="frame" x="16" y="112" width="343" height="1621"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NVH-o5-hD2">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="3000"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="1500"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aditional Options" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZgW-sa-ZQ7">
                                                 <rect key="frame" x="8" y="8" width="327" height="24"/>
@@ -166,12 +169,6 @@
                                                     <constraint firstAttribute="height" constant="150" id="ZBC-xn-ZcT"/>
                                                 </constraints>
                                             </pickerView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Fields:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W0q-Mx-abk">
-                                                <rect key="frame" x="8" y="601" width="327" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="A6a-nC-yAf">
                                                 <rect key="frame" x="0.0" y="630" width="343" height="300"/>
                                                 <color key="backgroundColor" red="0.90850696710000001" green="0.92308937820000003" blue="0.75596813939999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -179,17 +176,23 @@
                                                     <constraint firstAttribute="height" constant="300" id="sJX-Ga-9EC"/>
                                                 </constraints>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="GK0-sU-hIi">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="OptionCell" id="GK0-sU-hIi">
                                                         <rect key="frame" x="0.0" y="28" width="343" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GK0-sU-hIi" id="9tJ-Zj-K1a">
-                                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="304" height="43.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </tableViewCellContentView>
                                                         <color key="backgroundColor" red="0.90850696710000001" green="0.92308937820000003" blue="0.75596813939999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     </tableViewCell>
                                                 </prototypes>
                                             </tableView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Fields:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W0q-Mx-abk">
+                                                <rect key="frame" x="8" y="601" width="327" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" red="0.90850696710000001" green="0.92308937820000003" blue="0.75596813939999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
@@ -219,7 +222,7 @@
                                             <constraint firstItem="9Ss-0o-r0W" firstAttribute="leading" secondItem="NVH-o5-hD2" secondAttribute="leading" id="eXV-yZ-hg0"/>
                                             <constraint firstItem="A6a-nC-yAf" firstAttribute="top" secondItem="W0q-Mx-abk" secondAttribute="bottom" constant="8" id="fZ7-AI-PFT"/>
                                             <constraint firstAttribute="trailing" secondItem="9Ss-0o-r0W" secondAttribute="trailing" id="g7Q-9b-JhE"/>
-                                            <constraint firstAttribute="height" constant="3000" id="hIT-5X-otj"/>
+                                            <constraint firstAttribute="height" constant="1500" id="hIT-5X-otj"/>
                                             <constraint firstItem="W0q-Mx-abk" firstAttribute="leading" secondItem="NVH-o5-hD2" secondAttribute="leading" constant="8" id="qqJ-r4-d78"/>
                                             <constraint firstAttribute="trailing" secondItem="qSs-vw-cZa" secondAttribute="trailing" constant="8" id="rLL-tb-29n"/>
                                         </constraints>
@@ -249,12 +252,16 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="szF-7p-g3x"/>
                     </view>
-                    <size key="freeformSize" width="375" height="3667"/>
+                    <size key="freeformSize" width="375" height="1800"/>
                     <connections>
+                        <outlet property="fromDateLabel" destination="vcD-6I-Bzd" id="0FF-Bg-bHv"/>
                         <outlet property="fromDatePicker" destination="9Ss-0o-r0W" id="EoW-HK-zV5"/>
+                        <outlet property="orderByLabel" destination="qSs-vw-cZa" id="tQd-cz-0jE"/>
                         <outlet property="orderByPicker" destination="id2-nq-uoq" id="Ax7-mm-lTR"/>
                         <outlet property="serchText" destination="4sR-fN-Umk" id="6sH-Ja-Hh5"/>
+                        <outlet property="showFieldLabel" destination="W0q-Mx-abk" id="hPj-Oq-ntw"/>
                         <outlet property="showFieldSelector" destination="A6a-nC-yAf" id="t2a-57-f80"/>
+                        <outlet property="toDateLabel" destination="u6T-2V-dEA" id="SEK-Th-c7C"/>
                         <outlet property="toDatePicker" destination="oaa-0A-i3R" id="ZCS-NI-o1B"/>
                     </connections>
                 </viewController>
