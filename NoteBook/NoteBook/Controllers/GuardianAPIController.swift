@@ -21,7 +21,7 @@ class GuardianAPIController {
             session = URLSession(configuration: config)
         }
         
-        query = QueryObject()
+        //query = QueryObject()
     }
     
     /*

@@ -41,6 +41,7 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
 
         toDatePicker.datePickerMode = .date; fromDatePicker.datePickerMode = .date
         toDatePicker.locale = NSLocale.current; fromDatePicker.locale = NSLocale.current
+        toDatePicker.maximumDate = Date(); fromDatePicker.maximumDate = Date()
         
         toDatePicker.addTarget(self, action: #selector(toDateChanged(_:)), for: .valueChanged)
         fromDatePicker.addTarget(self, action: #selector(fromDateChanged(_:)), for: .valueChanged)
@@ -52,19 +53,55 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
     }
     
     @IBAction func searchGuardianAPI(_ sender: Any) {
-        let queryObj = QueryObject()
+        var queryObj: QueryObject
         if validateForm() {
-            queryObj.queryText = serchText.text
-            queryObj.dateFrom = fromDatePicker.date
-            queryObj.dateTo = toDatePicker.date
-            //queryObj.orderBy = orderByPicker.
-            //queryObj.showFields = showFieldSelector.
+            //Should be okay to force this as I have done the previous validation check in the if statement
+            queryObj = QueryObject(queryText: serchText.text!, dateFrom: fromDate!, dateTo: toDate!,
+                                   orderBy: orderBy!, showFields: showFields!)
+            print(queryObj.toString())
+        } else {
+            print("Invalid Input")
         }
     }
     
     func validateForm() -> Bool {
-        //TODO Implement
-        return false
+        
+        var vQuery = false
+        let vDate = dateValid()
+        var vOrder = false
+        var vShowFields = false
+        
+        if serchText.text != nil {
+            vQuery = true
+        }
+        
+        if orderBy != nil {
+            vOrder = true
+        }
+        
+        if showFields != nil {
+            vShowFields = true
+        }
+        
+        if vQuery && vDate && vOrder && vShowFields {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func dateValid() -> Bool {
+        if let to = toDate, let from = fromDate {
+            switch (from.compare(to)) {
+            case .orderedAscending:
+                return true;
+            case .orderedDescending:
+                return false;
+            case .orderedSame:
+                return false;
+            }
+        }
+        return false;
     }
     
     @objc func fromDateChanged(_ sender: UIDatePicker) {
@@ -89,8 +126,10 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
             }
         }
         
-        showFieldOptions = options
-        showFieldLabel.text = "Show Fields: " + listStringArray(strings: showFieldOptions)
+        showFields = options
+        if let fields = showFields {
+            showFieldLabel.text = "Show Fields: " + listStringArray(strings: fields)
+        }
     }
     
     func listStringArray(strings: [String]) -> String {

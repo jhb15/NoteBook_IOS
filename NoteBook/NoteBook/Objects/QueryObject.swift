@@ -8,31 +8,43 @@
 
 import Foundation
 
-class QueryObject {
-    var queryText: String?
-    var dateFrom: Date?
-    var dateTo: Date?
-    var orderBy: ORDER?
-    var showFields: [SHOWFIELD]?
+struct QueryObject {
+    var queryText: String
+    var dateFrom: Date
+    var dateTo: Date
+    var orderBy: String
+    var showFields: [String]
     
-    init() {
+    /*init() {
         //TODO Constructor for query
     }
     
     func reset() {
         //TODO Implement resetting query
-    }
+    }*/
     
+    /*
+     This function will build the query to be appended to the Guardian API endpoint.
+     TODO change from debugging to actual output!
+     */
     func toString() -> String {
-        //TODO Will build the query to append to API request
-        return ""
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy/MM/dd" //Guardian Date Format
+        
+        var options: String = "["
+        for opt in showFields {
+            options += opt + ", "
+        }
+        
+        return "[q: " + queryText + ", dateFrom: " + dateFormatter.string(from: dateFrom) + ", dateTo: " + dateFormatter.string(from: dateFrom)
+            + ", orderBy: " + orderBy + ", showFields: " + options + "]"
     }
     
-    enum ORDER: String {
+    /*enum ORDER: String {
         case newest, pldest, relevance
     }
     
     enum SHOWFIELD: String {
         case trailText, headline, body, lastModified, score, byline, starRating, all
-    }
+    }*/
 }
