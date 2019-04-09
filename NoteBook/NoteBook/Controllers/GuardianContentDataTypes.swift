@@ -91,6 +91,7 @@ struct GuardianOpenPlatformFields: Codable {
     var charCount: Int?
     var shouldHideHeaderRevenue: Bool?
     var showAffiliateLinks: Bool?
+    var score: Double
     
     init(from decoder: Decoder) throws {
         
@@ -136,7 +137,6 @@ struct GuardianOpenPlatformFields: Codable {
         }
         
         shortUrl = try values.decodeIfPresent(URL.self, forKey: .shortUrl)
-        
     }
 }
 
@@ -258,6 +258,8 @@ enum GuardianContentShowFields: String, CaseIterable {
     case lastModified
     case wordcount
     case byline
+    case score
+    case starRating
 }
 
 // MARK: - Filters

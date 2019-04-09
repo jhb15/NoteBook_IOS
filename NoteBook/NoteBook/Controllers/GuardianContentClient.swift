@@ -84,7 +84,11 @@ class GuardianContentClient {
                                "\nerror: \(String(describing: error))"
                     print(text)
                     
-                    print(String(describing: data))
+                    print(String(describing: downloadedData))
+                    print("############ RAW JSON ###########")
+                    print("#################################")
+                    print(NSString(data: downloadedData, encoding: String.Encoding.utf8.rawValue)!)
+                    print("#################################")
                 }
                 
                 do {

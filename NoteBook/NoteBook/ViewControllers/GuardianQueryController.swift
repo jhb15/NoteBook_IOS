@@ -24,7 +24,7 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     //Global Vars
     let dateFormatter = DateFormatter()
-    let guarApiController = GuardianContentClient(apiKey: "42573d7e-fb83-4aef-956f-2c52a9bca421")
+    let guarApiController = GuardianContentClient(apiKey: "42573d7e-fb83-4aef-956f-2c52a9bca421", verbose: true)
     var orderOptions = GuardianContentOrderFilter.allCases
     //var showFieldOptions = ["trailText", "headline", "body", "lastModified"] //TODO may need more fields?
     var showFieldOptions = GuardianContentShowFields.allCases
@@ -32,8 +32,8 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
     //Global Value Holders
     var fromDate: Date?
     var toDate: Date?
-    var orderBy: String?
-    var showFields: [String]?
+    var orderBy: GuardianContentOrderFilter?
+    var showFields: [GuardianContentShowFields]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,23 +56,36 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
     }
     
     @IBAction func searchGuardianAPI(_ sender: Any) {
-        var queryObj: QueryObject
         if validateForm() {
-            //Should be okay to force this as I have done the previous validation check in the if statement
-            queryObj = QueryObject(queryText: serchText.text!, dateFrom: fromDate!, dateTo: toDate!,
-                                   orderBy: orderBy!, showFields: showFields!)
-            print(queryObj.toString())
-            
             //TODO Build GuardianFiltersObject!!!
+            let filters = GuardianContentFilters()
+            
+            filters.fromDate = fromDate
+            filters.toDate = toDate
+            filters.orderBy = orderBy
+            
+            if showFields != nil {
+                filters.showFields = showFields
+            }
             
             //TODO Perform Network Request
-            //guarApiController.
-            
+            do {
+                try guarApiController.searchContent(for: serchText.text ?? "", usingFilters: filters, withCallback: testingCallback)
+                print("Sent Request!")
+            } catch let error as NSError {
+                print("Error Performing Search: \(error.localizedDescription)")
+            }
             //TODO Display Result
             
             dismiss(animated: true, completion: nil)
         } else {
             print("Invalid Input") //TODO More Detailed Validation Error Messages Needed
+        }
+    }
+    
+    func testingCallback(data: GuardianOpenPlatformData?) {
+        if let d = data {
+            print(d)
         }
     }
     
@@ -85,7 +98,6 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
         var vQuery = false
         let vDate = dateValid()
         var vOrder = false
-        var vShowFields = false
         
         if serchText.text != nil {
             vQuery = true
@@ -95,11 +107,7 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
             vOrder = true
         }
         
-        if showFields != nil {
-            vShowFields = true
-        }
-        
-        if vQuery && vDate && vOrder && vShowFields {
+        if vQuery && vDate && vOrder {
             return true
         } else {
             return false
@@ -131,21 +139,21 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
     }
     
     func showFieldsUpdate() {
-        let cells = showFieldSelector.visibleCells
-        var options = [String]()
+        let cells = showFieldSelector.visibleCells as! [ShowFieldOptCell]
+        var options = [GuardianContentShowFields]()
         
         for cell in cells {
             if cell.accessoryType == UITableViewCell.AccessoryType.checkmark {
-                if let option = cell.textLabel?.text {
+                if let option = cell.showFieldObj {
                     options.append(option)
                 }
             }
         }
         
         showFields = options
-        if let fields = showFields {
+        /*if let fields = showFields {
             showFieldLabel.text = "Show Fields: " + listStringArray(strings: fields)
-        }
+        }*/ //NOTE This part may not be needed.
     }
     
     func listStringArray(strings: [String]) -> String {
@@ -179,7 +187,7 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        orderBy = orderOptions[row].rawValue
+        orderBy = orderOptions[row]
         orderByLabel.text = "Order By: " + orderOptions[row].rawValue
     }
     
@@ -188,8 +196,9 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "OptionCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "OptionCell", for: indexPath) as! ShowFieldOptCell
         
+        cell.showFieldObj = showFieldOptions[indexPath.row]
         cell.textLabel?.text = showFieldOptions[indexPath.row].rawValue
         cell.accessoryType = UITableViewCell.AccessoryType.none
         

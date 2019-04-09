@@ -10,6 +10,7 @@
 		C1266229225BE0110078C5C6 /* GuardianQueryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1266228225BE0110078C5C6 /* GuardianQueryController.swift */; };
 		C128A278225D137700722962 /* GuardianContentDataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C128A276225D137600722962 /* GuardianContentDataTypes.swift */; };
 		C128A279225D137700722962 /* GuardianContentClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C128A277225D137600722962 /* GuardianContentClient.swift */; };
+		C128A27B225D1EFC00722962 /* ShowFieldOptCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C128A27A225D1EFC00722962 /* ShowFieldOptCell.swift */; };
 		C182FFAB22536EE900B8CF97 /* NewNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C182FFAA22536EE900B8CF97 /* NewNoteController.swift */; };
 		C182FFAD22536EFB00B8CF97 /* AboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C182FFAC22536EFB00B8CF97 /* AboutController.swift */; };
 		C182FFAF22536F2C00B8CF97 /* MyNotesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C182FFAE22536F2C00B8CF97 /* MyNotesController.swift */; };
@@ -49,6 +50,7 @@
 		C1266228225BE0110078C5C6 /* GuardianQueryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardianQueryController.swift; sourceTree = "<group>"; };
 		C128A276225D137600722962 /* GuardianContentDataTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuardianContentDataTypes.swift; sourceTree = "<group>"; };
 		C128A277225D137600722962 /* GuardianContentClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuardianContentClient.swift; sourceTree = "<group>"; };
+		C128A27A225D1EFC00722962 /* ShowFieldOptCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowFieldOptCell.swift; sourceTree = "<group>"; };
 		C182FFAA22536EE900B8CF97 /* NewNoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNoteController.swift; sourceTree = "<group>"; };
 		C182FFAC22536EFB00B8CF97 /* AboutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutController.swift; sourceTree = "<group>"; };
 		C182FFAE22536F2C00B8CF97 /* MyNotesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNotesController.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				C182FFAE22536F2C00B8CF97 /* MyNotesController.swift */,
 				C1DE0F5E225914530035B488 /* NoteDetailController.swift */,
 				C1266228225BE0110078C5C6 /* GuardianQueryController.swift */,
+				C128A27A225D1EFC00722962 /* ShowFieldOptCell.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -326,6 +329,7 @@
 				C1C9468E225A7F31009243EE /* Response.swift in Sources */,
 				C1C94688225A66CF009243EE /* QueryObject.swift in Sources */,
 				C182FFAB22536EE900B8CF97 /* NewNoteController.swift in Sources */,
+				C128A27B225D1EFC00722962 /* ShowFieldOptCell.swift in Sources */,
 				C1EF1B33224CE8F3005264C8 /* AppDelegate.swift in Sources */,
 				C1EF1B3B224CE8F3005264C8 /* NoteBook.xcdatamodeld in Sources */,
 				C182FFAD22536EFB00B8CF97 /* AboutController.swift in Sources */,
