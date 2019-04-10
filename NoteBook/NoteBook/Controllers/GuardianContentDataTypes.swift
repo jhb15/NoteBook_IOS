@@ -128,6 +128,7 @@ struct GuardianOpenPlatformFields: Codable {
         newspaperEditionDate = try values.decodeIfPresent(Date.self, forKey: .newspaperEditionDate, transformFrom: String.self)
         
         shortUrl = try values.decodeIfPresent(URL.self, forKey: .shortUrl)
+        thumbnail = try values.decodeIfPresent(URL.self, forKey: .thumbnail)
     }
 }
 

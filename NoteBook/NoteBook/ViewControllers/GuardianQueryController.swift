@@ -62,6 +62,8 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
             results = nil
             let filters = GuardianContentFilters()
             
+            filters.page = 1
+            filters.pageSize = 25
             filters.fromDate = fromDate
             filters.toDate = toDate
             filters.orderBy = orderBy

@@ -43,6 +43,13 @@ class QueryResultsTableController: UITableViewController {
         
         if resultsIn != nil && resultsIn!.response.results != nil && resultsIn!.response.results![indexPath.row].fields != nil {
             if let fields = resultsIn!.response.results![indexPath.row].fields {
+                /*if let img = fields.thumbnail {
+                    do {
+                        try cell.imgView.image = UIImage(data: Data(contentsOf: img))
+                    } catch let error as NSError {
+                        print("Error trying to show thumnail. \(error)")
+                    }
+                }*/
                 
                 if let hl = fields.headline { cell.headlineLabel.text = hl }
                 if let by = fields.byline { cell.bylineLabel.text = "By: " + by }
@@ -87,15 +94,22 @@ class QueryResultsTableController: UITableViewController {
         return true
     }
     */
-
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        
+        if let view = segue.destination as? ResultDetailViewController,
+            let indexPath = tableView.indexPathForSelectedRow,
+            let results = resultsIn!.response.results {
+            
+            view.result = results[indexPath.row]
+            
+        }
+        
     }
-    */
 
 }

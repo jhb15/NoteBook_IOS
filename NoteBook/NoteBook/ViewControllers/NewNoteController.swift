@@ -9,11 +9,10 @@
 import UIKit
 import CoreData
 
-class NewNoteController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class NewNoteController: UIViewController {
     
     @IBOutlet weak var noteTitle: UITextField!
     @IBOutlet weak var noteContent: UITextView!
-    @IBOutlet weak var linksTableView: UITableView!
     
     var managedContext: NSManagedObjectContext?
     
@@ -21,8 +20,6 @@ class NewNoteController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        linksTableView.delegate = self; linksTableView.dataSource = self;
 
         guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
             print("error - unable to access failure")
@@ -66,17 +63,5 @@ class NewNoteController: UIViewController, UITableViewDelegate, UITableViewDataS
         // Pass the selected object to the new view controller.
     }
     */
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cells.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "LinkCell", for: indexPath)
-        
-        cell.textLabel?.text = cells[indexPath.row]
-        
-        return cell
-    }
 
 }
