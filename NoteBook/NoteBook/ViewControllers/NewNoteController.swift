@@ -35,6 +35,7 @@ class NewNoteController: UIViewController {
         let note = Note(entity: Note.entity(), insertInto: managedContext)
         note.title = noteTitle.text
         note.content = noteContent.text
+        note.created_at = Date(); note.updated_at = Date()
         //TODO Add Links
         
         do {

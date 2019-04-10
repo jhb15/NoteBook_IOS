@@ -23,7 +23,7 @@ class ResultDetailViewController: UIViewController {
         super.viewDidLoad()
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy HH:MM:SS"
+        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
         //bodyTextView.isEditable = false
         
         if let fields = result?.fields {

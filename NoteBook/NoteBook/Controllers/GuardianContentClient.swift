@@ -84,20 +84,20 @@ class GuardianContentClient {
                                "\nerror: \(String(describing: error))"
                     print(text)
                     
-                    print(String(describing: downloadedData))
+                    /*print(String(describing: downloadedData))
                     print("############ RAW JSON ###########")
                     print("#################################")
                     print(NSString(data: downloadedData, encoding: String.Encoding.utf8.rawValue)!)
-                    print("#################################")
+                    print("#################################")*/
                 }
                 
                 do {
                     let decoder = JSONDecoder()
                     let data = try decoder.decode(GuardianOpenPlatformData.self, from: downloadedData)
                     
-                    if self.verbose {
+                    /*if self.verbose {
                         print(data)
-                    }
+                    }*/
                     
                     callback(data)
                 }

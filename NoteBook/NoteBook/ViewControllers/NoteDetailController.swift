@@ -11,6 +11,7 @@ import UIKit
 class NoteDetailController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var contentTextArea: UITextView!
     @IBOutlet weak var linksTable: UITableView!
     
@@ -18,11 +19,22 @@ class NoteDetailController: UIViewController, UITableViewDelegate, UITableViewDa
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
         
         linksTable.delegate = self; linksTable.dataSource = self
 
         titleLabel.text = noteItem?.title
+        var times = ""
+        if let cre = noteItem?.created_at,
+            let upd = noteItem?.updated_at {
+            times = "Created: " + dateFormatter.string(from: cre) + " Updated: " + dateFormatter.string(from: upd)
+        } else {
+            times = "Created: err Updated: err"
+        }
+        timestampLabel.text = times
         contentTextArea.text = noteItem?.content
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,15 +42,19 @@ class NoteDetailController: UIViewController, UITableViewDelegate, UITableViewDa
         linksTable.reloadData()
     }
     
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if let view = segue.destination as? WebViewController,
+            let indexPath = linksTable.indexPathForSelectedRow {
+            if let link = noteItem!.links?.object(at: indexPath.row) as? Link {
+                view.link = link
+            }
+        }
     }
-    */
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let links = noteItem!.links {
