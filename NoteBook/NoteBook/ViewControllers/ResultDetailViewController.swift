@@ -43,7 +43,9 @@ class ResultDetailViewController: UIViewController {
             }
             
             if let lastMod = fields.lastModified {
-                lastModLabel.text = "Last Modified: " + dateFormatter.string(from: lastMod)
+                let str = dateFormatter.string(from: lastMod)
+                print(str)
+                lastModLabel.text = "Last Modified: " + str
             }
             
             if let trail = fields.trailText { trailTextLabel.text = trail }

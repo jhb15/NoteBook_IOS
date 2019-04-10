@@ -10,6 +10,12 @@ import UIKit
 
 class QueryResultsTableController: UITableViewController {
     
+    @IBOutlet weak var pageNumberLab: UILabel!
+    @IBOutlet weak var numberOfPages: UILabel!
+    @IBOutlet weak var resultsPerPage: UILabel!
+    @IBOutlet weak var totalResults: UILabel!
+    
+    
     var resultsIn : GuardianOpenPlatformData?
 
     override func viewDidLoad() {
@@ -17,6 +23,10 @@ class QueryResultsTableController: UITableViewController {
         
         if resultsIn != nil && resultsIn!.response.results != nil {
             
+            pageNumberLab.text = "Page \(resultsIn!.response.currentPage ?? 0)"
+            numberOfPages.text = "\(resultsIn!.response.pages ?? 0) pages"
+            resultsPerPage.text = "25 stories per page"
+            totalResults.text = "\(resultsIn!.response.total) stories in total"
         }
 
         // Uncomment the following line to preserve selection between presentations
@@ -35,6 +45,12 @@ class QueryResultsTableController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        if let total = resultsIn?.response.total {
+            if resultsIn!.response.total > 25 {
+                return 25
+            }
+            return total
+        }
         return resultsIn?.response.total ?? 0
     }
 
