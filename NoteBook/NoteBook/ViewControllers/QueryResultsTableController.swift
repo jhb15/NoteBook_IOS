@@ -10,10 +10,14 @@ import UIKit
 
 class QueryResultsTableController: UITableViewController {
     
-    var results : GuardianOpenPlatformData?
+    var resultsIn : GuardianOpenPlatformData?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if resultsIn != nil && resultsIn!.response.results != nil {
+            
+        }
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -31,13 +35,20 @@ class QueryResultsTableController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return results?.response.total ?? 0
+        return resultsIn?.response.total ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ResultCell", for: indexPath) as! ResultTableCell
         
+        if resultsIn != nil && resultsIn!.response.results != nil && resultsIn!.response.results![indexPath.row].fields != nil {
+            if let fields = resultsIn!.response.results![indexPath.row].fields {
+                
+                if let hl = fields.headline { cell.headlineLabel.text = hl }
+                if let by = fields.byline { cell.bylineLabel.text = "By: " + by }
+                if let cnt = fields.wordcount { cell.wordCountLabel.text = "Word Count: \(cnt)" }
+            }
+        }
         
         return cell
     }

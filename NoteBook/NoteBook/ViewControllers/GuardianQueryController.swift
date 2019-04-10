@@ -59,7 +59,7 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     @IBAction func searchGuardianAPI(_ sender: Any) {
         if validateForm() {
-            //TODO Build GuardianFiltersObject!!!
+            results = nil
             let filters = GuardianContentFilters()
             
             filters.fromDate = fromDate
@@ -72,29 +72,28 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
             
             //TODO Perform Network Request
             do {
-                try guarApiController.searchContent(for: serchText.text ?? "", usingFilters: filters, withCallback: dataRecievedCallback)
+                try guarApiController.searchContent(for: serchText.text ?? "", usingFilters: filters, withCallback: {
+                    (data:GuardianOpenPlatformData?) in
+                    if data != nil {
+                        self.results = data
+                    } else {
+                        print("Error no Data passed back from 'GuardianContentClient.searchContent'")
+                    }
+                })
                 print("Sent Request!")
             } catch let error as NSError {
                 print("Error Performing Search: \(error.localizedDescription)")
             }
+            
+            while(results == nil) { //Massive Bodge. TODO Improve
+                usleep(2000)
+            }
             //TODO Display Result
+            performSegue(withIdentifier: "ShowResults", sender: nil)
             
         } else {
             print("Invalid Input") //TODO More Detailed Validation Error Messages Needed
         }
-    }
-    
-    func dataRecievedCallback(data: GuardianOpenPlatformData?) {
-        if data != nil {
-            results = data
-            dismiss(animated: true, completion: nil)
-        } else {
-            print("Error in Data Recieved Callback!")
-        }
-    }
-    
-    @IBAction func cancelSearch(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
     }
     
     func validateForm() -> Bool {
@@ -175,7 +174,7 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
         if let view = segue.destination as? QueryResultsTableController {
-            view.results = results
+            view.resultsIn = results
         }
     }
     

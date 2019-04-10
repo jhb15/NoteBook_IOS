@@ -244,6 +244,7 @@ enum GuardianContentOrderFilter: String, CaseIterable {
  */
 enum GuardianContentShowFields: String, CaseIterable {
     case trailText
+    case thumbnail
     case headline
     case body
     case lastModified
