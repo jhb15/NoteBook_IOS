@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WebKit
 
 class ResultDetailViewController: UIViewController {
     
@@ -14,17 +15,16 @@ class ResultDetailViewController: UIViewController {
     @IBOutlet weak var headlineLabel: UILabel!
     @IBOutlet weak var bylineLabel: UILabel!
     @IBOutlet weak var lastModLabel: UILabel!
-    @IBOutlet weak var trailTextLabel: UILabel!
-    @IBOutlet weak var bodyTextView: UITextView!
+    @IBOutlet weak var webView: WKWebView!
     
     var result: GuardianOpenPlatformResult?
-    var dateFormatter = DateFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dateFormatter.locale = NSLocale.current
-        bodyTextView.isEditable = false
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy HH:MM:SS"
+        //bodyTextView.isEditable = false
         
         if let fields = result?.fields {
             if let img = fields.thumbnail {
@@ -44,27 +44,28 @@ class ResultDetailViewController: UIViewController {
             
             if let lastMod = fields.lastModified {
                 let str = dateFormatter.string(from: lastMod)
-                print(str)
                 lastModLabel.text = "Last Modified: " + str
             }
             
-            if let trail = fields.trailText { trailTextLabel.text = trail }
-            
-            if let body = fields.body { bodyTextView.text = body }
+            if let trail = fields.trailText,
+                let body = fields.body {
+                let html = "<b>" + trail + "</b>" + body
+                webView.loadHTMLString(html, baseURL: nil)
+            }
         }
         
         // Do any additional setup after loading the view.
     }
     
-
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if let view = segue.destination as? SelectNoteTableViewController {
+            view.article = result
+        }
     }
-    */
 
 }
