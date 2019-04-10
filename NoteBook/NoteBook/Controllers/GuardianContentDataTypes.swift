@@ -73,6 +73,7 @@ struct GuardianOpenPlatformFields: Codable {
     var body: String?
     var newspaperPageNumber: Int?
     var wordcount: Int?
+    var commentCloseDate: Date?
     var commentable: Bool?
     var firstPublicationDate: Date?
     var isInappropriateForSponsorship: Bool?
@@ -91,7 +92,6 @@ struct GuardianOpenPlatformFields: Codable {
     var charCount: Int?
     var shouldHideHeaderRevenue: Bool?
     var showAffiliateLinks: Bool?
-    var score: Double
     
     init(from decoder: Decoder) throws {
         
@@ -109,32 +109,23 @@ struct GuardianOpenPlatformFields: Codable {
         lang = try values.decodeIfPresent(String.self, forKey: .lang)
         bodyText = try values.decodeIfPresent(String.self, forKey: .bodyText)
         
-        newspaperPageNumber = try values.decodeIfPresent(Int.self, forKey: .newspaperPageNumber)
-        wordcount = try values.decodeIfPresent(Int.self, forKey: .wordcount)
-        charCount = try values.decodeIfPresent(Int.self, forKey: .charCount)
+        newspaperPageNumber = try values.decodeIfPresent(Int.self, forKey: .newspaperPageNumber, transformFrom: String.self)
+        wordcount = try values.decodeIfPresent(Int.self, forKey: .wordcount, transformFrom: String.self)
+        charCount = try values.decodeIfPresent(Int.self, forKey: .charCount, transformFrom: String.self)
         
-        commentable = try values.decodeIfPresent(Bool.self, forKey: .commentable)
-        isInappropriateForSponsorship = try values.decodeIfPresent(Bool.self, forKey: .isInappropriateForSponsorship)
-        isPremoderated = try values.decodeIfPresent(Bool.self, forKey: .isPremoderated)
-        shouldHideAdverts = try values.decodeIfPresent(Bool.self, forKey: .shouldHideAdverts)
-        showInRelatedContent = try values.decodeIfPresent(Bool.self, forKey: .showInRelatedContent)
-        legallySensitive = try values.decodeIfPresent(Bool.self, forKey: .legallySensitive)
-        shouldHideHeaderRevenue = try values.decodeIfPresent(Bool.self, forKey: .shouldHideHeaderRevenue)
-        showAffiliateLinks = try values.decodeIfPresent(Bool.self, forKey: .showAffiliateLinks)
+        commentable = try values.decodeIfPresent(Bool.self, forKey: .commentable, transformFrom: String.self)
+        isInappropriateForSponsorship = try values.decodeIfPresent(Bool.self, forKey: .isInappropriateForSponsorship, transformFrom: String.self)
+        isPremoderated = try values.decodeIfPresent(Bool.self, forKey: .isPremoderated, transformFrom: String.self)
+        shouldHideAdverts = try values.decodeIfPresent(Bool.self, forKey: .shouldHideAdverts, transformFrom: String.self)
+        showInRelatedContent = try values.decodeIfPresent(Bool.self, forKey: .showInRelatedContent, transformFrom: String.self)
+        legallySensitive = try values.decodeIfPresent(Bool.self, forKey: .legallySensitive, transformFrom: String.self)
+        shouldHideHeaderRevenue = try values.decodeIfPresent(Bool.self, forKey: .shouldHideHeaderRevenue, transformFrom: String.self)
+        showAffiliateLinks = try values.decodeIfPresent(Bool.self, forKey: .showAffiliateLinks, transformFrom: String.self)
         
-        let formatter = ISO8601DateFormatter()
-        
-        if let firstPublicationDateString = try values.decodeIfPresent(String.self, forKey: .firstPublicationDate) {
-           firstPublicationDate = formatter.date(from: firstPublicationDateString)!
-        }
-        
-        if let lastModifiedString = try values.decodeIfPresent(String.self, forKey: .lastModified) {
-            lastModified = formatter.date(from: lastModifiedString)!
-        }
-        
-        if let newspaperEditionDateString = try values.decodeIfPresent(String.self, forKey: .newspaperEditionDate) {
-            newspaperEditionDate = formatter.date(from: newspaperEditionDateString)!
-        }
+        commentCloseDate = try values.decodeIfPresent(Date.self, forKey: .commentCloseDate, transformFrom: String.self)
+        firstPublicationDate = try values.decodeIfPresent(Date.self, forKey: .firstPublicationDate, transformFrom: String.self)
+        lastModified = try values.decodeIfPresent(Date.self, forKey: .lastModified, transformFrom: String.self)
+        newspaperEditionDate = try values.decodeIfPresent(Date.self, forKey: .newspaperEditionDate, transformFrom: String.self)
         
         shortUrl = try values.decodeIfPresent(URL.self, forKey: .shortUrl)
     }
@@ -159,7 +150,7 @@ struct GuardianOpenPlatformResult: Codable {
     var webTitle: String
     var webUrl: URL?
     var apiUrl: URL?
-    var fields: [GuardianOpenPlatformFields]?
+    var fields: GuardianOpenPlatformFields?
     var references: [GuardianOpenPlatformReference]?
     
     /**
@@ -196,7 +187,7 @@ struct GuardianOpenPlatformResult: Codable {
         webUrl = try values.decodeIfPresent(URL.self, forKey: .webUrl)
         apiUrl = try values.decodeIfPresent(URL.self, forKey: .apiUrl)
         
-        fields = try values.decodeIfPresent([GuardianOpenPlatformFields].self, forKey: .fields)
+        fields = try values.decodeIfPresent(GuardianOpenPlatformFields.self, forKey: .fields)
         
         references = try values.decodeIfPresent([GuardianOpenPlatformReference].self, forKey: .references)
         
@@ -258,8 +249,6 @@ enum GuardianContentShowFields: String, CaseIterable {
     case lastModified
     case wordcount
     case byline
-    case score
-    case starRating
 }
 
 // MARK: - Filters

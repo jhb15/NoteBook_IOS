@@ -35,6 +35,8 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
     var orderBy: GuardianContentOrderFilter?
     var showFields: [GuardianContentShowFields]?
     
+    var results: GuardianOpenPlatformData?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -70,22 +72,24 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
             
             //TODO Perform Network Request
             do {
-                try guarApiController.searchContent(for: serchText.text ?? "", usingFilters: filters, withCallback: testingCallback)
+                try guarApiController.searchContent(for: serchText.text ?? "", usingFilters: filters, withCallback: dataRecievedCallback)
                 print("Sent Request!")
             } catch let error as NSError {
                 print("Error Performing Search: \(error.localizedDescription)")
             }
             //TODO Display Result
             
-            dismiss(animated: true, completion: nil)
         } else {
             print("Invalid Input") //TODO More Detailed Validation Error Messages Needed
         }
     }
     
-    func testingCallback(data: GuardianOpenPlatformData?) {
-        if let d = data {
-            print(d)
+    func dataRecievedCallback(data: GuardianOpenPlatformData?) {
+        if data != nil {
+            results = data
+            dismiss(animated: true, completion: nil)
+        } else {
+            print("Error in Data Recieved Callback!")
         }
     }
     
@@ -164,15 +168,16 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
         return out
     }
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if let view = segue.destination as? QueryResultsTableController {
+            view.results = results
+        }
     }
-    */
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
