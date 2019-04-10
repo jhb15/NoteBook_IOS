@@ -25,7 +25,11 @@ class NoteDetailController: UIViewController, UITableViewDelegate, UITableViewDa
         contentTextArea.text = noteItem?.content
     }
     
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        linksTable.reloadData()
+    }
+    
     /*
     // MARK: - Navigation
 
