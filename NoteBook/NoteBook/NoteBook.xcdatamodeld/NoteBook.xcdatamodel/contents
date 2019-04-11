@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14315.18" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="HistoricQuery" representedClassName="HistoricQuery" syncable="YES" codeGenerationType="class">
+        <attribute name="dateFrom" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="dateTo" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="orderBy" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="query" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="showFields" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Link" representedClassName="Link" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
@@ -16,5 +23,6 @@
     <elements>
         <element name="Link" positionX="-54" positionY="9" width="128" height="105"/>
         <element name="Note" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="HistoricQuery" positionX="-63" positionY="36" width="128" height="120"/>
     </elements>
 </model>

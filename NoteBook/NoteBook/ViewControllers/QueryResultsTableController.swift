@@ -15,25 +15,40 @@ class QueryResultsTableController: UITableViewController {
     @IBOutlet weak var resultsPerPage: UILabel!
     @IBOutlet weak var totalResults: UILabel!
     
-    
+    var searchText: String?
+    var filters: GuardianContentFilters?
     var resultsIn : GuardianOpenPlatformData?
-
+    let guarApiController = GuardianContentClient(apiKey: "42573d7e-fb83-4aef-956f-2c52a9bca421", verbose: true)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //TODO Move this code to results table view.
+        do {
+            try guarApiController.searchContent(for: searchText ?? "", usingFilters: filters, withCallback: {
+                (data:GuardianOpenPlatformData?) in
+                if data != nil {
+                    self.resultsIn = data
+                } else {
+                    print("Error no Data passed back from 'GuardianContentClient.searchContent'")
+                }
+            })
+            print("Sent Request!")
+        } catch let error as NSError {
+            print("Error Performing Search: \(error.localizedDescription)")
+        }
+        
+        while resultsIn == nil {
+            usleep(2000)
+        }
+        
         if resultsIn != nil && resultsIn!.response.results != nil {
-            
             pageNumberLab.text = "Page \(resultsIn!.response.currentPage ?? 0)"
             numberOfPages.text = "\(resultsIn!.response.pages ?? 0) pages"
             resultsPerPage.text = "25 stories per page"
             totalResults.text = "\(resultsIn!.response.total) stories in total"
         }
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        tableView.reloadData()
     }
 
     // MARK: - Table view data source

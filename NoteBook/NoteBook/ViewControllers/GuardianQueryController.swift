@@ -24,7 +24,6 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     //Global Vars
     let dateFormatter = DateFormatter()
-    let guarApiController = GuardianContentClient(apiKey: "42573d7e-fb83-4aef-956f-2c52a9bca421", verbose: true)
     var orderOptions = GuardianContentOrderFilter.allCases
     //var showFieldOptions = ["trailText", "headline", "body", "lastModified"] //TODO may need more fields?
     var showFieldOptions = GuardianContentShowFields.allCases
@@ -35,7 +34,7 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
     var orderBy: GuardianContentOrderFilter?
     var showFields: [GuardianContentShowFields]?
     
-    var results: GuardianOpenPlatformData?
+    var filters: GuardianContentFilters?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,8 +49,10 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
         
         toDatePicker.addTarget(self, action: #selector(toDateChanged(_:)), for: .valueChanged)
         fromDatePicker.addTarget(self, action: #selector(fromDateChanged(_:)), for: .valueChanged)
+        toDateChanged(toDatePicker); fromDateChanged(fromDatePicker); orderByChanged(row: orderByPicker.selectedRow(inComponent: 1))
         
         orderByPicker.delegate = self; orderByPicker.dataSource = self
+        
         
         showFieldSelector.delegate = self; showFieldSelector.dataSource = self
         
@@ -59,37 +60,18 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     @IBAction func searchGuardianAPI(_ sender: Any) {
         if validateForm() {
-            results = nil
-            let filters = GuardianContentFilters()
+            filters = GuardianContentFilters()
             
-            filters.page = 1
-            filters.pageSize = 25
-            filters.fromDate = fromDate
-            filters.toDate = toDate
-            filters.orderBy = orderBy
+            filters!.page = 1
+            filters!.pageSize = 25
+            filters!.fromDate = fromDate
+            filters!.toDate = toDate
+            filters!.orderBy = orderBy
             
             if showFields != nil {
-                filters.showFields = showFields
+                filters!.showFields = showFields
             }
             
-            //TODO Move this code to results table view.
-            do {
-                try guarApiController.searchContent(for: serchText.text ?? "", usingFilters: filters, withCallback: {
-                    (data:GuardianOpenPlatformData?) in
-                    if data != nil {
-                        self.results = data
-                    } else {
-                        print("Error no Data passed back from 'GuardianContentClient.searchContent'")
-                    }
-                })
-                print("Sent Request!")
-            } catch let error as NSError {
-                print("Error Performing Search: \(error.localizedDescription)")
-            }
-            
-            while(results == nil) { //Massive Bodge. TODO Improve
-                usleep(2000)
-            }
             //TODO Display Result
             performSegue(withIdentifier: "ShowResults", sender: nil)
             
@@ -99,49 +81,38 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
         }
     }
     
+    //Nolonger needed!
     func validateForm() -> Bool {
         
-        var vQuery = false
-        let vDate = dateValid()
+        let vDate = true
         var vOrder = false
-        
-        if serchText.text != nil {
-            vQuery = true
-        }
         
         if orderBy != nil {
             vOrder = true
         }
         
-        if vQuery && vDate && vOrder {
+        if vDate && vOrder {
             return true
         } else {
             return false
         }
     }
     
-    func dateValid() -> Bool {
-        if let to = toDate, let from = fromDate {
-            switch (from.compare(to)) {
-            case .orderedAscending:
-                return true;
-            case .orderedDescending:
-                return false;
-            case .orderedSame:
-                return false;
-            }
-        }
-        return false;
-    }
-    
     @objc func fromDateChanged(_ sender: UIDatePicker) {
         fromDate = sender.date
         fromDateLabel.text = "Date From: " + dateFormatter.string(from: sender.date)
+        toDatePicker.minimumDate = sender.date
     }
     
     @objc func toDateChanged(_ sender: UIDatePicker) {
         toDate = sender.date
         toDateLabel.text = "Date To: " + dateFormatter.string(from: sender.date)
+        fromDatePicker.maximumDate = sender.date
+    }
+    
+    func orderByChanged(row: Int) {
+        orderBy = orderOptions[row]
+        orderByLabel.text = "Order By: " + orderOptions[row].rawValue
     }
     
     func showFieldsUpdate() {
@@ -177,7 +148,8 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
         if let view = segue.destination as? QueryResultsTableController {
-            view.resultsIn = results
+            view.searchText = serchText.text
+            view.filters = filters
         }
     }
     
@@ -194,8 +166,7 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        orderBy = orderOptions[row]
-        orderByLabel.text = "Order By: " + orderOptions[row].rawValue
+        orderByChanged(row: row)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
