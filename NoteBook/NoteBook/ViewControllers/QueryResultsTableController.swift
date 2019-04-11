@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class QueryResultsTableController: UITableViewController {
     
@@ -15,15 +16,28 @@ class QueryResultsTableController: UITableViewController {
     @IBOutlet weak var resultsPerPage: UILabel!
     @IBOutlet weak var totalResults: UILabel!
     
+    var managedContext: NSManagedObjectContext?
+    let guarApiController = GuardianContentClient(apiKey: "42573d7e-fb83-4aef-956f-2c52a9bca421", verbose: true)
+    
     var searchText: String?
     var filters: GuardianContentFilters?
+    
     var resultsIn : GuardianOpenPlatformData?
-    let guarApiController = GuardianContentClient(apiKey: "42573d7e-fb83-4aef-956f-2c52a9bca421", verbose: true)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //TODO Move this code to results table view.
+        queryAPI()
+        
+        if resultsIn != nil {
+            saveSearch()
+        }
+    }
+    
+    /**
+     Function for quering the API.
+     */
+    func queryAPI() {
         do {
             try guarApiController.searchContent(for: searchText ?? "", usingFilters: filters, withCallback: {
                 (data:GuardianOpenPlatformData?) in
@@ -50,7 +64,17 @@ class QueryResultsTableController: UITableViewController {
         }
         tableView.reloadData()
     }
-
+    
+    func saveSearch() {
+        let historyRecord = HistoricQuery(entity: HistoricQuery.entity(), insertInto: managedContext)
+        historyRecord.query = searchText
+        historyRecord.dateFrom = filters?.fromDate
+        historyRecord.dateTo = filters?.toDate
+        //historyRecord.orderBy = filters?.orderBy
+        //historyRecord.showFields = filters?.showFields
+        
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
