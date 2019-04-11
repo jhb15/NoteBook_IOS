@@ -7,23 +7,31 @@
 //
 
 import UIKit
+import CoreData
 
 class NoteDetailController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleLabel: UITextView!
     @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var contentTextArea: UITextView!
     @IBOutlet weak var linksTable: UITableView!
+    @IBOutlet weak var editBtn: UIButton!
     
     var noteItem: Note?
+    var isEditable = false
+    var managedContext: NSManagedObjectContext?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        showData()
+    }
+    
+    func showData() {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
         
         linksTable.delegate = self; linksTable.dataSource = self
-
+        
         titleLabel.text = noteItem?.title
         var times = ""
         if let cre = noteItem?.created_at,
@@ -34,12 +42,42 @@ class NoteDetailController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         timestampLabel.text = times
         contentTextArea.text = noteItem?.content
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         linksTable.reloadData()
+    }
+    
+    @IBAction func toggleEditMode(_ sender: Any) {
+        titleLabel.isEditable = !titleLabel.isEditable
+        contentTextArea.isEditable = !contentTextArea.isEditable
+        if isEditable {
+            editBtn.setTitle("Edit Note", for: .normal)
+            titleLabel.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.8509803922, blue: 0.03137254902, alpha: 1)
+            contentTextArea.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.8509803922, blue: 0.03137254902, alpha: 1)
+            saveChanges()
+        } else {
+            editBtn.setTitle("Save Changes", for: .normal)
+            titleLabel.backgroundColor = #colorLiteral(red: 0.9050896764, green: 0.9237543344, blue: 0.7370834947, alpha: 1)
+            contentTextArea.backgroundColor = #colorLiteral(red: 0.9050896764, green: 0.9237543344, blue: 0.7370834947, alpha: 1)
+        }
+        isEditable = !isEditable
+        linksTable.reloadData()
+    }
+    
+    func saveChanges() {
+        noteItem?.title = titleLabel.text
+        noteItem?.content = contentTextArea.text
+        noteItem?.updated_at = Date()
+        do {
+            try managedContext?.save()
+            print("Note Updated")
+        }
+        catch let error as NSError {
+            print("error with \(error)")
+        }
+        showData()
     }
     
     // MARK: - Navigation
@@ -71,6 +109,19 @@ class NoteDetailController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.textLabel?.text = link.title
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return isEditable
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            if let link = noteItem?.links?.object(at: indexPath.row) as? Link {
+                link.removeFromNote(noteItem!)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+        }
     }
 
 }

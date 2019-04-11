@@ -91,7 +91,8 @@ class MyNotesController: UITableViewController, UISearchResultsUpdating {
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let edit = UITableViewRowAction(style: .normal, title: "Edit") {
             action, index in
-            print("Editing")
+            //Plan has changed slightly
+            //self.performSegue(withIdentifier: "NewEditNoteSegue", sender: nil)
         }
         edit.backgroundColor = UIColor.lightGray
         let delete = UITableViewRowAction(style: .normal, title: "Delete") {
@@ -180,7 +181,9 @@ class MyNotesController: UITableViewController, UISearchResultsUpdating {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let view = segue.destination as? NoteDetailController,
-            let indexPath = tableView.indexPathForSelectedRow {
+            let indexPath = tableView.indexPathForSelectedRow,
+            let ctx = managedContext {
+            view.managedContext = ctx
             view.noteItem = fetchedResultsController?.object(at: indexPath)
         }
         

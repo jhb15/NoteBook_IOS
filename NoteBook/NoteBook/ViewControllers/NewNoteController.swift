@@ -16,8 +16,6 @@ class NewNoteController: UIViewController {
     
     var managedContext: NSManagedObjectContext?
     
-    var cells = ["Cell1", "Cell2"]
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 

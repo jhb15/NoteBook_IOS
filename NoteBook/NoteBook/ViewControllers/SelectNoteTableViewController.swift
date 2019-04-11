@@ -81,6 +81,7 @@ class SelectNoteTableViewController: UITableViewController {
         
         let note = fetchedResultsNotes?.object(at: indexPath)
         note?.addToLinks(link!)
+        note?.updated_at = Date() //Updateing updated-at timestamp
         
         do {
             try managedContext?.save()
