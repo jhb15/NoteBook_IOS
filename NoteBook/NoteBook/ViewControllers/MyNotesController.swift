@@ -9,14 +9,31 @@
 import UIKit
 import CoreData
 
-class MyNotesController: UITableViewController {
+/**
+ Help for search bar came from: https://www.ioscreator.com/tutorials/add-search-table-view-ios-tutorial
+ this also helped with defining the predicate: https://stackoverflow.com/questions/10611362/ios-coredata-nspredicate-to-query-multiple-properties-at-once#10614749
+ */
+class MyNotesController: UITableViewController, UISearchResultsUpdating {
     
     var managedContext: NSManagedObjectContext?
-    
     var fetchedResultsController: NSFetchedResultsController<Note>?
+    
+    var filteredTableData = [Note]()
+    var resultSearchController = UISearchController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        resultSearchController = ({
+            let controller = UISearchController(searchResultsController: nil)
+            controller.searchResultsUpdater = self
+            controller.dimsBackgroundDuringPresentation = false
+            controller.searchBar.sizeToFit()
+            
+            tableView.tableHeaderView = controller.searchBar
+            
+            return controller
+        })()
 
         guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
             print("error - unable to access failure")
@@ -34,6 +51,11 @@ class MyNotesController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        var contentOffset: CGPoint = tableView.contentOffset
+        contentOffset.y += (tableView.tableHeaderView?.frame)!.height
+        self.tableView.contentOffset = contentOffset
+        
         performFetchForController()
     }
 
@@ -46,14 +68,22 @@ class MyNotesController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        if resultSearchController.isActive {
+            return filteredTableData.count
+        }
         return fetchedResultsController?.fetchedObjects?.count ?? 0
     }
     
      override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NoteCell", for: indexPath)
      
-        let note = fetchedResultsController?.object(at: indexPath)
-        cell.textLabel?.text = note?.title ?? "Unknown"
+        if resultSearchController.isActive {
+            let note = filteredTableData[indexPath.row]
+            cell.textLabel?.text = note.title ?? "Unknown"
+        } else {
+            let note = fetchedResultsController?.object(at: indexPath)
+            cell.textLabel?.text = note?.title ?? "Unknown"
+        }
      
         return cell
      }
@@ -92,6 +122,21 @@ class MyNotesController: UITableViewController {
             print("The error was: \(error)")
             
         }
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        filteredTableData.removeAll(keepingCapacity: false)
+        
+        //TODO Filtering
+        let titlePredicate = NSPredicate(format: "title CONTAINS[c] %@", searchController.searchBar.text!)
+        let contentPredicate = NSPredicate(format: "content CONTAINS[c] %@", searchController.searchBar.text!)
+        let searchPredicate = NSCompoundPredicate(type: .or, subpredicates: [titlePredicate, contentPredicate])
+        let notes = fetchedResultsController?.fetchedObjects
+        let nsNotes = NSArray(array: notes!)
+        let filteredNotes = nsNotes.filtered(using: searchPredicate) as! [Note]
+        filteredTableData = filteredNotes
+        
+        tableView.reloadData()
     }
 
     /*
@@ -138,6 +183,8 @@ class MyNotesController: UITableViewController {
             let indexPath = tableView.indexPathForSelectedRow {
             view.noteItem = fetchedResultsController?.object(at: indexPath)
         }
+        
+        resultSearchController.isActive = false
     }
 
 }
