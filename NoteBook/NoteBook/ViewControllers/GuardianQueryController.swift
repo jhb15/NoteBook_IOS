@@ -72,7 +72,7 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
                 filters.showFields = showFields
             }
             
-            //TODO Perform Network Request
+            //TODO Move this code to results table view.
             do {
                 try guarApiController.searchContent(for: serchText.text ?? "", usingFilters: filters, withCallback: {
                     (data:GuardianOpenPlatformData?) in
@@ -95,6 +95,7 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
             
         } else {
             print("Invalid Input") //TODO More Detailed Validation Error Messages Needed
+            alertUser(title: "InValid Input", message: "You have entered the incorrect input. More Detailed messages soon!")
         }
     }
     
@@ -222,5 +223,14 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
         
         tableView.deselectRow(at: indexPath, animated: true)
         showFieldsUpdate()
+    }
+    
+    func alertUser(title: String, message: String) {
+        let alertCntrl = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let okBtn = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        
+        alertCntrl.addAction(okBtn)
+        present(alertCntrl, animated: true, completion: nil)
     }
 }
