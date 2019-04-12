@@ -23,7 +23,7 @@
         <relationship name="links" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Link" inverseName="note" inverseEntity="Link" syncable="YES"/>
     </entity>
     <entity name="ResultCache" representedClassName="ResultCache" syncable="YES" codeGenerationType="class">
-        <attribute name="results" optional="YES" attributeType="Transformable" customClassName="[GuardianOpenPlatformData]" syncable="YES"/>
+        <attribute name="results" optional="YES" attributeType="Transformable" syncable="YES"/>
         <relationship name="query" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HistoricQuery" inverseName="result" inverseEntity="HistoricQuery" syncable="YES"/>
     </entity>
     <elements>

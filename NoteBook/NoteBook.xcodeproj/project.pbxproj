@@ -23,7 +23,6 @@
 		C182FFAB22536EE900B8CF97 /* NewNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C182FFAA22536EE900B8CF97 /* NewNoteController.swift */; };
 		C182FFAD22536EFB00B8CF97 /* AboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C182FFAC22536EFB00B8CF97 /* AboutController.swift */; };
 		C182FFAF22536F2C00B8CF97 /* MyNotesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C182FFAE22536F2C00B8CF97 /* MyNotesController.swift */; };
-		C182FFB1225370C100B8CF97 /* GuardianAPIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C182FFB0225370C100B8CF97 /* GuardianAPIController.swift */; };
 		C1DE0F5F225914530035B488 /* NoteDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DE0F5E225914530035B488 /* NoteDetailController.swift */; };
 		C1EF1B33224CE8F3005264C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EF1B32224CE8F3005264C8 /* AppDelegate.swift */; };
 		C1EF1B38224CE8F3005264C8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1EF1B36224CE8F3005264C8 /* Main.storyboard */; };
@@ -68,7 +67,6 @@
 		C182FFAA22536EE900B8CF97 /* NewNoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNoteController.swift; sourceTree = "<group>"; };
 		C182FFAC22536EFB00B8CF97 /* AboutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutController.swift; sourceTree = "<group>"; };
 		C182FFAE22536F2C00B8CF97 /* MyNotesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNotesController.swift; sourceTree = "<group>"; };
-		C182FFB0225370C100B8CF97 /* GuardianAPIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardianAPIController.swift; sourceTree = "<group>"; };
 		C1DE0F5E225914530035B488 /* NoteDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailController.swift; sourceTree = "<group>"; };
 		C1EF1B2F224CE8F3005264C8 /* NoteBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoteBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1EF1B32224CE8F3005264C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -137,7 +135,6 @@
 				C128A277225D137600722962 /* GuardianContentClient.swift */,
 				C13C040F225E04FD00989B1B /* KeyedDecodingContainer+extension.swift */,
 				C128A276225D137600722962 /* GuardianContentDataTypes.swift */,
-				C182FFB0225370C100B8CF97 /* GuardianAPIController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -331,7 +328,6 @@
 				C1266229225BE0110078C5C6 /* GuardianQueryController.swift in Sources */,
 				C128A279225D137700722962 /* GuardianContentClient.swift in Sources */,
 				C13C041B225E86F700989B1B /* WebViewController.swift in Sources */,
-				C182FFB1225370C100B8CF97 /* GuardianAPIController.swift in Sources */,
 				C141FCA42260DCE6007E730A /* HistoryTableViewController.swift in Sources */,
 				C182FFAB22536EE900B8CF97 /* NewNoteController.swift in Sources */,
 				C13C0412225E0B7200989B1B /* QueryResultsTableController.swift in Sources */,
