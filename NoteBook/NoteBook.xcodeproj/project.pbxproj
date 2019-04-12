@@ -17,6 +17,9 @@
 		C13C0417225E364D00989B1B /* ResultDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13C0416225E364D00989B1B /* ResultDetailViewController.swift */; };
 		C13C0419225E5EF100989B1B /* SelectNoteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13C0418225E5EF100989B1B /* SelectNoteTableViewController.swift */; };
 		C13C041B225E86F700989B1B /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13C041A225E86F700989B1B /* WebViewController.swift */; };
+		C141FCA42260DCE6007E730A /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C141FCA32260DCE6007E730A /* HistoryTableViewController.swift */; };
+		C141FCA62260E7B4007E730A /* SearchHistoryFilteredTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C141FCA52260E7B4007E730A /* SearchHistoryFilteredTableViewCell.swift */; };
+		C141FCA8226104DA007E730A /* SearchHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C141FCA7226104DA007E730A /* SearchHistoryTableViewCell.swift */; };
 		C182FFAB22536EE900B8CF97 /* NewNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C182FFAA22536EE900B8CF97 /* NewNoteController.swift */; };
 		C182FFAD22536EFB00B8CF97 /* AboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C182FFAC22536EFB00B8CF97 /* AboutController.swift */; };
 		C182FFAF22536F2C00B8CF97 /* MyNotesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C182FFAE22536F2C00B8CF97 /* MyNotesController.swift */; };
@@ -63,6 +66,9 @@
 		C13C0416225E364D00989B1B /* ResultDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultDetailViewController.swift; sourceTree = "<group>"; };
 		C13C0418225E5EF100989B1B /* SelectNoteTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectNoteTableViewController.swift; sourceTree = "<group>"; };
 		C13C041A225E86F700989B1B /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		C141FCA32260DCE6007E730A /* HistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
+		C141FCA52260E7B4007E730A /* SearchHistoryFilteredTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryFilteredTableViewCell.swift; sourceTree = "<group>"; };
+		C141FCA7226104DA007E730A /* SearchHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		C182FFAA22536EE900B8CF97 /* NewNoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNoteController.swift; sourceTree = "<group>"; };
 		C182FFAC22536EFB00B8CF97 /* AboutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutController.swift; sourceTree = "<group>"; };
 		C182FFAE22536F2C00B8CF97 /* MyNotesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNotesController.swift; sourceTree = "<group>"; };
@@ -126,6 +132,9 @@
 				C13C0416225E364D00989B1B /* ResultDetailViewController.swift */,
 				C13C0418225E5EF100989B1B /* SelectNoteTableViewController.swift */,
 				C13C041A225E86F700989B1B /* WebViewController.swift */,
+				C141FCA32260DCE6007E730A /* HistoryTableViewController.swift */,
+				C141FCA52260E7B4007E730A /* SearchHistoryFilteredTableViewCell.swift */,
+				C141FCA7226104DA007E730A /* SearchHistoryTableViewCell.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -345,6 +354,7 @@
 				C1C9468C225A7378009243EE /* ResponseObject.swift in Sources */,
 				C1C9468A225A6CFC009243EE /* ResultObject.swift in Sources */,
 				C182FFB1225370C100B8CF97 /* GuardianAPIController.swift in Sources */,
+				C141FCA42260DCE6007E730A /* HistoryTableViewController.swift in Sources */,
 				C1C9468E225A7F31009243EE /* Response.swift in Sources */,
 				C1C94688225A66CF009243EE /* QueryObject.swift in Sources */,
 				C182FFAB22536EE900B8CF97 /* NewNoteController.swift in Sources */,
@@ -357,7 +367,9 @@
 				C13C0417225E364D00989B1B /* ResultDetailViewController.swift in Sources */,
 				C182FFAD22536EFB00B8CF97 /* AboutController.swift in Sources */,
 				C1DE0F5F225914530035B488 /* NoteDetailController.swift in Sources */,
+				C141FCA8226104DA007E730A /* SearchHistoryTableViewCell.swift in Sources */,
 				C13C0414225E214500989B1B /* ResultTableCell.swift in Sources */,
+				C141FCA62260E7B4007E730A /* SearchHistoryFilteredTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

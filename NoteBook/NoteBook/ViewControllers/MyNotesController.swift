@@ -42,7 +42,7 @@ class MyNotesController: UITableViewController, UISearchResultsUpdating {
         managedContext = delegate.persistentContainer.viewContext
         
         let fetchRequest = NSFetchRequest<Note>(entityName: "Note")
-        let sortDescriptor = NSSortDescriptor(key: "created_at", ascending: true, selector: #selector(NSString.localizedCompare(_:)))
+        let sortDescriptor = NSSortDescriptor(key: "updated_at", ascending: false, selector: #selector(NSString.localizedCompare(_:)))
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedContext!, sectionNameKeyPath: nil, cacheName: nil)

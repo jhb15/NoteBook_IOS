@@ -9,6 +9,10 @@
 import UIKit
 
 class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITableViewDelegate, UITableViewDataSource {
+    //Content
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var addFiltersBtn: UIButton!
+    
     //Labels
     @IBOutlet weak var fromDateLabel: UILabel!
     @IBOutlet weak var toDateLabel: UILabel!
@@ -39,6 +43,8 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        scrollView.isHidden = true
+        
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none
         dateFormatter.locale = NSLocale.current
@@ -58,20 +64,33 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
         
     }
     
+    @IBAction func toggleFilters(_ sender: Any) {
+        if scrollView.isHidden {
+            scrollView.isHidden = false
+            addFiltersBtn.setTitle("Remove Filters", for: .normal)
+        } else {
+            scrollView.isHidden = true
+            addFiltersBtn.setTitle("Add Filters", for: .normal)
+        }
+    }
+    
     @IBAction func searchGuardianAPI(_ sender: Any) {
         if validateForm() {
-            filters = GuardianContentFilters()
-            
-            filters!.page = 1
-            filters!.pageSize = 25
-            filters!.fromDate = fromDate
-            filters!.toDate = toDate
-            filters!.orderBy = orderBy
-            
-            if showFields != nil {
-                filters!.showFields = showFields
+            if !scrollView.isHidden {
+                filters = GuardianContentFilters()
+                
+                filters!.page = 1
+                filters!.pageSize = 25
+                filters!.fromDate = fromDate
+                filters!.toDate = toDate
+                filters!.orderBy = orderBy
+                
+                if showFields != nil {
+                    filters!.showFields = showFields
+                }
+            } else {
+                filters = nil
             }
-            
             //TODO Display Result
             performSegue(withIdentifier: "ShowResults", sender: nil)
             

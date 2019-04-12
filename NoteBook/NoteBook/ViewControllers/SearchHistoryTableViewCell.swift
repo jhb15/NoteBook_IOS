@@ -1,19 +1,17 @@
 //
-//  ResultTableCell.swift
+//  SearchHistoryFilteredTableViewCell.swift
 //  NoteBook
 //
-//  Created by jhb15 on 10/04/2019.
+//  Created by jhb15 on 12/04/2019.
 //  Copyright © 2019 jhb15. All rights reserved.
 //
 
 import UIKit
 
-class ResultTableCell: UITableViewCell {
+class SearchHistoryTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var webTitleLabel: UILabel!
-    @IBOutlet weak var categoryLabel: UILabel!
-    @IBOutlet weak var publishedLabel: UILabel!
-    @IBOutlet weak var wordCountLabel: UILabel!
+    @IBOutlet weak var searchTextLabel: UILabel!
+    @IBOutlet weak var searchDateLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -27,11 +27,16 @@ class QueryResultsTableController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        queryAPI()
-        
-        if resultsIn != nil {
-            saveSearch()
+        guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
+            print("error - unable to access failure")
+            exit(EXIT_FAILURE)
+            
         }
+        managedContext = delegate.persistentContainer.viewContext
+        
+        queryAPI() //Neeed to add cacheing
+        
+        saveSearch() //Need This in More Appropriate Place
     }
     
     /**
@@ -68,47 +73,69 @@ class QueryResultsTableController: UITableViewController {
     func saveSearch() {
         let historyRecord = HistoricQuery(entity: HistoricQuery.entity(), insertInto: managedContext)
         historyRecord.query = searchText
-        historyRecord.dateFrom = filters?.fromDate
-        historyRecord.dateTo = filters?.toDate
-        //historyRecord.orderBy = filters?.orderBy
-        //historyRecord.showFields = filters?.showFields
+        if let filt = filters {
+            historyRecord.dateFrom = filt.fromDate
+            historyRecord.dateTo = filt.toDate
+            historyRecord.orderBy = filt.orderBy?.rawValue
+            
+            if let fields = filt.showFields {
+                var showFields: [String] = []
+                for str in fields {
+                    showFields.append(str.rawValue)
+                }
+                historyRecord.showFields = showFields
+            }
+        }
+        historyRecord.created_at = Date()
         
+        do {
+            try managedContext?.save()
+            print("Added to Search History")
+        } catch let error as NSError {
+            print("error with \(error)")
+        }
     }
     
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        if let total = resultsIn?.response.total {
-            if resultsIn!.response.total > 25 {
-                return 25
+        
+        let total = resultsIn!.response.total
+        
+        if let pages = resultsIn!.response.pages,
+            let pageSize = resultsIn!.response.pageSize,
+            let currentPage = resultsIn!.response.currentPage {
+            if pages > 1 {
+                if currentPage != pages {
+                    return pageSize
+                }
+                return total % pageSize
+            } else {
+                return total
             }
-            return total
         }
-        return resultsIn?.response.total ?? 0
+        return total
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ResultCell", for: indexPath) as! ResultTableCell
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
         
-        if resultsIn != nil && resultsIn!.response.results != nil && resultsIn!.response.results![indexPath.row].fields != nil {
-            if let fields = resultsIn!.response.results![indexPath.row].fields {
-                /*if let img = fields.thumbnail {
-                    do {
-                        try cell.imgView.image = UIImage(data: Data(contentsOf: img))
-                    } catch let error as NSError {
-                        print("Error trying to show thumnail. \(error)")
-                    }
-                }*/
-                
-                if let hl = fields.headline { cell.headlineLabel.text = hl }
-                if let by = fields.byline { cell.bylineLabel.text = "By: " + by }
-                if let cnt = fields.wordcount { cell.wordCountLabel.text = "Word Count: \(cnt)" }
+        if let result = resultsIn!.response.results?[indexPath.row] {
+            cell.webTitleLabel.text = result.webTitle
+            cell.categoryLabel.text = "Category: " + (result.sectionName ?? "Unknown")
+            if let date = result.webPublicationDate{ cell.publishedLabel.text = "Published " + dateFormatter.string(from: date) }
+            
+            if let fields = result.fields {
+                    if let cnt = fields.wordcount { cell.wordCountLabel.text = "Word Count: \(cnt)" }
+            } else {
+                cell.isUserInteractionEnabled = false
+                cell.accessoryType = .none
             }
         }
         
