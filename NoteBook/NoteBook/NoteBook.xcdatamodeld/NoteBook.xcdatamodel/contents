@@ -7,6 +7,7 @@
         <attribute name="orderBy" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="query" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="showFields" optional="YES" attributeType="Transformable" customClassName="[String]" syncable="YES"/>
+        <relationship name="result" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ResultCache" inverseName="query" inverseEntity="ResultCache" syncable="YES"/>
     </entity>
     <entity name="Link" representedClassName="Link" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
@@ -21,9 +22,14 @@
         <attribute name="updated_at" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="links" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Link" inverseName="note" inverseEntity="Link" syncable="YES"/>
     </entity>
+    <entity name="ResultCache" representedClassName="ResultCache" syncable="YES" codeGenerationType="class">
+        <attribute name="results" optional="YES" attributeType="Transformable" customClassName="[GuardianOpenPlatformData]" syncable="YES"/>
+        <relationship name="query" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HistoricQuery" inverseName="result" inverseEntity="HistoricQuery" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="HistoricQuery" positionX="-63" positionY="36" width="128" height="135"/>
+        <element name="HistoricQuery" positionX="-63" positionY="36" width="128" height="150"/>
         <element name="Link" positionX="-54" positionY="9" width="128" height="105"/>
         <element name="Note" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="ResultCache" positionX="-54" positionY="63" width="128" height="75"/>
     </elements>
 </model>
