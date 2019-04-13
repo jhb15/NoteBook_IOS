@@ -36,22 +36,21 @@ class QueryResultsTableController: UITableViewController {
         }
         managedContext = delegate.persistentContainer.viewContext
         
-        /*if let query = queryExists() {
-            
-        }*/
-        
-        if dataCached() {
-            
+        let query = queryExists()
+        if query != nil && query!.result != nil  {
+            showCachedData()
         } else {
-            queryAPI() //Neeed to add cacheing
+            queryAPI()
         }
-        
-        saveSearch() //Need This in More Appropriate Place
+        saveSearch(query: query) //Need This in More Appropriate Place
     }
     
-    func dataCached() -> Bool {
+    func showCachedData() {
         
-        return false
+    }
+    
+    func cacheResult() {
+        
     }
     
     /**
@@ -86,7 +85,6 @@ class QueryResultsTableController: UITableViewController {
     }
     
     /**
-     This is horrible tidy up please. //TODO
      This function is designed to check the HistoricQuery CoreData entity for an existing query with the same perameters. If
      one is found it will be returned.
      */
@@ -136,9 +134,9 @@ class QueryResultsTableController: UITableViewController {
      This function will either update the created_at attribute of an existing query or add the new query to the history
      of searches.
      */
-    func saveSearch() {
-        if let query = queryExists() {
-            query.created_at = Date()
+    func saveSearch(query: HistoricQuery?) {
+        if query != nil {
+            query!.created_at = Date()
         } else {
             let historyRecord = HistoricQuery(entity: HistoricQuery.entity(), insertInto: managedContext)
             historyRecord.query = searchText
