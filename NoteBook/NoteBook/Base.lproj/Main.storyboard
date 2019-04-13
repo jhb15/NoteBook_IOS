@@ -547,7 +547,6 @@
                                     <outlet property="publishedLabel" destination="47H-u5-0df" id="noW-QG-Vcc"/>
                                     <outlet property="webTitleLabel" destination="tVY-yx-yDl" id="Dbe-Bo-af0"/>
                                     <outlet property="wordCountLabel" destination="TWZ-24-n48" id="Yob-PB-fD4"/>
-                                    <segue destination="0yW-za-CqN" kind="show" id="GsO-tS-s4r"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -561,6 +560,8 @@
                         <outlet property="pageNumberLab" destination="oO8-3P-qqi" id="sXS-gp-UfZ"/>
                         <outlet property="resultsPerPage" destination="opv-ze-xlm" id="sqJ-G1-yUR"/>
                         <outlet property="totalResults" destination="wVv-Mz-XYw" id="QOw-KQ-bXQ"/>
+                        <segue destination="0yW-za-CqN" kind="show" identifier="ShowDetail" id="tE5-ET-cBT"/>
+                        <segue destination="7zG-bE-ZNw" kind="show" identifier="AddLink" id="cIT-KK-NpE"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Roq-o4-EW2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -612,6 +613,7 @@
                                                 <rect key="frame" x="8" y="441" width="359" height="494"/>
                                                 <color key="backgroundColor" red="0.90850696710000001" green="0.92308937820000003" blue="0.75596813939999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <wkWebViewConfiguration key="configuration">
+                                                    <dataDetectorTypes key="dataDetectorTypes"/>
                                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                                     <wkPreferences key="preferences"/>
                                                 </wkWebViewConfiguration>
@@ -620,9 +622,7 @@
                                                 <rect key="frame" x="122" y="403" width="131" height="30"/>
                                                 <state key="normal" title="Add Article to Note"/>
                                                 <connections>
-                                                    <segue destination="7zG-bE-ZNw" kind="popoverPresentation" popoverAnchorView="w1x-nC-Ell" id="FxL-ov-eDs">
-                                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                                    </segue>
+                                                    <segue destination="7zG-bE-ZNw" kind="show" id="FxL-ov-eDs"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -679,7 +679,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cdc-u2-HMk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2204" y="-1867"/>
+            <point key="canvasLocation" x="2188" y="-2374"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="IFZ-dc-DHq">
@@ -1027,22 +1027,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93333333330000001" green="0.85098039219999999" blue="0.031372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="BZ1-v7-9W6">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <items>
-                                <navigationItem title="Title" id="aE5-EJ-YGQ">
-                                    <barButtonItem key="leftBarButtonItem" style="plain" systemItem="cancel" id="oat-Ks-H1f">
-                                        <connections>
-                                            <action selector="cancelAddingToNote:" destination="7zG-bE-ZNw" id="pUM-jr-EKj"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </navigationItem>
-                            </items>
-                        </navigationBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NoteCell" id="BlH-9y-kWa">
-                                <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BlH-9y-kWa" id="VM8-DT-PZQ">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -1063,6 +1050,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="cIT-KK-NpE"/>
         <segue reference="5Ol-nk-ZRt"/>
     </inferredMetricsTieBreakers>
 </document>

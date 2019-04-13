@@ -15,6 +15,7 @@ class SelectNoteTableViewController: UITableViewController {
     var fetchedResultsNotes: NSFetchedResultsController<Note>?
     var fetchedResultsLinks: NSFetchedResultsController<Link>?
     var article: GuardianOpenPlatformResult?
+    var link: Link?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +37,8 @@ class SelectNoteTableViewController: UITableViewController {
         fetchedResultsNotes = NSFetchedResultsController(fetchRequest: fetchRequestNote, managedObjectContext: managedContext!, sectionNameKeyPath: nil, cacheName: nil)
         fetchedResultsLinks = NSFetchedResultsController(fetchRequest: fetchRequestLink, managedObjectContext: managedContext!, sectionNameKeyPath: nil, cacheName: nil)
         performFetchForController()
+        
+        link = doesLinkExist(id: article!.id)
     }
     
     @IBAction func cancelAddingToNote(_ sender: Any) {
@@ -61,15 +64,24 @@ class SelectNoteTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NoteCell", for: indexPath)
-
-        cell.textLabel?.text = fetchedResultsNotes?.object(at: indexPath).title
+        
+        let note = fetchedResultsNotes?.object(at: indexPath)
+        
+        if link != nil && (note?.links?.contains(link as Any)) ?? false {  //Disable Cell if Non Linkable
+            cell.isUserInteractionEnabled = false
+            cell.textLabel?.isEnabled = false
+            cell.textLabel?.text = note!.title! + " -- (Already Linked)"
+        } else {
+            cell.isUserInteractionEnabled = true
+            cell.textLabel?.isEnabled = true
+            cell.textLabel?.text = note!.title
+        }
 
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //Check if we already store a Link of this type
-        var link = doesLinkExist(id: article!.id)
         
         if link == nil {
             //Create Link
@@ -80,6 +92,11 @@ class SelectNoteTableViewController: UITableViewController {
         }
         
         let note = fetchedResultsNotes?.object(at: indexPath)
+        
+        /*if note.links.contains(link) {
+            
+        }*/ //ADD Check to see if link already added to 
+        
         note?.addToLinks(link!)
         note?.updated_at = Date() //Updateing updated-at timestamp
         
@@ -91,7 +108,8 @@ class SelectNoteTableViewController: UITableViewController {
             print("error with \(error)")
         }
         
-        dismiss(animated: true, completion: nil)
+        //dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
     
     func doesLinkExist(id: String) -> Link? {

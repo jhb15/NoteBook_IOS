@@ -134,12 +134,20 @@ class QueryResultsTableController: UITableViewController {
             if let fields = result.fields {
                     if let cnt = fields.wordcount { cell.wordCountLabel.text = "Word Count: \(cnt)" }
             } else {
-                cell.isUserInteractionEnabled = false
-                cell.accessoryType = .none
+                cell.accessoryType = .disclosureIndicator
             }
         }
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let result = resultsIn!.response.results?[indexPath.row],
+            let _ = result.fields {
+            performSegue(withIdentifier: "ShowDetail", sender: self)
+        } else {
+            performSegue(withIdentifier: "AddLink", sender: self)
+        }
     }
 
     /*
@@ -184,14 +192,17 @@ class QueryResultsTableController: UITableViewController {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
         
-        if let view = segue.destination as? ResultDetailViewController,
-            let indexPath = tableView.indexPathForSelectedRow,
+        if let indexPath = tableView.indexPathForSelectedRow,
             let results = resultsIn!.response.results {
             
-            view.result = results[indexPath.row]
+            if let view = segue.destination as? ResultDetailViewController {
+                view.result = results[indexPath.row]
+            }
             
+            if let view = segue.destination as? SelectNoteTableViewController {
+                view.article = results[indexPath.row]
+            }
         }
-        
     }
 
 }

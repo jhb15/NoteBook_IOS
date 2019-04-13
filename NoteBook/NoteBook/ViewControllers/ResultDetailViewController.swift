@@ -50,11 +50,9 @@ class ResultDetailViewController: UIViewController {
             if let trail = fields.trailText,
                 let body = fields.body {
                 let html = "<b>" + trail + "</b>" + body
-                webView.loadHTMLString(html, baseURL: nil)
+                webView.loadHTMLString(html, baseURL: nil) // Not Sure WebView is the best option but is okay for now
             }
         }
-        
-        // Do any additional setup after loading the view.
     }
     
     // MARK: - Navigation
