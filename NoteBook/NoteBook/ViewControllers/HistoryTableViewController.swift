@@ -10,7 +10,10 @@ import UIKit
 import CoreData
 
 class HistoryTableViewController: UITableViewController {
+    //UI Elements
+    @IBOutlet weak var clearBtn: UIButton!
     
+    //Global Vars
     var dateFormatter = DateFormatter()
     
     var managedContext: NSManagedObjectContext?
@@ -22,6 +25,7 @@ class HistoryTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        clearBtn.isEnabled = false
         dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
 
         guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
@@ -43,11 +47,56 @@ class HistoryTableViewController: UITableViewController {
         
         performFetchForController()
     }
-
+    
+    @IBAction func clearHistory(_ sender: Any) {
+        let alertCntrl = UIAlertController(title: "Clear History", message: "Are you sure you want to delete all of your Search History?", preferredStyle: .alert)
+        
+        let yesBtn = UIAlertAction(title: "Yes", style: .destructive, handler: { (action) in
+            self.clearHistoryConfirm()
+        })
+        let noBtn = UIAlertAction(title: "No", style: .cancel, handler: nil)
+        
+        alertCntrl.addAction(yesBtn)
+        alertCntrl.addAction(noBtn)
+        present(alertCntrl, animated: true, completion: nil)
+    }
+    
+    func clearHistoryConfirm() {
+        let history = fetchedResultsController?.fetchedObjects
+        if history != nil && history!.count > 0 {
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "HistoricQuery")
+            
+            let batchDel = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            
+            do {
+                try managedContext?.execute(batchDel)
+                print("Cleared History")
+            } catch let error as NSError {
+                print("Error Clearing History, \(error.localizedDescription)")
+            }
+        }
+        performFetchForController()
+        tableView.reloadData()
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        if let cnt = fetchedResultsController!.fetchedObjects?.count,
+            cnt > 0 {
+            clearBtn.isEnabled = true
+            tableView.separatorStyle = .singleLine
+            tableView.backgroundView = nil
+            return 1
+        }
+        clearBtn.isEnabled = false
+        let noDataLabel = UILabel()
+        noDataLabel.text = "No History to Show"
+        noDataLabel.textColor = UIColor.gray
+        noDataLabel.textAlignment = .center
+        tableView.separatorStyle = .none
+        tableView.backgroundView = noDataLabel
+        return 0
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -175,5 +224,4 @@ class HistoryTableViewController: UITableViewController {
         }
         return filters
     }
-
 }

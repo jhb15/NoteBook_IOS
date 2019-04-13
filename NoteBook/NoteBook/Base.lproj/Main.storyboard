@@ -293,27 +293,39 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93333333330000001" green="0.85098039219999999" blue="0.031372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="QEa-9B-EFH">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="31"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search History" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oVy-gp-Lzk">
-                                    <rect key="frame" x="8" y="8" width="359" height="23"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <rect key="frame" x="8" y="14" width="127.5" height="24"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dec-t5-FlM">
+                                    <rect key="frame" x="278" y="11" width="89" height="30"/>
+                                    <state key="normal" title="Clear History"/>
+                                    <connections>
+                                        <action selector="clearHistory:" destination="XAg-qs-5Aa" eventType="touchUpInside" id="7ad-p1-E7i"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" red="0.93333333330000001" green="0.85098039219999999" blue="0.031372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstItem="oVy-gp-Lzk" firstAttribute="leading" secondItem="QEa-9B-EFH" secondAttribute="leading" constant="8" id="7BZ-ix-OJp"/>
-                                <constraint firstItem="oVy-gp-Lzk" firstAttribute="centerX" secondItem="QEa-9B-EFH" secondAttribute="centerX" id="O5h-DG-lo1"/>
-                                <constraint firstAttribute="bottom" secondItem="oVy-gp-Lzk" secondAttribute="bottom" id="i3C-AY-8zN"/>
-                                <constraint firstItem="oVy-gp-Lzk" firstAttribute="top" secondItem="QEa-9B-EFH" secondAttribute="top" constant="8" id="tDM-zP-L0s"/>
+                                <constraint firstItem="oVy-gp-Lzk" firstAttribute="top" secondItem="QEa-9B-EFH" secondAttribute="top" constant="14" id="B0A-Qm-LeR"/>
+                                <constraint firstItem="oVy-gp-Lzk" firstAttribute="centerY" secondItem="QEa-9B-EFH" secondAttribute="centerY" id="Lrl-tS-KSH"/>
+                                <constraint firstItem="dec-t5-FlM" firstAttribute="top" secondItem="QEa-9B-EFH" secondAttribute="top" constant="11" id="OWA-PX-T1v"/>
+                                <constraint firstAttribute="bottom" secondItem="oVy-gp-Lzk" secondAttribute="bottom" constant="14" id="QJj-vM-WQX"/>
+                                <constraint firstAttribute="bottom" secondItem="dec-t5-FlM" secondAttribute="bottom" constant="11" id="W27-fa-igs"/>
+                                <constraint firstItem="oVy-gp-Lzk" firstAttribute="leading" secondItem="QEa-9B-EFH" secondAttribute="leading" constant="8" id="Xvr-by-3qa"/>
+                                <constraint firstItem="dec-t5-FlM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="oVy-gp-Lzk" secondAttribute="trailing" constant="8" symbolic="YES" id="gRt-UO-fi1"/>
+                                <constraint firstAttribute="trailing" secondItem="dec-t5-FlM" secondAttribute="trailing" constant="8" id="iSP-Xo-BE9"/>
+                                <constraint firstItem="dec-t5-FlM" firstAttribute="centerY" secondItem="QEa-9B-EFH" secondAttribute="centerY" id="iTd-qR-cKO"/>
                             </constraints>
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="QueryCell" rowHeight="97" id="VAu-Sh-L2Z" customClass="SearchHistoryTableViewCell" customModule="NoteBook" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="59" width="375" height="97"/>
+                                <rect key="frame" x="0.0" y="80" width="375" height="97"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VAu-Sh-L2Z" id="S7U-9N-kLn">
                                     <rect key="frame" x="0.0" y="0.0" width="341" height="96.5"/>
@@ -349,7 +361,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="QueryWithFiltersCell" rowHeight="251" id="0JI-qm-gfB" customClass="SearchHistoryFilteredTableViewCell" customModule="NoteBook" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="156" width="375" height="251"/>
+                                <rect key="frame" x="0.0" y="177" width="375" height="251"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0JI-qm-gfB" id="7BI-sn-nYG">
                                     <rect key="frame" x="0.0" y="0.0" width="341" height="250.5"/>
@@ -431,6 +443,7 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="clearBtn" destination="dec-t5-FlM" id="iwp-hX-1Z5"/>
                         <segue destination="82d-Fr-Xvw" kind="show" identifier="RedoSearch" id="5Ol-nk-ZRt"/>
                     </connections>
                 </tableViewController>
@@ -582,7 +595,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aMi-B7-7hc" userLabel="Scroll Area">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="943"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Fmw-ti-BED">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Fmw-ti-BED">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="208"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="208" id="EOa-Hs-f7a"/>
@@ -613,7 +626,7 @@
                                                 <rect key="frame" x="8" y="441" width="359" height="494"/>
                                                 <color key="backgroundColor" red="0.90850696710000001" green="0.92308937820000003" blue="0.75596813939999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <wkWebViewConfiguration key="configuration">
-                                                    <dataDetectorTypes key="dataDetectorTypes"/>
+                                                    <dataDetectorTypes key="dataDetectorTypes" none="YES"/>
                                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                                     <wkPreferences key="preferences"/>
                                                 </wkWebViewConfiguration>
@@ -1050,7 +1063,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="cIT-KK-NpE"/>
+        <segue reference="FxL-ov-eDs"/>
         <segue reference="5Ol-nk-ZRt"/>
     </inferredMetricsTieBreakers>
 </document>
