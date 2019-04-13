@@ -108,7 +108,7 @@ class QueryResultsTableController: UITableViewController {
         tableView.reloadData()
         
         if let query = queryExists() { //Should exist at this point
-            cacheResult(query: query)
+            //cacheResult(query: query)
         }
     }
     
