@@ -10,7 +10,7 @@
 import Foundation
 import CoreData
 
-@objc(ResultCache)
+//@objc(ResultCache)
 public class ResultCache: NSManagedObject {
     
     /*var results: [GuardianOpenPlatformData] {

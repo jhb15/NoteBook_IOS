@@ -37,20 +37,44 @@ class QueryResultsTableController: UITableViewController {
         managedContext = delegate.persistentContainer.viewContext
         
         let query = queryExists()
+        saveSearch(query: query)
         if query != nil && query!.result != nil  {
-            showCachedData()
+            showCachedData(cachedData: (query!.result?.responses)!)
         } else {
             queryAPI()
         }
-        saveSearch(query: query) //Need This in More Appropriate Place
     }
     
-    func showCachedData() {
-        
+    func showCachedData(cachedData: [GuardianOpenPlatformData]) {
+        let pageNumber = filters?.page ?? 1
+        for guardianData in cachedData {
+            if guardianData.response.currentPage == pageNumber {
+                resultsIn = guardianData
+            }
+        }
     }
     
-    func cacheResult() {
-        
+    func cacheResult(query: HistoricQuery) {
+        if query.result == nil {
+            query.result = ResultCache(entity: ResultCache.entity(),  insertInto: managedContext)
+        }
+        if query.result!.responses == nil {
+            query.result!.responses = []
+        }
+        if let page = doesResultPageExist(pageNum: resultsIn!.response.currentPage!, resultCache: query.result!) {
+            query.result!.responses![page] = resultsIn!
+        } else {
+            query.result!.responses?.append(resultsIn!)
+        }
+    }
+    
+    func doesResultPageExist(pageNum: Int, resultCache: ResultCache) -> Int?{
+        for (index, guardianData) in (resultCache.responses?.enumerated())! {
+            if guardianData.response.currentPage! == pageNum {
+                return index
+            }
+        }
+        return nil
     }
     
     /**
@@ -82,6 +106,10 @@ class QueryResultsTableController: UITableViewController {
             totalResults.text = "\(resultsIn!.response.total) stories in total"
         }
         tableView.reloadData()
+        
+        if let query = queryExists() { //Should exist at this point
+            cacheResult(query: query)
+        }
     }
     
     /**
