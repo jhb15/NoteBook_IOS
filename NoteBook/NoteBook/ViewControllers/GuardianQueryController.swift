@@ -29,16 +29,15 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
     //Global Vars
     let dateFormatter = DateFormatter()
     var orderOptions = GuardianContentOrderFilter.allCases
-    //var showFieldOptions = ["trailText", "headline", "body", "lastModified"] //TODO may need more fields?
     var showFieldOptions = GuardianContentShowFields.allCases
+    var isFieldSelected = [Bool](repeating: false, count: GuardianContentShowFields.allCases.count) //TODO MASSIVE BODGE
     
     //Global Value Holders
     var fromDate: Date?
     var toDate: Date?
     var orderBy: GuardianContentOrderFilter?
-    var showFields: [GuardianContentShowFields]?
-    
     var filters: GuardianContentFilters?
+    var showFields: [GuardianContentShowFields]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -135,21 +134,21 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
     }
     
     func showFieldsUpdate() {
-        let cells = showFieldSelector.visibleCells as! [ShowFieldOptCell]
         var options = [GuardianContentShowFields]()
+        var strAry: [String] = []
         
-        for cell in cells {
-            if cell.accessoryType == UITableViewCell.AccessoryType.checkmark {
-                if let option = cell.showFieldObj {
-                    options.append(option)
-                }
+        for (index, selected) in isFieldSelected.enumerated() {
+            if selected {
+                options.append(showFieldOptions[index])
+                strAry.append(showFieldOptions[index].rawValue)
             }
         }
         
-        showFields = options
-        /*if let fields = showFields {
-            showFieldLabel.text = "Show Fields: " + listStringArray(strings: fields)
-        }*/ //NOTE This part may not be needed.
+        var str = "Show Fields: "
+        if options.count > 0 {
+            str.append("\n[" + strAry.joined(separator: ", ") + "]")
+        }
+        showFieldLabel.text = str
     }
     
     func listStringArray(strings: [String]) -> String {
@@ -197,7 +196,11 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
         
         cell.showFieldObj = showFieldOptions[indexPath.row]
         cell.textLabel?.text = showFieldOptions[indexPath.row].rawValue
-        cell.accessoryType = UITableViewCell.AccessoryType.none
+        if isFieldSelected[indexPath.row] {
+            cell.accessoryType = .checkmark
+        } else {
+            cell.accessoryType = .none
+        }
         
         return cell
     }
@@ -205,11 +208,12 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         
-        if cell?.accessoryType == UITableViewCell.AccessoryType.none {
-            cell?.accessoryType = UITableViewCell.AccessoryType.checkmark
+        if isFieldSelected[indexPath.row] {
+            cell?.accessoryType = .none
         } else {
-            cell?.accessoryType = UITableViewCell.AccessoryType.none
+            cell?.accessoryType = .checkmark
         }
+        isFieldSelected[indexPath.row] = !isFieldSelected[indexPath.row]
         
         tableView.deselectRow(at: indexPath, animated: true)
         showFieldsUpdate()

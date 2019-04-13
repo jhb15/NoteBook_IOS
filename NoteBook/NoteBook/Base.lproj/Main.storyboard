@@ -101,7 +101,7 @@
                                 <rect key="frame" x="16" y="181" width="343" height="950"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NVH-o5-hD2">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="950"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="949.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aditional Options" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZgW-sa-ZQ7">
                                                 <rect key="frame" x="8" y="8" width="327" height="24"/>
@@ -152,7 +152,7 @@
                                                 </constraints>
                                             </pickerView>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="A6a-nC-yAf">
-                                                <rect key="frame" x="0.0" y="630" width="343" height="300"/>
+                                                <rect key="frame" x="0.0" y="629.5" width="343" height="300"/>
                                                 <color key="backgroundColor" red="0.90850696710000001" green="0.92308937820000003" blue="0.75596813939999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="300" id="sJX-Ga-9EC"/>
@@ -169,8 +169,8 @@
                                                     </tableViewCell>
                                                 </prototypes>
                                             </tableView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Fields:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W0q-Mx-abk">
-                                                <rect key="frame" x="8" y="601" width="327" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Fields:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W0q-Mx-abk">
+                                                <rect key="frame" x="8" y="601" width="327" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -443,7 +443,6 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="clearBtn" destination="dec-t5-FlM" id="iwp-hX-1Z5"/>
                         <segue destination="82d-Fr-Xvw" kind="show" identifier="RedoSearch" id="5Ol-nk-ZRt"/>
                     </connections>
                 </tableViewController>
@@ -1064,6 +1063,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="FxL-ov-eDs"/>
-        <segue reference="5Ol-nk-ZRt"/>
+        <segue reference="dGf-5v-fLU"/>
     </inferredMetricsTieBreakers>
 </document>

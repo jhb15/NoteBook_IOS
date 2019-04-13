@@ -233,43 +233,17 @@ enum GuardianContentDateFilter: String {
 /**
  Valid filter settings for the `order-by` filter.
  */
-/*@objc*/ public enum GuardianContentOrderFilter: /*Int, RawRepresentable,*/String, CaseIterable {
+public enum GuardianContentOrderFilter: String, CaseIterable {
     case newest
     case oldest
     case relevance
-    
-    /*public typealias RawValue = String
-    
-    public var rawValue: RawValue {
-        switch self {
-        case .newest:
-            return "newest"
-        case .oldest:
-            return "oldest"
-        case .relevance:
-            return "relevance"
-        }
-    }
-    
-    public init?(rawValue: RawValue) {
-        switch rawValue {
-        case "newest" :
-            self = .newest
-        case "oldest" :
-            self = .oldest
-        case "relevance" :
-            self = .relevance
-        default:
-            self = .newest
-        }
-    }*/
 }
 
 /**
  Valid filter settings for 'show-fields' filter. Not all have been added but just some
  that the user may want.
  */
-/*@objc*/ public enum GuardianContentShowFields: /*Int, RawRepresentable,*/String, CaseIterable {
+public enum GuardianContentShowFields: String, CaseIterable {
     case trailText
     case thumbnail
     case headline
@@ -277,48 +251,6 @@ enum GuardianContentDateFilter: String {
     case lastModified
     case wordcount
     case byline
-    
-    /*public typealias RawValue = String
-    
-    public var rawValue: RawValue {
-        switch self {
-        case .trailText:
-            return "trailText"
-        case .thumbnail:
-            return "thumbnail"
-        case .headline:
-            return "headline"
-        case .body:
-            return "body"
-        case .lastModified:
-            return "lastModified"
-        case .wordcount:
-            return "wordcount"
-        case .byline:
-            return "byline"
-        }
-    }
-    
-    public init?(rawValue: RawValue) {
-        switch rawValue {
-        case "trailText":
-            self = .trailText
-        case "thumbnail":
-            self = .thumbnail
-        case "headline":
-            self = .headline
-        case "body":
-            self = .body
-        case "lastModified":
-            self = .lastModified
-        case "wordcount":
-            self = .wordcount
-        case "byline":
-            self = .byline
-        default:
-            self = .trailText
-        }
-    }*/
 }
 
 // MARK: - Filters

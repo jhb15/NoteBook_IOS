@@ -63,7 +63,19 @@ class MyNotesController: UITableViewController, UISearchResultsUpdating {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        if let notes = fetchedResultsController?.fetchedObjects,
+            notes.count > 0 {
+            tableView.separatorStyle = .singleLine
+            tableView.backgroundView = nil
+            return 1
+        }
+        let noDataLabel = UILabel()
+        noDataLabel.text = "You do not have any notes to display."
+        noDataLabel.textColor = UIColor.gray
+        noDataLabel.textAlignment = .center
+        tableView.separatorStyle = .none
+        tableView.backgroundView = noDataLabel
+        return 0
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
