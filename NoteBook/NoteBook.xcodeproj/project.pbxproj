@@ -31,8 +31,6 @@
 		C1EF1B40224CE8F4005264C8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1EF1B3E224CE8F4005264C8 /* LaunchScreen.storyboard */; };
 		C1EF1B4B224CE8F4005264C8 /* NoteBookTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EF1B4A224CE8F4005264C8 /* NoteBookTests.swift */; };
 		C1EF1B56224CE8F4005264C8 /* NoteBookUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EF1B55224CE8F4005264C8 /* NoteBookUITests.swift */; };
-		C1FB86EC2262324900CF0630 /* ResultCache+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FB86EA2262324900CF0630 /* ResultCache+CoreDataClass.swift */; };
-		C1FB86ED2262324900CF0630 /* ResultCache+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FB86EB2262324900CF0630 /* ResultCache+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,8 +81,6 @@
 		C1EF1B51224CE8F4005264C8 /* NoteBookUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoteBookUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1EF1B55224CE8F4005264C8 /* NoteBookUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteBookUITests.swift; sourceTree = "<group>"; };
 		C1EF1B57224CE8F4005264C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C1FB86EA2262324900CF0630 /* ResultCache+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResultCache+CoreDataClass.swift"; sourceTree = "<group>"; };
-		C1FB86EB2262324900CF0630 /* ResultCache+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResultCache+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,7 +162,6 @@
 		C1EF1B31224CE8F3005264C8 /* NoteBook */ = {
 			isa = PBXGroup;
 			children = (
-				C1FB86E9226231CC00CF0630 /* CoreDataFiles */,
 				C128023022590BD900BA9901 /* Controllers */,
 				C128022F22590BA600BA9901 /* ViewControllers */,
 				C1EF1B32224CE8F3005264C8 /* AppDelegate.swift */,
@@ -195,15 +190,6 @@
 				C1EF1B57224CE8F4005264C8 /* Info.plist */,
 			);
 			path = NoteBookUITests;
-			sourceTree = "<group>";
-		};
-		C1FB86E9226231CC00CF0630 /* CoreDataFiles */ = {
-			isa = PBXGroup;
-			children = (
-				C1FB86EA2262324900CF0630 /* ResultCache+CoreDataClass.swift */,
-				C1FB86EB2262324900CF0630 /* ResultCache+CoreDataProperties.swift */,
-			);
-			path = CoreDataFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -338,7 +324,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C182FFAF22536F2C00B8CF97 /* MyNotesController.swift in Sources */,
-				C1FB86EC2262324900CF0630 /* ResultCache+CoreDataClass.swift in Sources */,
 				C128A278225D137700722962 /* GuardianContentDataTypes.swift in Sources */,
 				C1266229225BE0110078C5C6 /* GuardianQueryController.swift in Sources */,
 				C128A279225D137700722962 /* GuardianContentClient.swift in Sources */,
@@ -354,7 +339,6 @@
 				C13C0417225E364D00989B1B /* ResultDetailViewController.swift in Sources */,
 				C182FFAD22536EFB00B8CF97 /* AboutController.swift in Sources */,
 				C1DE0F5F225914530035B488 /* NoteDetailController.swift in Sources */,
-				C1FB86ED2262324900CF0630 /* ResultCache+CoreDataProperties.swift in Sources */,
 				C141FCA8226104DA007E730A /* SearchHistoryTableViewCell.swift in Sources */,
 				C13C0414225E214500989B1B /* ResultTableCell.swift in Sources */,
 				C141FCA62260E7B4007E730A /* SearchHistoryFilteredTableViewCell.swift in Sources */,

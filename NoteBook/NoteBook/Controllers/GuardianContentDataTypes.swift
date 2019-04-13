@@ -8,11 +8,11 @@
 
 import Foundation
 
-public class GuardianOpenPlatformData: NSObject, Codable {
+struct GuardianOpenPlatformData: Codable {
     var response: GuardianOpenPlatFormResponse
 }
 
-public class GuardianOpenPlatFormResponse: NSObject, Codable {
+struct GuardianOpenPlatFormResponse: Codable {
     var status: String
     var userTier: String
     var total: Int
@@ -24,7 +24,7 @@ public class GuardianOpenPlatFormResponse: NSObject, Codable {
     var results: [GuardianOpenPlatformResult]?
 }
 
-public class GuardianOpenPlatformTag: NSObject, Codable {
+struct GuardianOpenPlatformTag: Codable {
     
     var id: String
     var type: String
@@ -42,7 +42,7 @@ public class GuardianOpenPlatformTag: NSObject, Codable {
      - The required keyword is used to indicate that any subclasses must
      implement this interface.
      */
-    required public init(from decoder: Decoder) throws {
+    init(from decoder: Decoder) throws {
         
         let values = try decoder.container(keyedBy: CodingKeys.self)
         
@@ -59,12 +59,12 @@ public class GuardianOpenPlatformTag: NSObject, Codable {
     }
 }
 
-public class GuardianOpenPlatformReference: NSObject, Codable {
+struct GuardianOpenPlatformReference: Codable {
     var id: String
     var type: String
 }
 
-public class GuardianOpenPlatformFields: NSObject, Codable {
+struct GuardianOpenPlatformFields: Codable {
     var headline: String?
     var standfirst: String?
     var trailText: String?
@@ -93,7 +93,7 @@ public class GuardianOpenPlatformFields: NSObject, Codable {
     var shouldHideHeaderRevenue: Bool?
     var showAffiliateLinks: Bool?
     
-    required public init(from decoder: Decoder) throws {
+    init(from decoder: Decoder) throws {
         
         let values = try decoder.container(keyedBy: CodingKeys.self)
         
@@ -132,7 +132,7 @@ public class GuardianOpenPlatformFields: NSObject, Codable {
     }
 }
 
-public class GuardianOpenPlatformEdition: NSObject, Codable {
+struct GuardianOpenPlatformEdition: Codable {
     
     var id: String
     var webTitle: String
@@ -142,7 +142,7 @@ public class GuardianOpenPlatformEdition: NSObject, Codable {
     
 }
 
-public class GuardianOpenPlatformResult: NSObject, Codable {
+struct GuardianOpenPlatformResult: Codable {
     var id: String
     var type: String?
     var sectionId: String?
@@ -169,7 +169,7 @@ public class GuardianOpenPlatformResult: NSObject, Codable {
         - The required keyword is used to indicate that any subclasses must
           implement this interface.
      */
-    required public init(from decoder: Decoder) throws {
+    init(from decoder: Decoder) throws {
         
         let values = try decoder.container(keyedBy: CodingKeys.self)
         

@@ -16,6 +16,8 @@ class GuardianContentClient {
     
     let session = URLSession(configuration: .default)
     
+    var cacheEnabled: Bool = true
+    
     convenience init(apiKey: String) {
         self.init(apiKey: apiKey, verbose: false)
     }
@@ -63,6 +65,8 @@ class GuardianContentClient {
     func performDataTask(with urlString: String,
                          withCallback callback: @escaping (_ data: GuardianOpenPlatformData?) -> Void) throws  {
         
+        let responseCache = NSCache<AnyObject, AnyObject>()
+        
         guard let value = urlString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed),
               let url = URL(string: value) else {
                 
@@ -71,6 +75,15 @@ class GuardianContentClient {
             }
                 
             throw GuardianContentClientError.InvalidUrl
+        }
+        
+        //loading cache
+        
+        if self.cacheEnabled,
+            let res = responseCache.object(forKey: value as AnyObject) {
+            print("Accessing data cache")
+            let json = res as! NSData
+            callback(decodeJSON(json: json as Data))
         }
         
         let task = session.dataTask(with: url) {
@@ -84,35 +97,33 @@ class GuardianContentClient {
                                "\nerror: \(String(describing: error))"
                     print(text)
                     
-                    /*print(String(describing: downloadedData))
-                    print("############ RAW JSON ###########")
-                    print("#################################")
-                    print(NSString(data: downloadedData, encoding: String.Encoding.utf8.rawValue)!)
-                    print("#################################")*/
                 }
                 
-                do {
-                    let decoder = JSONDecoder()
-                    let data = try decoder.decode(GuardianOpenPlatformData.self, from: downloadedData)
-                    
-                    /*if self.verbose {
-                        print(data)
-                    }*/
-                    
-                    callback(data)
-                }
-                catch let error as NSError {
-                    if self.verbose {
-                        print("There was an error: \(error.localizedDescription)")
-                    }
-                    callback(nil)
-                }
+                //Cache Data
+                responseCache.setObject(downloadedData as AnyObject, forKey: value as AnyObject)
+                
+                callback(self.decodeJSON(json: downloadedData))
             }
             
         }
         
         task.resume()
         
+    }
+    
+    func decodeJSON(json: Data) -> GuardianOpenPlatformData? {
+        do {
+            let decoder = JSONDecoder()
+            let data = try decoder.decode(GuardianOpenPlatformData.self, from: json)
+            
+            return data
+        }
+        catch let error as NSError {
+            if verbose {
+                print("There was an error: \(error.localizedDescription)")
+            }
+            return nil
+        }
     }
     
     

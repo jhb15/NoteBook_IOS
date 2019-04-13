@@ -18,8 +18,6 @@ class QueryResultsTableController: UITableViewController {
     
     var managedContext: NSManagedObjectContext?
     let guarApiController = GuardianContentClient(apiKey: "42573d7e-fb83-4aef-956f-2c52a9bca421", verbose: true)
-    var fetchedHistoricController: NSFetchedResultsController<HistoricQuery>?
-    var fetchedCacheController: NSFetchedResultsController<ResultCache>?
     
     var searchText: String?
     var filters: GuardianContentFilters?
@@ -36,45 +34,8 @@ class QueryResultsTableController: UITableViewController {
         }
         managedContext = delegate.persistentContainer.viewContext
         
-        let query = queryExists()
-        saveSearch(query: query)
-        if query != nil && query!.result != nil  {
-            showCachedData(cachedData: (query!.result?.responses)!)
-        } else {
-            queryAPI()
-        }
-    }
-    
-    func showCachedData(cachedData: [GuardianOpenPlatformData]) {
-        let pageNumber = filters?.page ?? 1
-        for guardianData in cachedData {
-            if guardianData.response.currentPage == pageNumber {
-                resultsIn = guardianData
-            }
-        }
-    }
-    
-    func cacheResult(query: HistoricQuery) {
-        if query.result == nil {
-            query.result = ResultCache(entity: ResultCache.entity(),  insertInto: managedContext)
-        }
-        if query.result!.responses == nil {
-            query.result!.responses = []
-        }
-        if let page = doesResultPageExist(pageNum: resultsIn!.response.currentPage!, resultCache: query.result!) {
-            query.result!.responses![page] = resultsIn!
-        } else {
-            query.result!.responses?.append(resultsIn!)
-        }
-    }
-    
-    func doesResultPageExist(pageNum: Int, resultCache: ResultCache) -> Int?{
-        for (index, guardianData) in (resultCache.responses?.enumerated())! {
-            if guardianData.response.currentPage! == pageNum {
-                return index
-            }
-        }
-        return nil
+        
+        queryAPI()
     }
     
     /**
@@ -106,10 +67,7 @@ class QueryResultsTableController: UITableViewController {
             totalResults.text = "\(resultsIn!.response.total) stories in total"
         }
         tableView.reloadData()
-        
-        if let query = queryExists() { //Should exist at this point
-            //cacheResult(query: query)
-        }
+        saveSearch()
     }
     
     /**
@@ -162,9 +120,9 @@ class QueryResultsTableController: UITableViewController {
      This function will either update the created_at attribute of an existing query or add the new query to the history
      of searches.
      */
-    func saveSearch(query: HistoricQuery?) {
-        if query != nil {
-            query!.created_at = Date()
+    func saveSearch() {
+        if let query = queryExists() {
+            query.created_at = Date()
         } else {
             let historyRecord = HistoricQuery(entity: HistoricQuery.entity(), insertInto: managedContext)
             historyRecord.query = searchText
