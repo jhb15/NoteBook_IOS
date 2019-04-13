@@ -443,6 +443,7 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="clearBtn" destination="dec-t5-FlM" id="jhe-zO-xIa"/>
                         <segue destination="82d-Fr-Xvw" kind="show" identifier="RedoSearch" id="5Ol-nk-ZRt"/>
                     </connections>
                 </tableViewController>
@@ -1062,7 +1063,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="FxL-ov-eDs"/>
-        <segue reference="dGf-5v-fLU"/>
+        <segue reference="cIT-KK-NpE"/>
+        <segue reference="5Ol-nk-ZRt"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -18,6 +18,8 @@ class QueryResultsTableController: UITableViewController {
     
     var managedContext: NSManagedObjectContext?
     let guarApiController = GuardianContentClient(apiKey: "42573d7e-fb83-4aef-956f-2c52a9bca421", verbose: true)
+    var fetchedHistoricController: NSFetchedResultsController<HistoricQuery>?
+    var fetchedCacheController: NSFetchedResultsController<ResultCache>?
     
     var searchText: String?
     var filters: GuardianContentFilters?
@@ -34,9 +36,22 @@ class QueryResultsTableController: UITableViewController {
         }
         managedContext = delegate.persistentContainer.viewContext
         
-        queryAPI() //Neeed to add cacheing
+        /*if let query = queryExists() {
+            
+        }*/
+        
+        if dataCached() {
+            
+        } else {
+            queryAPI() //Neeed to add cacheing
+        }
         
         saveSearch() //Need This in More Appropriate Place
+    }
+    
+    func dataCached() -> Bool {
+        
+        return false
     }
     
     /**
@@ -70,23 +85,78 @@ class QueryResultsTableController: UITableViewController {
         tableView.reloadData()
     }
     
-    func saveSearch() {
-        let historyRecord = HistoricQuery(entity: HistoricQuery.entity(), insertInto: managedContext)
-        historyRecord.query = searchText
-        if let filt = filters {
-            historyRecord.dateFrom = filt.fromDate
-            historyRecord.dateTo = filt.toDate
-            historyRecord.orderBy = filt.orderBy?.rawValue
+    /**
+     This is horrible tidy up please. //TODO
+     This function is designed to check the HistoricQuery CoreData entity for an existing query with the same perameters. If
+     one is found it will be returned.
+     */
+    func queryExists() -> HistoricQuery? {
+        let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: "HistoricQuery")
+        fetchReq.returnsDistinctResults = true
+        
+        
+        let qPredicate = NSPredicate(format: "query MATCHES[c] %@", searchText!)
+        var dfPredicate = NSPredicate(format: "dateFrom == %@",  0)
+        var dtPredicate = NSPredicate(format: "dateTo == %@", 0)
+        var obPredicate = NSPredicate(format: "orderBy == %@",0)
+        var sfPredicate = NSPredicate(format: "showFields == %@", 0) //0 should mean nil/null
+        
+        if filters != nil {
             
-            if let fields = filt.showFields {
-                var showFields: [String] = []
-                for str in fields {
-                    showFields.append(str.rawValue)
+            let toDate = (filters!.toDate)! as NSDate; let fromDate = (filters!.fromDate)! as NSDate
+            dfPredicate = NSPredicate(format: "dateFrom == %@",  fromDate)
+            dtPredicate = NSPredicate(format: "dateTo == %@", toDate)
+            obPredicate = NSPredicate(format: "orderBy MATCHES[c] %@", (filters!.orderBy?.rawValue)! as NSString)
+            
+            var sfs: [String] = []
+            if let showFields = filters!.showFields {
+                for field in showFields {
+                    sfs.append(field.rawValue)
                 }
-                historyRecord.showFields = showFields
+                sfPredicate = NSPredicate(format: "showFields == %@", sfs as [NSString])
             }
         }
-        historyRecord.created_at = Date()
+        
+        let pred = NSCompoundPredicate(type: .and, subpredicates: [qPredicate, obPredicate, dfPredicate, dtPredicate, sfPredicate])
+        fetchReq.predicate = pred
+        
+        do {
+            let result = try managedContext?.fetch(fetchReq) as? [HistoricQuery]
+            if (result?.count)! > 0 {
+                return result?[0]
+            }
+        } catch let error as NSError {
+            print("Error checking for existing query. Dscr: \(error.localizedDescription)")
+        }
+        
+        return nil
+    }
+    
+    /**
+     This function will either update the created_at attribute of an existing query or add the new query to the history
+     of searches.
+     */
+    func saveSearch() {
+        if let query = queryExists() {
+            query.created_at = Date()
+        } else {
+            let historyRecord = HistoricQuery(entity: HistoricQuery.entity(), insertInto: managedContext)
+            historyRecord.query = searchText
+            if let filt = filters {
+                historyRecord.dateFrom = filt.fromDate
+                historyRecord.dateTo = filt.toDate
+                historyRecord.orderBy = filt.orderBy?.rawValue
+                
+                if let fields = filt.showFields {
+                    var showFields: [String] = []
+                    for str in fields {
+                        showFields.append(str.rawValue)
+                    }
+                    historyRecord.showFields = showFields
+                }
+            }
+            historyRecord.created_at = Date()
+        }
         
         do {
             try managedContext?.save()

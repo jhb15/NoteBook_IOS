@@ -144,6 +144,8 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
             }
         }
         
+        showFields = options
+        
         var str = "Show Fields: "
         if options.count > 0 {
             str.append("\n[" + strAry.joined(separator: ", ") + "]")

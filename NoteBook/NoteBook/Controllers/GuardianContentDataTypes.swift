@@ -8,11 +8,11 @@
 
 import Foundation
 
-struct GuardianOpenPlatformData: Codable {
+public class GuardianOpenPlatformData: NSObject, Codable {
     var response: GuardianOpenPlatFormResponse
 }
 
-struct GuardianOpenPlatFormResponse: Codable {
+public class GuardianOpenPlatFormResponse: NSObject, Codable {
     var status: String
     var userTier: String
     var total: Int
@@ -24,7 +24,7 @@ struct GuardianOpenPlatFormResponse: Codable {
     var results: [GuardianOpenPlatformResult]?
 }
 
-struct GuardianOpenPlatformTag: Codable {
+public class GuardianOpenPlatformTag: NSObject, Codable {
     
     var id: String
     var type: String
@@ -42,7 +42,7 @@ struct GuardianOpenPlatformTag: Codable {
      - The required keyword is used to indicate that any subclasses must
      implement this interface.
      */
-    init(from decoder: Decoder) throws {
+    required public init(from decoder: Decoder) throws {
         
         let values = try decoder.container(keyedBy: CodingKeys.self)
         
@@ -59,12 +59,12 @@ struct GuardianOpenPlatformTag: Codable {
     }
 }
 
-struct GuardianOpenPlatformReference: Codable {
+public class GuardianOpenPlatformReference: NSObject, Codable {
     var id: String
     var type: String
 }
 
-struct GuardianOpenPlatformFields: Codable {
+public class GuardianOpenPlatformFields: NSObject, Codable {
     var headline: String?
     var standfirst: String?
     var trailText: String?
@@ -93,7 +93,7 @@ struct GuardianOpenPlatformFields: Codable {
     var shouldHideHeaderRevenue: Bool?
     var showAffiliateLinks: Bool?
     
-    init(from decoder: Decoder) throws {
+    required public init(from decoder: Decoder) throws {
         
         let values = try decoder.container(keyedBy: CodingKeys.self)
         
@@ -132,7 +132,7 @@ struct GuardianOpenPlatformFields: Codable {
     }
 }
 
-struct GuardianOpenPlatformEdition: Codable {
+public class GuardianOpenPlatformEdition: NSObject, Codable {
     
     var id: String
     var webTitle: String
@@ -142,7 +142,7 @@ struct GuardianOpenPlatformEdition: Codable {
     
 }
 
-struct GuardianOpenPlatformResult: Codable {
+public class GuardianOpenPlatformResult: NSObject, Codable {
     var id: String
     var type: String?
     var sectionId: String?
@@ -169,7 +169,7 @@ struct GuardianOpenPlatformResult: Codable {
         - The required keyword is used to indicate that any subclasses must
           implement this interface.
      */
-    init(from decoder: Decoder) throws {
+    required public init(from decoder: Decoder) throws {
         
         let values = try decoder.container(keyedBy: CodingKeys.self)
         
@@ -233,7 +233,7 @@ enum GuardianContentDateFilter: String {
 /**
  Valid filter settings for the `order-by` filter.
  */
-public enum GuardianContentOrderFilter: String, CaseIterable {
+enum GuardianContentOrderFilter: String, CaseIterable {
     case newest
     case oldest
     case relevance
@@ -243,7 +243,7 @@ public enum GuardianContentOrderFilter: String, CaseIterable {
  Valid filter settings for 'show-fields' filter. Not all have been added but just some
  that the user may want.
  */
-public enum GuardianContentShowFields: String, CaseIterable {
+enum GuardianContentShowFields: String, CaseIterable {
     case trailText
     case thumbnail
     case headline
