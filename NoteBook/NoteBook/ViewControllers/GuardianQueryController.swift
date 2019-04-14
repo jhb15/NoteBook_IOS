@@ -21,6 +21,8 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     //Value Selectors
     @IBOutlet weak var serchText: UITextField!
+    @IBOutlet weak var pageNumberTextField: UITextField!
+    @IBOutlet weak var resultsPerTextField: UITextField!
     @IBOutlet weak var fromDatePicker: UIDatePicker!
     @IBOutlet weak var toDatePicker: UIDatePicker!
     @IBOutlet weak var orderByPicker: UIPickerView!
@@ -44,6 +46,9 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
         super.viewDidLoad()
         
         scrollView.isHidden = true
+        
+        pageNumberTextField.text = "1"
+        resultsPerTextField.text = "10"
         
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none

@@ -315,6 +315,8 @@
                         <outlet property="fromDatePicker" destination="9Ss-0o-r0W" id="EoW-HK-zV5"/>
                         <outlet property="orderByLabel" destination="qSs-vw-cZa" id="tQd-cz-0jE"/>
                         <outlet property="orderByPicker" destination="id2-nq-uoq" id="Ax7-mm-lTR"/>
+                        <outlet property="pageNumberTextField" destination="vey-Xq-oaZ" id="A0S-fs-fNG"/>
+                        <outlet property="resultsPerTextField" destination="HNE-5i-dj6" id="lYw-xo-cfw"/>
                         <outlet property="scrollView" destination="O8g-VQ-Ltb" id="uxj-w6-d8g"/>
                         <outlet property="serchText" destination="4sR-fN-Umk" id="6sH-Ja-Hh5"/>
                         <outlet property="showFieldLabel" destination="W0q-Mx-abk" id="hPj-Oq-ntw"/>
