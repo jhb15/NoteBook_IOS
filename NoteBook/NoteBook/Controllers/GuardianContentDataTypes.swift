@@ -224,7 +224,17 @@ enum GuardianContentElementsFilter: String {
 /**
  Valid filter settings for the `use-date` filter.
  */
-enum GuardianContentDateFilter: String {
+enum GuardianContentDateFilter: String, CaseIterable {
+    case published
+    case firstPublication = "first-publication"
+    case newspaperEdition = "newspaper-edition"
+    case lastModified = "last-modified"
+}
+
+/**
+ Valid filter settings for the 'order-date' filter.
+ */
+enum GuardianContentOrderDateFilter: String, CaseIterable {
     case published
     case newspaperEdition = "newspaper-edition"
     case lastModified = "last-modified"
@@ -326,6 +336,7 @@ class GuardianContentFilters: GuardianContentTagFilters {
     var showTags: String?
     var showElements: GuardianContentElementsFilter?
     var orderBy: GuardianContentOrderFilter?
+    var orderDate: GuardianContentOrderDateFilter?
     var useDate: GuardianContentDateFilter?
     var fromDate: Date?
     var toDate: Date?

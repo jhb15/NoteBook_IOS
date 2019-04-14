@@ -28,7 +28,8 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     //Global Vars
     let dateFormatter = DateFormatter()
-    var orderOptions = GuardianContentOrderFilter.allCases
+    var orderByOptions = GuardianContentOrderFilter.allCases
+    var orderUsingOptions = GuardianContentOrderDateFilter.allCases
     var showFieldOptions = GuardianContentShowFields.allCases
     var isFieldSelected = [Bool](repeating: false, count: GuardianContentShowFields.allCases.count) //TODO MASSIVE BODGE
     
@@ -54,7 +55,7 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
         
         toDatePicker.addTarget(self, action: #selector(toDateChanged(_:)), for: .valueChanged)
         fromDatePicker.addTarget(self, action: #selector(fromDateChanged(_:)), for: .valueChanged)
-        toDateChanged(toDatePicker); fromDateChanged(fromDatePicker); orderByChanged(row: orderByPicker.selectedRow(inComponent: 1))
+        toDateChanged(toDatePicker); fromDateChanged(fromDatePicker); orderByChanged()
         
         orderByPicker.delegate = self; orderByPicker.dataSource = self
         
@@ -128,9 +129,10 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
         fromDatePicker.maximumDate = sender.date
     }
     
-    func orderByChanged(row: Int) {
-        orderBy = orderOptions[row]
-        orderByLabel.text = "Order By: " + orderOptions[row].rawValue
+    func orderByChanged() {
+        let orderUsing = orderUsingOptions[orderByPicker.selectedRow(inComponent: 0)].rawValue
+        let orderBy = orderByOptions[orderByPicker.selectedRow(inComponent: 1)].rawValue
+        orderByLabel.text = "Order Using: " + orderUsing + " By: " + orderBy
     }
     
     func showFieldsUpdate() {
@@ -174,19 +176,25 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
+        return 2
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return orderOptions.count
+        if component == 0 {
+            return orderUsingOptions.count
+        }
+        return orderByOptions.count
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return orderOptions[row].rawValue
+        if component == 0 {
+            return orderUsingOptions[row].rawValue
+        }
+        return orderByOptions[row].rawValue
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        orderByChanged(row: row)
+        orderByChanged()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
