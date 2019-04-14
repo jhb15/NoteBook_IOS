@@ -33,7 +33,7 @@ class GuardianContentClient {
     
     func searchContent(for query: String,
                        usingFilters filters: GuardianContentFilters?,
-                       withCallback callback: @escaping (_ data: GuardianOpenPlatformData?) -> Void) throws  {
+                       withCallback callback: @escaping (_ data: GuardianOpenPlatformData?, _ fromCache: Bool) -> Void) throws  {
         
         var parameters = ""
         if let parameterValues = filters?.queryParameters() {
@@ -46,7 +46,7 @@ class GuardianContentClient {
     }
     
     func searchSections(for query: String,
-                        withCallback callback: @escaping (_ data: GuardianOpenPlatformData?) -> Void) throws {
+                        withCallback callback: @escaping (_ data: GuardianOpenPlatformData?, _ fromCache: Bool) -> Void) throws {
         
         let urlString = "https://content.guardianapis.com/sections?q=\(query)&api-key=\(apiKey)"
         try performDataTask(with: urlString, withCallback: callback)
@@ -54,7 +54,7 @@ class GuardianContentClient {
     
     func searchTags(for query: String,
                     usingFilters filters: GuardianContentTagFilters?,
-                    withCallback callback: @escaping (_ data: GuardianOpenPlatformData?) -> Void) throws {
+                    withCallback callback: @escaping (_ data: GuardianOpenPlatformData?, _ fromCache: Bool) -> Void) throws {
         
         var parameters = ""
         if let parameterValues = filters?.queryParameters() {
@@ -67,7 +67,7 @@ class GuardianContentClient {
     }
     
     func performDataTask(with urlString: String,
-                         withCallback callback: @escaping (_ data: GuardianOpenPlatformData?) -> Void) throws  {
+                         withCallback callback: @escaping (_ data: GuardianOpenPlatformData?, _ fromCache: Bool) -> Void) throws  {
         guard let value = urlString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed),
               let url = URL(string: value) else {
                 
@@ -80,13 +80,15 @@ class GuardianContentClient {
         
         //loading cache
         
+        print("URL: " + value)
+        
         if self.cacheEnabled,
             //let res = responseCache.object(forKey: value as NSString) {
             let res = responseCacheCD.getCachedData(key: value) {
             
             print("Accessing data cache")
             let json = res
-            callback(decodeJSON(json: json as Data))
+            callback(decodeJSON(json: json as Data), true)
             return
         }
         
@@ -107,7 +109,7 @@ class GuardianContentClient {
                 //responseCache.setObject(downloadedData as NSData, forKey: value as NSString)
                 self.responseCacheCD.cacheData(key: value, data: downloadedData)
                 
-                callback(self.decodeJSON(json: downloadedData))
+                callback(self.decodeJSON(json: downloadedData), false)
             }
             
         }

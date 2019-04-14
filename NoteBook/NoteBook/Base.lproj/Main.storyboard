@@ -460,29 +460,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93333333330000001" green="0.85098039219999999" blue="0.031372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="qtS-CP-zSL">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="126"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="103"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oO8-3P-qqi">
-                                    <rect key="frame" x="8" y="8" width="359" height="21"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oO8-3P-qqi">
+                                    <rect key="frame" x="8" y="8" width="359" height="49"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hzR-we-9aa">
-                                    <rect key="frame" x="8" y="36" width="359" height="21"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="opv-ze-xlm">
-                                    <rect key="frame" x="8" y="65" width="359" height="21"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wVv-Mz-XYw">
-                                    <rect key="frame" x="8" y="94" width="359" height="21"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zjp-4o-fpS">
+                                    <rect key="frame" x="8" y="65" width="98" height="30"/>
+                                    <state key="normal" title="Previous Page"/>
+                                    <connections>
+                                        <action selector="previousPage:" destination="82d-Fr-Xvw" eventType="touchUpInside" id="erx-cG-PQG"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yuA-xc-CEv">
+                                    <rect key="frame" x="296" y="65" width="71" height="30"/>
+                                    <state key="normal" title="Next Page"/>
+                                    <connections>
+                                        <action selector="nextPage:" destination="82d-Fr-Xvw" eventType="touchUpInside" id="eZp-jZ-xeT"/>
+                                    </connections>
+                                </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Offline Data" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uSJ-Gc-9sX">
+                                    <rect key="frame" x="142" y="65" width="91" height="30"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -490,24 +492,25 @@
                             </subviews>
                             <color key="backgroundColor" red="0.93333333330000001" green="0.85098039219999999" blue="0.031372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="wVv-Mz-XYw" secondAttribute="trailing" constant="8" id="K5z-1N-Z43"/>
-                                <constraint firstAttribute="trailing" secondItem="hzR-we-9aa" secondAttribute="trailing" constant="8" id="Mnv-y0-Q0n"/>
-                                <constraint firstAttribute="trailing" secondItem="opv-ze-xlm" secondAttribute="trailing" constant="8" id="OIT-DH-oNO"/>
-                                <constraint firstItem="opv-ze-xlm" firstAttribute="top" secondItem="hzR-we-9aa" secondAttribute="bottom" constant="8" id="P4T-TZ-bgP"/>
-                                <constraint firstItem="wVv-Mz-XYw" firstAttribute="top" secondItem="opv-ze-xlm" secondAttribute="bottom" constant="8" id="Pa5-11-8oa"/>
-                                <constraint firstAttribute="bottom" secondItem="wVv-Mz-XYw" secondAttribute="bottom" constant="11" id="abN-3l-pgc"/>
-                                <constraint firstItem="hzR-we-9aa" firstAttribute="leading" secondItem="qtS-CP-zSL" secondAttribute="leading" constant="8" id="hVq-NK-m23"/>
+                                <constraint firstAttribute="bottom" secondItem="uSJ-Gc-9sX" secondAttribute="bottom" constant="8" id="2CF-1j-rn8"/>
+                                <constraint firstAttribute="bottom" secondItem="yuA-xc-CEv" secondAttribute="bottom" constant="8" id="6Pb-LY-qIr"/>
+                                <constraint firstItem="uSJ-Gc-9sX" firstAttribute="centerX" secondItem="qtS-CP-zSL" secondAttribute="centerX" id="D1R-Ki-Djz"/>
+                                <constraint firstItem="zjp-4o-fpS" firstAttribute="top" secondItem="oO8-3P-qqi" secondAttribute="bottom" constant="8" id="QiY-ak-kmw"/>
+                                <constraint firstItem="yuA-xc-CEv" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="uSJ-Gc-9sX" secondAttribute="trailing" constant="8" symbolic="YES" id="UKK-RX-8Y0"/>
+                                <constraint firstItem="uSJ-Gc-9sX" firstAttribute="top" secondItem="oO8-3P-qqi" secondAttribute="bottom" constant="8" id="ZQS-my-g6K"/>
+                                <constraint firstItem="zjp-4o-fpS" firstAttribute="leading" secondItem="qtS-CP-zSL" secondAttribute="leading" constant="8" id="djW-Kj-lmZ"/>
+                                <constraint firstItem="yuA-xc-CEv" firstAttribute="top" secondItem="oO8-3P-qqi" secondAttribute="bottom" constant="8" id="k9h-qX-ch2"/>
+                                <constraint firstAttribute="bottom" secondItem="zjp-4o-fpS" secondAttribute="bottom" constant="8" id="lQ1-Sc-ooZ"/>
                                 <constraint firstAttribute="trailing" secondItem="oO8-3P-qqi" secondAttribute="trailing" constant="8" id="qgS-HP-3t9"/>
-                                <constraint firstItem="hzR-we-9aa" firstAttribute="top" secondItem="oO8-3P-qqi" secondAttribute="bottom" constant="7" id="r7k-ps-oV7"/>
                                 <constraint firstItem="oO8-3P-qqi" firstAttribute="leading" secondItem="qtS-CP-zSL" secondAttribute="leading" constant="8" id="tq0-Qb-dqF"/>
-                                <constraint firstItem="wVv-Mz-XYw" firstAttribute="leading" secondItem="qtS-CP-zSL" secondAttribute="leading" constant="8" id="wue-rE-484"/>
+                                <constraint firstItem="uSJ-Gc-9sX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="zjp-4o-fpS" secondAttribute="trailing" constant="8" symbolic="YES" id="w3E-3f-7da"/>
+                                <constraint firstAttribute="trailing" secondItem="yuA-xc-CEv" secondAttribute="trailing" constant="8" id="xO2-fG-4e9"/>
                                 <constraint firstItem="oO8-3P-qqi" firstAttribute="top" secondItem="qtS-CP-zSL" secondAttribute="top" constant="8" id="ydh-s4-WB9"/>
-                                <constraint firstItem="opv-ze-xlm" firstAttribute="leading" secondItem="qtS-CP-zSL" secondAttribute="leading" constant="8" id="yxR-Gl-k5x"/>
                             </constraints>
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="ResultCell" rowHeight="196" id="zGR-Sr-jTl" customClass="ResultTableCell" customModule="NoteBook" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="154" width="375" height="196"/>
+                                <rect key="frame" x="0.0" y="131" width="375" height="196"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zGR-Sr-jTl" id="Q4c-vS-Foh">
                                     <rect key="frame" x="0.0" y="0.0" width="327" height="195.5"/>
@@ -569,10 +572,10 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="numberOfPages" destination="hzR-we-9aa" id="kQc-0O-bsS"/>
-                        <outlet property="pageNumberLab" destination="oO8-3P-qqi" id="sXS-gp-UfZ"/>
-                        <outlet property="resultsPerPage" destination="opv-ze-xlm" id="sqJ-G1-yUR"/>
-                        <outlet property="totalResults" destination="wVv-Mz-XYw" id="QOw-KQ-bXQ"/>
+                        <outlet property="infoLabel" destination="oO8-3P-qqi" id="TUG-3j-u6w"/>
+                        <outlet property="nextPageBtn" destination="yuA-xc-CEv" id="un0-Qn-F2s"/>
+                        <outlet property="offlineDataLabel" destination="uSJ-Gc-9sX" id="P6b-Xo-Ipl"/>
+                        <outlet property="previousPageBtn" destination="zjp-4o-fpS" id="Db4-Yq-ERm"/>
                         <segue destination="0yW-za-CqN" kind="show" identifier="ShowDetail" id="tE5-ET-cBT"/>
                         <segue destination="7zG-bE-ZNw" kind="show" identifier="AddLink" id="cIT-KK-NpE"/>
                     </connections>

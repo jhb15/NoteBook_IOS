@@ -11,10 +11,10 @@ import CoreData
 
 class QueryResultsTableController: UITableViewController {
     
-    @IBOutlet weak var pageNumberLab: UILabel!
-    @IBOutlet weak var numberOfPages: UILabel!
-    @IBOutlet weak var resultsPerPage: UILabel!
-    @IBOutlet weak var totalResults: UILabel!
+    @IBOutlet weak var infoLabel: UILabel!
+    @IBOutlet weak var offlineDataLabel: UILabel!
+    @IBOutlet weak var previousPageBtn: UIButton!
+    @IBOutlet weak var nextPageBtn: UIButton!
     
     var managedContext: NSManagedObjectContext?
     let guarApiController = GuardianContentClient(apiKey: "42573d7e-fb83-4aef-956f-2c52a9bca421", verbose: true)
@@ -23,6 +23,7 @@ class QueryResultsTableController: UITableViewController {
     var filters: GuardianContentFilters?
     
     var resultsIn : GuardianOpenPlatformData?
+    var resultFromCache: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,13 +31,74 @@ class QueryResultsTableController: UITableViewController {
         guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
             print("error - unable to access failure")
             exit(EXIT_FAILURE)
-            
         }
         managedContext = delegate.persistentContainer.viewContext
         
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefresh(_:)), for: .valueChanged)
+        refreshControl.tintColor = .black
+        
+        tableView.addSubview(refreshControl)
         
         queryAPI()
     }
+    
+    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        guarApiController.cacheEnabled = false
+        resultsIn = nil
+        
+        queryAPI()
+        
+        guarApiController.cacheEnabled = true
+        
+        refreshControl.endRefreshing()
+    }
+    
+    // MARK: - UI Functions
+    
+    func updateTableHeader() {
+        if resultsIn != nil {
+            let response = resultsIn!.response
+            
+            
+            infoLabel.text = "Page \(response.currentPage ?? 0) of \(response.pages ?? 0) \n"
+                + "\(response.total) stories in total" //Maybe add items per page
+            
+            if resultFromCache {
+                offlineDataLabel.isHidden = false
+            } else {
+                offlineDataLabel.isHidden = true
+            }
+            
+            
+            previousPageBtn.isEnabled = true
+            nextPageBtn.isEnabled = true
+            if response.currentPage == response.pages {
+                nextPageBtn.isEnabled = false
+            }
+            if response.currentPage == 1 {
+                previousPageBtn.isEnabled = false
+            }
+            return
+        }
+        infoLabel.text = "Unexpected Error"
+    }
+    
+    // MARK: - Page Change Actions
+    
+    @IBAction func previousPage(_ sender: Any) {
+        filters?.page = (resultsIn?.response.currentPage)! - 1
+        resultsIn = nil
+        queryAPI()
+    }
+    
+    @IBAction func nextPage(_ sender: Any) {
+        filters?.page = (resultsIn?.response.currentPage)! + 1
+        resultsIn = nil
+        queryAPI()
+    }
+    
+    // MARK: - API Query Functions
     
     /**
      Function for quering the API.
@@ -44,9 +106,10 @@ class QueryResultsTableController: UITableViewController {
     func queryAPI() {
         do {
             try guarApiController.searchContent(for: searchText ?? "", usingFilters: filters, withCallback: {
-                (data:GuardianOpenPlatformData?) in
+                (data:GuardianOpenPlatformData?, fromCache: Bool) in
                 if data != nil {
                     self.resultsIn = data
+                    self.resultFromCache = fromCache
                 } else {
                     print("Error no Data passed back from 'GuardianContentClient.searchContent'")
                 }
@@ -60,12 +123,8 @@ class QueryResultsTableController: UITableViewController {
             usleep(2000)
         }
         
-        if resultsIn != nil && resultsIn!.response.results != nil {
-            pageNumberLab.text = "Page \(resultsIn!.response.currentPage ?? 0)"
-            numberOfPages.text = "\(resultsIn!.response.pages ?? 0) pages"
-            resultsPerPage.text = "25 stories per page"
-            totalResults.text = "\(resultsIn!.response.total) stories in total"
-        }
+        updateTableHeader()
+        
         tableView.reloadData()
         saveSearch()
     }
