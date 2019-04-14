@@ -31,6 +31,11 @@ class CacheTableViewController: UITableViewController {
         performFetchForController()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        performFetchForController()
+    }
+    
     func performFetchForController() {
         do {
             try fetchedResultsController?.performFetch()
