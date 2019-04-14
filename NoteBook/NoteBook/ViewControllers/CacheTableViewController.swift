@@ -65,7 +65,7 @@ class CacheTableViewController: UITableViewController {
         cell.textLabel?.numberOfLines = 5
         let cachedRes = fetchedResultsController?.object(at: indexPath)
         let str = cachedRes?.expiryDate?.description ?? "nil"
-        cell.textLabel?.text = (cachedRes?.key ?? "Unknown") + str
+        cell.textLabel?.text = (cachedRes?.key ?? "Unknown") + "[Date: " + str + "]"
 
         return cell
     }

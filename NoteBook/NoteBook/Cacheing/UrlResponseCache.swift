@@ -36,7 +36,7 @@ class UrlResponseCache {
         do {
             if let result = try managedContext?.fetch(fetchReq) as? [ResponseCache] {
                 if result.count > 0 {
-                    if !hasExpired(expiry: result[0].expiryDate!) {
+                    if hasExpired(expiry: result[0].expiryDate!) {
                         print("Removing Expired Cache! key: " + (result[0].key ?? "nil"))
                         managedContext?.delete(result[0])
                     }
@@ -63,7 +63,7 @@ class UrlResponseCache {
             print("Error cacheing result! desc: \(error.localizedDescription)")
         }
     }
-        
+    
     func clearExpiredData() {
         let fetchRequest = NSFetchRequest<ResponseCache>(entityName: "ResponseCache")
         let sortDescriptor = NSSortDescriptor(key: "expiryDate", ascending: true, selector: #selector(NSString.localizedCompare(_:)))
@@ -92,7 +92,7 @@ class UrlResponseCache {
         let today = Date()
         let comp = today.compare(expiry)
         if comp == ComparisonResult.orderedAscending {
-            return true
+            return false
         }
         return true
     }
