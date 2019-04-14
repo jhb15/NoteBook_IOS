@@ -8,6 +8,8 @@
 
 import Foundation
 
+var responseCache = NSCache<NSString, NSData>()
+
 class GuardianContentClient {
 
     var apiKey: String
@@ -17,6 +19,8 @@ class GuardianContentClient {
     let session = URLSession(configuration: .default)
     
     var cacheEnabled: Bool = true
+    
+    let responseCacheCD = UrlResponseCache()
     
     convenience init(apiKey: String) {
         self.init(apiKey: apiKey, verbose: false)
@@ -64,9 +68,6 @@ class GuardianContentClient {
     
     func performDataTask(with urlString: String,
                          withCallback callback: @escaping (_ data: GuardianOpenPlatformData?) -> Void) throws  {
-        
-        let responseCache = NSCache<AnyObject, AnyObject>()
-        
         guard let value = urlString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed),
               let url = URL(string: value) else {
                 
@@ -80,10 +81,13 @@ class GuardianContentClient {
         //loading cache
         
         if self.cacheEnabled,
-            let res = responseCache.object(forKey: value as AnyObject) {
+            //let res = responseCache.object(forKey: value as NSString) {
+            let res = responseCacheCD.getCachedData(key: value) {
+            
             print("Accessing data cache")
-            let json = res as! NSData
+            let json = res
             callback(decodeJSON(json: json as Data))
+            return
         }
         
         let task = session.dataTask(with: url) {
@@ -100,7 +104,8 @@ class GuardianContentClient {
                 }
                 
                 //Cache Data
-                responseCache.setObject(downloadedData as AnyObject, forKey: value as AnyObject)
+                //responseCache.setObject(downloadedData as NSData, forKey: value as NSString)
+                self.responseCacheCD.cacheData(key: value, data: downloadedData)
                 
                 callback(self.decodeJSON(json: downloadedData))
             }

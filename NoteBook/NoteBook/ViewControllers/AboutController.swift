@@ -10,8 +10,23 @@ import UIKit
 
 class AboutController: UIViewController {
 
+    @IBOutlet weak var content: UITextView!
+    
+    var attributions: [String: String] = ["The Tab Bar Icons": "TODO Add attribution.",
+                                          "The Application Icon": "Icon part of the package downloaded from the icons8 site. (https://icons8.com/ios)"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        content.text += "\n\n\n\n\n"
+        
+        content.text += "Credits: \n"
+        
+        for item in attributions {
+            content.text += "\n[" + item.key + "]: \n" + item.value + "\n"
+        }
+        
+        
 
         // Do any additional setup after loading the view.
     }
