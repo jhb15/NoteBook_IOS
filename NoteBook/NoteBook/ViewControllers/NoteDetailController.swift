@@ -23,7 +23,24 @@ class NoteDetailController: UIViewController, UITableViewDelegate, UITableViewDa
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         showData()
+    }
+    
+    override func willMove(toParent parent: UIViewController?) {
+        if isEditable {
+            let alertCntrl = UIAlertController(title: "You Where in Edit Mode", message: "You where in edit mode when leaving note detail screen, should the changes be saved?", preferredStyle: .alert)
+            
+            let noBtn = UIAlertAction(title: "No", style: .default, handler: nil)
+            let yesBtn = UIAlertAction(title: "Yes", style: .destructive, handler: { (action) in
+                self.saveChanges()
+            }) //Destructive as it makes changes
+            
+            alertCntrl.addAction(noBtn)
+            alertCntrl.addAction(yesBtn)
+            present(alertCntrl, animated: true, completion: nil)
+        }
+        super.willMove(toParent: parent)
     }
     
     func showData() {

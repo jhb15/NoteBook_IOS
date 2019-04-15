@@ -109,7 +109,6 @@ class QueryResultsTableController: UITableViewController {
         do {
             try guarApiController.searchContent(for: searchText ?? "", usingFilters: filters, withCallback: {
                 (data:GuardianOpenPlatformData?, fromCache: Bool) in
-                print("AM I BEING CALLED AT ALL3")
                 if data != nil {
                     self.resultsIn = data
                     self.resultFromCache = fromCache
@@ -117,7 +116,6 @@ class QueryResultsTableController: UITableViewController {
                     print("Error no Data passed back from 'GuardianContentClient.searchContent'")
                 }
                 DispatchQueue.main.async {
-                    print("AM I BEING CALLED AT ALL4")
                     self.updateView()
                 }
             })
@@ -222,23 +220,22 @@ class QueryResultsTableController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        print("AM I BEING CALLED AT ALL numberOfSections")
         if resultsIn != nil {
             tableView.separatorStyle = .singleLine
             tableView.backgroundView = nil
             return 1
         }
         let noDataLabel = UILabel()
-        noDataLabel.text = "Guardian API Returned No Data!"
+        noDataLabel.text = "Guardian API Returned No Data! This could be because there where no results to show, the page you specified was out of range or a unknown error!"
         noDataLabel.textColor = UIColor.gray
         noDataLabel.textAlignment = .center
+        noDataLabel.numberOfLines = 5
         tableView.separatorStyle = .none
         tableView.backgroundView = noDataLabel
         return 0
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("AM I BEING CALLED AT ALL numberOfRowsInSection")
         
         let total = resultsIn!.response.total
         
@@ -258,7 +255,6 @@ class QueryResultsTableController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("AM I BEING CALLED AT ALL cellForRowAt")
         let cell = tableView.dequeueReusableCell(withIdentifier: "ResultCell", for: indexPath) as! ResultTableCell
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
