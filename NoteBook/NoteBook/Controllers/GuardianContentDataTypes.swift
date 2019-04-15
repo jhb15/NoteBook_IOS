@@ -370,8 +370,8 @@ class GuardianContentFilters: GuardianContentTagFilters {
             result.append("order-by=\(orderByValue.rawValue)")
         }
         
-        if let useDateValue = useDate {
-            result.append("use-date=\(useDateValue.rawValue)")
+        if let orderDateValue = orderDate {
+            result.append("order-date=\(orderDateValue.rawValue)")
         }
         
         if let fromDateValue = fromDate {
@@ -384,6 +384,10 @@ class GuardianContentFilters: GuardianContentTagFilters {
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd"
             result.append("to-date=\(formatter.string(from: toDateValue))")
+        }
+        
+        if let useDateValue = useDate {
+            result.append("use-date=\(useDateValue.rawValue)")
         }
         
         //Added to append the show fields filter onto the request.

@@ -21,6 +21,7 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
     //Labels
     @IBOutlet weak var fromDateLabel: UILabel!
     @IBOutlet weak var toDateLabel: UILabel!
+    @IBOutlet weak var useDateLabel: UILabel!
     @IBOutlet weak var orderByLabel: UILabel!
     @IBOutlet weak var showFieldLabel: UILabel!
     
@@ -35,6 +36,7 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     //Global Vars
     let dateFormatter = DateFormatter()
+    let dateUsingOptions = GuardianContentDateFilter.allCases
     var orderByOptions = GuardianContentOrderFilter.allCases
     var orderUsingOptions = GuardianContentOrderDateFilter.allCases
     var showFieldOptions = GuardianContentShowFields.allCases
@@ -45,6 +47,7 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
     var pageSize: Int?
     var fromDate: Date?
     var toDate: Date?
+    var toFromUsing: GuardianContentDateFilter?
     var orderBy: GuardianContentOrderFilter?
     var orderUsing: GuardianContentOrderDateFilter?
     var filters: GuardianContentFilters?
@@ -64,7 +67,7 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
 
         toDatePicker.datePickerMode = .date; fromDatePicker.datePickerMode = .date
         toDatePicker.locale = NSLocale.current; fromDatePicker.locale = NSLocale.current
-        toDatePicker.maximumDate = Date(); fromDatePicker.maximumDate = Date()
+        toDatePicker.maximumDate = Date(); fromDatePicker.maximumDate = Date(); dateUsingChanged(val: dateUsingOptions[0])
         
         toDatePicker.addTarget(self, action: #selector(toDateChanged(_:)), for: .valueChanged)
         fromDatePicker.addTarget(self, action: #selector(fromDateChanged(_:)), for: .valueChanged)
@@ -87,6 +90,24 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
         }
     }
     
+    @IBAction func setDateUsing(_ sender: Any) {
+        let actionSheet = UIAlertController(title: "Select Using Date", message: "The data used by the date to and date from filters.", preferredStyle: .actionSheet)
+        
+        for option in dateUsingOptions {
+            let btn = UIAlertAction(title: option.rawValue, style: .default, handler: { (bock) in
+                DispatchQueue.main.async {
+                    self.toFromUsing = option
+                    self.dateUsingChanged(val: option)
+                }
+            })
+            actionSheet.addAction(btn)
+        }
+        let btn = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        actionSheet.addAction(btn)
+        
+        present(actionSheet, animated: true, completion: nil)
+    }
+    
     @IBAction func searchGuardianAPI(_ sender: Any) {
         var errorMsgs: [String] = []
         if validateForm(err: &errorMsgs) {
@@ -97,7 +118,9 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
                 filters!.pageSize = Int(pageSize ?? DEFAULT_PAGE_SIZE)
                 filters!.fromDate = fromDate
                 filters!.toDate = toDate
+                filters!.useDate = toFromUsing
                 filters!.orderBy = orderBy
+                filters!.orderDate = orderUsing
                 
                 if showFields != nil {
                     filters!.showFields = showFields
@@ -142,27 +165,6 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
         return valid
     }
     
-    //No longer used, but might be in furture
-    /*@objc func pageNumChanged(_ sender: UITextView) {
-        if let pageNum = Int(pageNumberTextField.text!),
-            pageNum > 0 {
-            self.pageNum = pageNum
-        } else {
-            alertUser(title: "Invalid Page Numer!", message: "Page numer must be an interger value abouve 0.")
-            self.pageNum = nil
-        }
-    }
-    
-    @objc func pageSizeChanged(_ sender: UITextView) {
-        if let pageSize = Int(resultsPerTextField.text!),
-            pageSize >= MIN_PAGE_SIZE && pageSize <= MAX_PAGE_SIZE {
-            self.pageSize = pageSize
-        } else {
-            alertUser(title: "Invalid Page Size!", message: "Page size must be between \(MIN_PAGE_SIZE) and \(MAX_PAGE_SIZE)")
-            self.pageSize = nil
-        }
-    }*/
-    
     @objc func fromDateChanged(_ sender: UIDatePicker) {
         fromDate = sender.date
         fromDateLabel.text = "Date From: " + dateFormatter.string(from: sender.date)
@@ -173,6 +175,11 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
         toDate = sender.date
         toDateLabel.text = "Date To: " + dateFormatter.string(from: sender.date)
         fromDatePicker.maximumDate = sender.date
+    }
+    
+    func dateUsingChanged(val: GuardianContentDateFilter) {
+        toFromUsing = val
+        useDateLabel.text = "Useing: " + val.rawValue
     }
     
     func orderByChanged() {
