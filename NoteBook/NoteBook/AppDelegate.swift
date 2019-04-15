@@ -21,8 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Timer.scheduledTimer(withTimeInterval: TimeInterval(60), repeats: true, block: { (timer) in
             
             print("Performing Cache Cleanup Task")
-            let cache = UrlResponseCache()
-            cache.clearExpiredData()
+            DispatchQueue.main.async {
+                let cache = UrlResponseCache()
+                cache.clearExpiredData()
+            }
             
         })
         

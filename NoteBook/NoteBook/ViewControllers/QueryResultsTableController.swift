@@ -149,7 +149,9 @@ class QueryResultsTableController: UITableViewController {
         let qPredicate = NSPredicate(format: "query == %@", searchText!)
         var dfPredicate = NSPredicate(format: "dateFrom == %@",  0)
         var dtPredicate = NSPredicate(format: "dateTo == %@", 0)
+        var udPredicate = NSPredicate(format: "useDate == %@", 0)
         var obPredicate = NSPredicate(format: "orderBy == %@",0)
+        var odPredicate = NSPredicate(format: "orderDate == %@", 0)
         var sfPredicate = NSPredicate(format: "showFields == %@", 0) //0 should mean nil/null
         
         if isFiltered && filters != nil {
@@ -157,7 +159,9 @@ class QueryResultsTableController: UITableViewController {
             let toDate = (filters!.toDate)! as NSDate; let fromDate = (filters!.fromDate)! as NSDate
             dfPredicate = NSPredicate(format: "dateFrom == %@",  fromDate)
             dtPredicate = NSPredicate(format: "dateTo == %@", toDate)
-            obPredicate = NSPredicate(format: "orderBy == %@", filters!.orderBy!.rawValue as NSString)
+            udPredicate = NSPredicate(format: "useDate == %@", filters!.useDate?.rawValue ?? 0)
+            obPredicate = NSPredicate(format: "orderBy == %@", filters!.orderBy?.rawValue ?? 0)
+            odPredicate = NSPredicate(format: "orderDate == %@", filters!.orderDate?.rawValue ?? 0)
             
             var sfs: [String] = []
             if let showFields = filters!.showFields {
@@ -168,7 +172,7 @@ class QueryResultsTableController: UITableViewController {
             }
         }
         
-        let pred = NSCompoundPredicate(type: .and, subpredicates: [qPredicate, obPredicate, dfPredicate, dtPredicate, sfPredicate])
+        let pred = NSCompoundPredicate(type: .and, subpredicates: [qPredicate, obPredicate, odPredicate, dfPredicate, dtPredicate, udPredicate, sfPredicate])
         fetchReq.predicate = pred
         
         do {
@@ -196,7 +200,9 @@ class QueryResultsTableController: UITableViewController {
             if let filt = filters {
                 historyRecord.dateFrom = filt.fromDate
                 historyRecord.dateTo = filt.toDate
-                historyRecord.orderBy = filt.orderBy?.rawValue
+                historyRecord.orderBy = filt.orderBy?.rawValue ?? nil
+                historyRecord.orderDate = filt.orderDate?.rawValue ?? nil
+                historyRecord.useDate = filt.useDate?.rawValue ?? nil
                 
                 if let fields = filt.showFields {
                     var showFields: [String] = []

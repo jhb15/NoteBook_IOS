@@ -66,7 +66,7 @@ class UrlResponseCache {
     
     func clearExpiredData() {
         let fetchRequest = NSFetchRequest<ResponseCache>(entityName: "ResponseCache")
-        let sortDescriptor = NSSortDescriptor(key: "expiryDate", ascending: true, selector: #selector(NSString.localizedCompare(_:)))
+        let sortDescriptor = NSSortDescriptor(key: "expiryDate", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedContext!, sectionNameKeyPath: nil, cacheName: nil)

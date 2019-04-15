@@ -13,7 +13,9 @@ class SearchHistoryFilteredTableViewCell: UITableViewCell {
     @IBOutlet weak var searchQueryLabel: UILabel!
     @IBOutlet weak var dateFromLabel: UILabel!
     @IBOutlet weak var dateToLabel: UILabel!
+    @IBOutlet weak var dateUsing: UILabel!
     @IBOutlet weak var orderLabel: UILabel!
+    @IBOutlet weak var orderDate: UILabel!
     @IBOutlet weak var showFeildsLabel: UILabel!
     @IBOutlet weak var searchDateLabel: UILabel!
     

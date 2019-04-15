@@ -136,7 +136,9 @@ class HistoryTableViewController: UITableViewController {
         if let q = query?.query { cell.searchQueryLabel?.text = "Search Text: " + q }
         if let df = query?.dateFrom { cell.dateFromLabel?.text = "Date Form: " + dateFormatter.string(from: df) }
         if let dt = query?.dateTo { cell.dateToLabel?.text = "Date To: " + dateFormatter.string(from: dt) }
+        if let ud = query?.useDate { cell.dateUsing?.text = "Date Using " + ud }
         if let ob = query?.orderBy { cell.orderLabel?.text = "Order By: " + ob }
+        if let od = query?.orderDate { cell.orderDate?.text = "Order Using: " + od }
         if let sf = query?.showFields { cell.showFeildsLabel.text = "Show Fields: " + sf.joined(separator: ", ") }
         if let sd = query?.created_at { cell.searchDateLabel.text = "Search Date: " + dateFormatter.string(from: sd) }
         
@@ -172,6 +174,9 @@ class HistoryTableViewController: UITableViewController {
             view.searchText = query.query
             if isFiltered(query: query) {
                 view.filters = rebuildFilters(query: query)
+                view.isFiltered = true
+            } else {
+                view.isFiltered = false
             }
         }
     }
