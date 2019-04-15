@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C1169D542264F13C008B4C45 /* CustomPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1169D532264F13C008B4C45 /* CustomPicker.swift */; };
+		C1169D56226518FB008B4C45 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1169D55226518FB008B4C45 /* SettingsViewController.swift */; };
 		C1266229225BE0110078C5C6 /* GuardianQueryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1266228225BE0110078C5C6 /* GuardianQueryController.swift */; };
 		C128A278225D137700722962 /* GuardianContentDataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C128A276225D137600722962 /* GuardianContentDataTypes.swift */; };
 		C128A279225D137700722962 /* GuardianContentClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C128A277225D137600722962 /* GuardianContentClient.swift */; };
@@ -55,6 +56,7 @@
 
 /* Begin PBXFileReference section */
 		C1169D532264F13C008B4C45 /* CustomPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPicker.swift; sourceTree = "<group>"; };
+		C1169D55226518FB008B4C45 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		C1266228225BE0110078C5C6 /* GuardianQueryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardianQueryController.swift; sourceTree = "<group>"; };
 		C128A276225D137600722962 /* GuardianContentDataTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuardianContentDataTypes.swift; sourceTree = "<group>"; };
 		C128A277225D137600722962 /* GuardianContentClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuardianContentClient.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				C141FCA32260DCE6007E730A /* HistoryTableViewController.swift */,
 				C141FCA52260E7B4007E730A /* SearchHistoryFilteredTableViewCell.swift */,
 				C141FCA7226104DA007E730A /* SearchHistoryTableViewCell.swift */,
+				C1169D55226518FB008B4C45 /* SettingsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 				C1295D1A2263909F0077F3E3 /* CacheTableViewController.swift in Sources */,
 				C1EF1B33224CE8F3005264C8 /* AppDelegate.swift in Sources */,
 				C1EF1B3B224CE8F3005264C8 /* NoteBook.xcdatamodeld in Sources */,
+				C1169D56226518FB008B4C45 /* SettingsViewController.swift in Sources */,
 				C13C0419225E5EF100989B1B /* SelectNoteTableViewController.swift in Sources */,
 				C13C0417225E364D00989B1B /* ResultDetailViewController.swift in Sources */,
 				C182FFAD22536EFB00B8CF97 /* AboutController.swift in Sources */,

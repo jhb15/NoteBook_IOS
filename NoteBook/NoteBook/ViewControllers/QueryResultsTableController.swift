@@ -124,6 +124,7 @@ class QueryResultsTableController: UITableViewController {
             print("Error Performing Search: \(error.localizedDescription)")
         }
         
+        
     }
     
     func updateView() {

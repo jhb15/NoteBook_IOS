@@ -907,35 +907,6 @@
             </objects>
             <point key="canvasLocation" x="-234" y="-206"/>
         </scene>
-        <!--Root View Controller-->
-        <scene sceneID="6L1-Gr-M6u">
-            <objects>
-                <tableViewController id="pls-gO-22s" customClass="CacheTableViewController" customModule="NoteBook" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="LNm-hz-FGZ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CacheCell" id="qgS-os-amZ">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qgS-os-amZ" id="ZcT-Mq-9iL">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="pls-gO-22s" id="VZl-gx-WFN"/>
-                            <outlet property="delegate" destination="pls-gO-22s" id="nHL-3g-dr2"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="aVh-cC-BOu"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TMA-o1-exJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="566" y="554"/>
-        </scene>
         <!--Settings-->
         <scene sceneID="9Q5-Ql-CIY">
             <objects>
@@ -946,12 +917,70 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="pls-gO-22s" kind="relationship" relationship="rootViewController" id="IHC-4L-uFC"/>
+                        <segue destination="WPB-ps-dgb" kind="relationship" relationship="rootViewController" id="cWd-ch-4ho"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CoS-Bk-WR1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-234" y="554"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="Drg-y8-4gd">
+            <objects>
+                <viewController id="WPB-ps-dgb" customClass="SettingsViewController" customModule="NoteBook" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1uN-Yr-bAf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cacheing" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8eQ-Z5-Esn">
+                                <rect key="frame" x="16" y="80" width="343" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Responses Cached:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nbu-DV-Beu">
+                                <rect key="frame" x="16" y="118" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gpQ-rs-m94">
+                                <rect key="frame" x="145.5" y="147" width="84" height="30"/>
+                                <state key="normal" title="Clear Cache"/>
+                                <connections>
+                                    <action selector="clearCacheAction:" destination="WPB-ps-dgb" eventType="touchUpInside" id="hJW-LN-HcW"/>
+                                </connections>
+                            </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C7G-sH-w7F">
+                                <rect key="frame" x="163" y="185" width="51" height="31"/>
+                            </switch>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93333333330000001" green="0.85098039219999999" blue="0.031372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="nbu-DV-Beu" firstAttribute="top" secondItem="8eQ-Z5-Esn" secondAttribute="bottom" constant="8" id="4gU-lF-IhJ"/>
+                            <constraint firstItem="C7G-sH-w7F" firstAttribute="top" secondItem="gpQ-rs-m94" secondAttribute="bottom" constant="8" id="DlK-0B-IyY"/>
+                            <constraint firstItem="gpQ-rs-m94" firstAttribute="top" secondItem="nbu-DV-Beu" secondAttribute="bottom" constant="8" id="Lqd-h4-3h1"/>
+                            <constraint firstItem="nbu-DV-Beu" firstAttribute="leading" secondItem="Di7-WR-KpZ" secondAttribute="leading" constant="16" id="afY-W0-TL1"/>
+                            <constraint firstItem="Di7-WR-KpZ" firstAttribute="trailing" secondItem="nbu-DV-Beu" secondAttribute="trailing" constant="16" id="dVJ-bb-Ix5"/>
+                            <constraint firstItem="gpQ-rs-m94" firstAttribute="centerX" secondItem="1uN-Yr-bAf" secondAttribute="centerX" id="kXq-sh-4lc"/>
+                            <constraint firstItem="C7G-sH-w7F" firstAttribute="centerX" secondItem="1uN-Yr-bAf" secondAttribute="centerX" id="qXK-z8-Ft0"/>
+                            <constraint firstItem="8eQ-Z5-Esn" firstAttribute="leading" secondItem="Di7-WR-KpZ" secondAttribute="leading" constant="16" id="qyw-l1-FIz"/>
+                            <constraint firstItem="8eQ-Z5-Esn" firstAttribute="top" secondItem="Di7-WR-KpZ" secondAttribute="top" constant="16" id="vCQ-zU-mlN"/>
+                            <constraint firstItem="Di7-WR-KpZ" firstAttribute="trailing" secondItem="8eQ-Z5-Esn" secondAttribute="trailing" constant="16" id="yHl-oF-c7C"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Di7-WR-KpZ"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Settings" id="qBp-wX-mC5"/>
+                    <connections>
+                        <outlet property="cacheSizeLabel" destination="nbu-DV-Beu" id="Iiz-2v-zv6"/>
+                        <outlet property="cacheingSwitch" destination="C7G-sH-w7F" id="asO-3g-Feg"/>
+                        <outlet property="cahingLabel" destination="8eQ-Z5-Esn" id="Pxz-E6-a2X"/>
+                        <outlet property="clearCacheBtn" destination="gpQ-rs-m94" id="XOo-D9-vv2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J4x-V7-lgC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="584.79999999999995" y="551.87406296851577"/>
         </scene>
         <!--About-->
         <scene sceneID="UwP-qS-G6K">
