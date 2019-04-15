@@ -8,6 +8,11 @@
 
 import UIKit
 
+let DEFAULT_PAGE = 1
+let DEFAULT_PAGE_SIZE = 10
+let MIN_PAGE_SIZE = 1
+let MAX_PAGE_SIZE = 50
+
 class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITableViewDelegate, UITableViewDataSource {
     //Content
     @IBOutlet weak var scrollView: UIScrollView!
@@ -36,9 +41,12 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
     var isFieldSelected = [Bool](repeating: false, count: GuardianContentShowFields.allCases.count) //TODO MASSIVE BODGE
     
     //Global Value Holders
+    var pageNum: Int?
+    var pageSize: Int?
     var fromDate: Date?
     var toDate: Date?
     var orderBy: GuardianContentOrderFilter?
+    var orderUsing: GuardianContentOrderDateFilter?
     var filters: GuardianContentFilters?
     var showFields: [GuardianContentShowFields]?
     
@@ -80,12 +88,13 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
     }
     
     @IBAction func searchGuardianAPI(_ sender: Any) {
-        if validateForm() {
+        var errorMsgs: [String] = []
+        if validateForm(err: &errorMsgs) {
+            filters = GuardianContentFilters()
+            
             if !scrollView.isHidden {
-                filters = GuardianContentFilters()
-                
-                filters!.page = 1
-                filters!.pageSize = 25
+                filters!.page = Int(pageNum ?? DEFAULT_PAGE)
+                filters!.pageSize = Int(pageSize ?? DEFAULT_PAGE_SIZE)
                 filters!.fromDate = fromDate
                 filters!.toDate = toDate
                 filters!.orderBy = orderBy
@@ -100,27 +109,61 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
             performSegue(withIdentifier: "ShowResults", sender: nil)
             
         } else {
-            print("Invalid Input") //TODO More Detailed Validation Error Messages Needed
-            alertUser(title: "InValid Input", message: "You have entered the incorrect input. More Detailed messages soon!")
+            print("Invalid Input, Canceling") //TODO More Detailed Validation Error Messages Needed
+            alertUser(title: "InValid Input", message: errorMsgs.joined(separator: "\n\n"))
         }
     }
     
     //Nolonger needed!
-    func validateForm() -> Bool {
+    func validateForm(err: inout [String]) -> Bool {
         
-        let vDate = true
-        var vOrder = false
+        var valid = true
         
-        if orderBy != nil {
-            vOrder = true
+        if let pageNum = Int(pageNumberTextField.text!),
+            pageNum > 0 {
+            self.pageNum = pageNum
+        } else {
+            //alertUser(title: "Invalid Page Numer!", message: "Page numer must be an interger value abouve 0.")
+            err.append("[Ivalid Page Number!]\nPage numer must be an interger value abouve 0.")
+            self.pageNum = nil
+            pageNumberTextField.text = "\(DEFAULT_PAGE)"
+            valid = false
         }
         
-        if vDate && vOrder {
-            return true
+        if let pageSize = Int(resultsPerTextField.text!),
+            pageSize >= MIN_PAGE_SIZE && pageSize <= MAX_PAGE_SIZE {
+            self.pageSize = pageSize
         } else {
-            return false
+            //alertUser(title: "Invalid Page Size!", message: "Page size must be between \(MIN_PAGE_SIZE) and \(MAX_PAGE_SIZE)")
+            err.append("[Invalid Page Size!]\nPage size must be between \(MIN_PAGE_SIZE) and \(MAX_PAGE_SIZE).")
+            self.pageSize = nil
+            self.resultsPerTextField.text = "\(DEFAULT_PAGE_SIZE)"
+            valid = false
+        }
+
+        return valid
+    }
+    
+    //No longer used, but might be in furture
+    /*@objc func pageNumChanged(_ sender: UITextView) {
+        if let pageNum = Int(pageNumberTextField.text!),
+            pageNum > 0 {
+            self.pageNum = pageNum
+        } else {
+            alertUser(title: "Invalid Page Numer!", message: "Page numer must be an interger value abouve 0.")
+            self.pageNum = nil
         }
     }
+    
+    @objc func pageSizeChanged(_ sender: UITextView) {
+        if let pageSize = Int(resultsPerTextField.text!),
+            pageSize >= MIN_PAGE_SIZE && pageSize <= MAX_PAGE_SIZE {
+            self.pageSize = pageSize
+        } else {
+            alertUser(title: "Invalid Page Size!", message: "Page size must be between \(MIN_PAGE_SIZE) and \(MAX_PAGE_SIZE)")
+            self.pageSize = nil
+        }
+    }*/
     
     @objc func fromDateChanged(_ sender: UIDatePicker) {
         fromDate = sender.date
@@ -135,9 +178,10 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
     }
     
     func orderByChanged() {
-        let orderUsing = orderUsingOptions[orderByPicker.selectedRow(inComponent: 0)].rawValue
-        let orderBy = orderByOptions[orderByPicker.selectedRow(inComponent: 1)].rawValue
-        orderByLabel.text = "Order Using: " + orderUsing + " By: " + orderBy
+        let orderUsing = orderUsingOptions[orderByPicker.selectedRow(inComponent: 0)]
+        let orderBy = orderByOptions[orderByPicker.selectedRow(inComponent: 1)]
+        self.orderBy = orderBy; self.orderUsing = orderUsing
+        orderByLabel.text = "Order Using: " + orderUsing.rawValue + " By: " + orderBy.rawValue
     }
     
     func showFieldsUpdate() {

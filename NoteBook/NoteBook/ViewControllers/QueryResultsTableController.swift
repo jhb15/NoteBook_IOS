@@ -82,7 +82,10 @@ class QueryResultsTableController: UITableViewController {
             return
         }
         infoLabel.text = "Unexpected Error"
+        previousPageBtn.isEnabled = false
+        nextPageBtn.isEnabled = false
     }
+    
     
     // MARK: - Page Change Actions
     
@@ -113,16 +116,18 @@ class QueryResultsTableController: UITableViewController {
                 } else {
                     print("Error no Data passed back from 'GuardianContentClient.searchContent'")
                 }
+                DispatchQueue.main.async {
+                    self.updateView()
+                }
             })
             print("Sent Request!")
         } catch let error as NSError {
             print("Error Performing Search: \(error.localizedDescription)")
         }
         
-        while resultsIn == nil {
-            usleep(2000)
-        }
-        
+    }
+    
+    func updateView() {
         updateTableHeader()
         
         tableView.reloadData()
@@ -153,7 +158,7 @@ class QueryResultsTableController: UITableViewController {
             let toDate = (filters!.toDate)! as NSDate; let fromDate = (filters!.fromDate)! as NSDate
             dfPredicate = NSPredicate(format: "dateFrom == %@",  fromDate)
             dtPredicate = NSPredicate(format: "dateTo == %@", toDate)
-            obPredicate = NSPredicate(format: "orderBy MATCHES[c] %@", (filters!.orderBy?.rawValue)! as NSString)
+            obPredicate = NSPredicate(format: "orderBy == %@", filters!.orderBy!.rawValue as NSString)
             
             var sfs: [String] = []
             if let showFields = filters!.showFields {
@@ -216,7 +221,18 @@ class QueryResultsTableController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        if resultsIn != nil {
+            tableView.separatorStyle = .singleLine
+            tableView.backgroundView = nil
+            return 1
+        }
+        let noDataLabel = UILabel()
+        noDataLabel.text = "Guardian API Returned No Data!"
+        noDataLabel.textColor = UIColor.gray
+        noDataLabel.textAlignment = .center
+        tableView.separatorStyle = .none
+        tableView.backgroundView = noDataLabel
+        return 0
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
