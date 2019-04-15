@@ -21,6 +21,7 @@ class QueryResultsTableController: UITableViewController {
     
     var searchText: String?
     var filters: GuardianContentFilters?
+    var isFiltered: Bool = false
     
     var resultsIn : GuardianOpenPlatformData?
     var resultFromCache: Bool = false
@@ -45,12 +46,10 @@ class QueryResultsTableController: UITableViewController {
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         guarApiController.cacheEnabled = false
-        resultsIn = nil
         
         queryAPI()
         
         guarApiController.cacheEnabled = true
-        
         refreshControl.endRefreshing()
     }
     
@@ -110,6 +109,7 @@ class QueryResultsTableController: UITableViewController {
         do {
             try guarApiController.searchContent(for: searchText ?? "", usingFilters: filters, withCallback: {
                 (data:GuardianOpenPlatformData?, fromCache: Bool) in
+                print("AM I BEING CALLED AT ALL3")
                 if data != nil {
                     self.resultsIn = data
                     self.resultFromCache = fromCache
@@ -117,6 +117,7 @@ class QueryResultsTableController: UITableViewController {
                     print("Error no Data passed back from 'GuardianContentClient.searchContent'")
                 }
                 DispatchQueue.main.async {
+                    print("AM I BEING CALLED AT ALL4")
                     self.updateView()
                 }
             })
@@ -153,7 +154,7 @@ class QueryResultsTableController: UITableViewController {
         var obPredicate = NSPredicate(format: "orderBy == %@",0)
         var sfPredicate = NSPredicate(format: "showFields == %@", 0) //0 should mean nil/null
         
-        if filters != nil {
+        if isFiltered && filters != nil {
             
             let toDate = (filters!.toDate)! as NSDate; let fromDate = (filters!.fromDate)! as NSDate
             dfPredicate = NSPredicate(format: "dateFrom == %@",  fromDate)
@@ -221,6 +222,7 @@ class QueryResultsTableController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
+        print("AM I BEING CALLED AT ALL numberOfSections")
         if resultsIn != nil {
             tableView.separatorStyle = .singleLine
             tableView.backgroundView = nil
@@ -236,6 +238,7 @@ class QueryResultsTableController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("AM I BEING CALLED AT ALL numberOfRowsInSection")
         
         let total = resultsIn!.response.total
         
@@ -255,6 +258,7 @@ class QueryResultsTableController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("AM I BEING CALLED AT ALL cellForRowAt")
         let cell = tableView.dequeueReusableCell(withIdentifier: "ResultCell", for: indexPath) as! ResultTableCell
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"

@@ -102,8 +102,6 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
                 if showFields != nil {
                     filters!.showFields = showFields
                 }
-            } else {
-                filters = nil
             }
             //TODO Display Result
             performSegue(withIdentifier: "ShowResults", sender: nil)
@@ -221,6 +219,7 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
         if let view = segue.destination as? QueryResultsTableController {
             view.searchText = serchText.text
             view.filters = filters
+            view.isFiltered = !scrollView.isHidden
         }
     }
     

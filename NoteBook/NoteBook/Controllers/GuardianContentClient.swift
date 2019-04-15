@@ -92,6 +92,8 @@ class GuardianContentClient {
             return
         }
         
+        print("AM I BEING CALLED AT ALL1")
+        
         let task = session.dataTask(with: url) {
             (data: Data?, response: URLResponse?, error: Error?) -> Void in
             
@@ -113,6 +115,7 @@ class GuardianContentClient {
             }
             
         }
+        print("AM I BEING CALLED AT ALL2")
         
         task.resume()
         
