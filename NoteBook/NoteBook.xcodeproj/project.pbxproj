@@ -10,6 +10,7 @@
 		C1169D542264F13C008B4C45 /* CustomPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1169D532264F13C008B4C45 /* CustomPicker.swift */; };
 		C1169D56226518FB008B4C45 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1169D55226518FB008B4C45 /* SettingsViewController.swift */; };
 		C1266229225BE0110078C5C6 /* GuardianQueryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1266228225BE0110078C5C6 /* GuardianQueryController.swift */; };
+		C127C851226623F2000F4C22 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = C127C850226623F2000F4C22 /* AppConfig.swift */; };
 		C128A278225D137700722962 /* GuardianContentDataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C128A276225D137600722962 /* GuardianContentDataTypes.swift */; };
 		C128A279225D137700722962 /* GuardianContentClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C128A277225D137600722962 /* GuardianContentClient.swift */; };
 		C128A27B225D1EFC00722962 /* ShowFieldOptCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C128A27A225D1EFC00722962 /* ShowFieldOptCell.swift */; };
@@ -58,6 +59,7 @@
 		C1169D532264F13C008B4C45 /* CustomPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPicker.swift; sourceTree = "<group>"; };
 		C1169D55226518FB008B4C45 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		C1266228225BE0110078C5C6 /* GuardianQueryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardianQueryController.swift; sourceTree = "<group>"; };
+		C127C850226623F2000F4C22 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		C128A276225D137600722962 /* GuardianContentDataTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuardianContentDataTypes.swift; sourceTree = "<group>"; };
 		C128A277225D137600722962 /* GuardianContentClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuardianContentClient.swift; sourceTree = "<group>"; };
 		C128A27A225D1EFC00722962 /* ShowFieldOptCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowFieldOptCell.swift; sourceTree = "<group>"; };
@@ -124,21 +126,29 @@
 			path = Pickers;
 			sourceTree = "<group>";
 		};
+		C127C84F226623D6000F4C22 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				C127C850226623F2000F4C22 /* AppConfig.swift */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
 		C128022F22590BA600BA9901 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				C1169D522264F10D008B4C45 /* Pickers */,
 				C1295D192263909F0077F3E3 /* CacheTableViewController.swift */,
+				C1266228225BE0110078C5C6 /* GuardianQueryController.swift */,
+				C13C0411225E0B7200989B1B /* QueryResultsTableController.swift */,
+				C13C0416225E364D00989B1B /* ResultDetailViewController.swift */,
+				C13C0418225E5EF100989B1B /* SelectNoteTableViewController.swift */,
 				C182FFAA22536EE900B8CF97 /* NewNoteController.swift */,
 				C182FFAC22536EFB00B8CF97 /* AboutController.swift */,
 				C182FFAE22536F2C00B8CF97 /* MyNotesController.swift */,
 				C1DE0F5E225914530035B488 /* NoteDetailController.swift */,
-				C1266228225BE0110078C5C6 /* GuardianQueryController.swift */,
 				C128A27A225D1EFC00722962 /* ShowFieldOptCell.swift */,
 				C13C0413225E214500989B1B /* ResultTableCell.swift */,
-				C13C0411225E0B7200989B1B /* QueryResultsTableController.swift */,
-				C13C0416225E364D00989B1B /* ResultDetailViewController.swift */,
-				C13C0418225E5EF100989B1B /* SelectNoteTableViewController.swift */,
 				C13C041A225E86F700989B1B /* WebViewController.swift */,
 				C141FCA32260DCE6007E730A /* HistoryTableViewController.swift */,
 				C141FCA52260E7B4007E730A /* SearchHistoryFilteredTableViewCell.swift */,
@@ -189,6 +199,7 @@
 		C1EF1B31224CE8F3005264C8 /* NoteBook */ = {
 			isa = PBXGroup;
 			children = (
+				C127C84F226623D6000F4C22 /* Config */,
 				C1295D14226367880077F3E3 /* Cacheing */,
 				C128023022590BD900BA9901 /* Controllers */,
 				C128022F22590BA600BA9901 /* ViewControllers */,
@@ -360,6 +371,7 @@
 				C141FCA42260DCE6007E730A /* HistoryTableViewController.swift in Sources */,
 				C182FFAB22536EE900B8CF97 /* NewNoteController.swift in Sources */,
 				C1169D542264F13C008B4C45 /* CustomPicker.swift in Sources */,
+				C127C851226623F2000F4C22 /* AppConfig.swift in Sources */,
 				C13C0412225E0B7200989B1B /* QueryResultsTableController.swift in Sources */,
 				C128A27B225D1EFC00722962 /* ShowFieldOptCell.swift in Sources */,
 				C13C0410225E04FD00989B1B /* KeyedDecodingContainer+extension.swift in Sources */,

@@ -26,8 +26,13 @@ class QueryResultsTableController: UITableViewController {
     var resultsIn : GuardianOpenPlatformData?
     var resultFromCache: Bool = false
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        nextPageBtn.isEnabled = false
+        previousPageBtn.isEnabled = false
         
         guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
             print("error - unable to access failure")
@@ -78,6 +83,10 @@ class QueryResultsTableController: UITableViewController {
             if response.currentPage == 1 {
                 previousPageBtn.isEnabled = false
             }
+            if response.pages == 1 {
+                previousPageBtn.isEnabled = false
+                nextPageBtn.isEnabled = false
+            }
             return
         }
         infoLabel.text = "Unexpected Error"
@@ -89,20 +98,22 @@ class QueryResultsTableController: UITableViewController {
     // MARK: - Page Change Actions
     
     @IBAction func previousPage(_ sender: Any) {
-        if filters == nil {                         //Fix for if the filters variable isn't set. //Could be improved
+        previousPageBtn.isEnabled = false
+        if filters == nil {
             filters = GuardianContentFilters()
         }
         filters!.page = (resultsIn?.response.currentPage)! - 1
-        resultsIn = nil
+        //resultsIn = nil
         queryAPI()
     }
     
     @IBAction func nextPage(_ sender: Any) {
+        nextPageBtn.isEnabled = false
         if filters == nil {
             filters = GuardianContentFilters()
         }
         filters!.page = (resultsIn?.response.currentPage)! + 1
-        resultsIn = nil
+        //resultsIn = nil
         queryAPI()
     }
     
@@ -233,13 +244,20 @@ class QueryResultsTableController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        if resultsIn != nil {
-            tableView.separatorStyle = .singleLine
-            tableView.backgroundView = nil
-            return 1
+        var msg = ""
+        if let response = resultsIn {
+            if response.response.total > 1 {
+                tableView.separatorStyle = .singleLine
+                tableView.backgroundView = nil
+                return 1
+            } else {
+                msg = "No Results!"
+            }
+        } else {
+            msg = "No Response. Could be you entered a page number that is out of range. Or you could have no Internet."
         }
         let noDataLabel = UILabel()
-        noDataLabel.text = "Guardian API Returned No Data! This could be because there where no results to show, the page you specified was out of range or a unknown error!"
+        noDataLabel.text = msg
         noDataLabel.textColor = UIColor.gray
         noDataLabel.textAlignment = .center
         noDataLabel.numberOfLines = 5
