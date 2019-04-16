@@ -11,6 +11,7 @@ import UIKit
 class SearchHistoryFilteredTableViewCell: UITableViewCell {
     
     @IBOutlet weak var searchQueryLabel: UILabel!
+    @IBOutlet weak var pageInfoLabel: UILabel!
     @IBOutlet weak var dateFromLabel: UILabel!
     @IBOutlet weak var dateToLabel: UILabel!
     @IBOutlet weak var dateUsing: UILabel!

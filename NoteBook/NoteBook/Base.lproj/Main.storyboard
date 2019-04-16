@@ -455,57 +455,63 @@
                                     <outlet property="searchTextLabel" destination="hCZ-gJ-ano" id="XyX-c0-iAo"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="QueryWithFiltersCell" rowHeight="251" id="0JI-qm-gfB" customClass="SearchHistoryFilteredTableViewCell" customModule="NoteBook" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="177" width="375" height="251"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="QueryWithFiltersCell" rowHeight="311" id="0JI-qm-gfB" customClass="SearchHistoryFilteredTableViewCell" customModule="NoteBook" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="177" width="375" height="311"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0JI-qm-gfB" id="7BI-sn-nYG">
-                                    <rect key="frame" x="0.0" y="0.0" width="341" height="250.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="341" height="310.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Seach Text:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9iH-9Y-1Dl">
-                                            <rect key="frame" x="16" y="11" width="317" height="21.5"/>
+                                            <rect key="frame" x="16" y="11" width="317" height="53"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="254" verticalCompressionResistancePriority="753" text="Date From:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nwd-fy-nL1">
-                                            <rect key="frame" x="16" y="40.5" width="317" height="20.5"/>
+                                            <rect key="frame" x="16" y="100.5" width="317" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="752" text="Date To:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hlj-bj-6vh">
-                                            <rect key="frame" x="16" y="69" width="317" height="20.5"/>
+                                            <rect key="frame" x="16" y="129" width="317" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="752" text="Date Using:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a7O-I2-bDr">
-                                            <rect key="frame" x="16" y="97.5" width="317" height="20.5"/>
+                                            <rect key="frame" x="16" y="157.5" width="317" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Order:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FbP-6Y-KG3">
-                                            <rect key="frame" x="16" y="126" width="317" height="20.5"/>
+                                            <rect key="frame" x="16" y="186" width="317" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Fields: " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="upe-9W-s1v">
-                                            <rect key="frame" x="16" y="183" width="317" height="20.5"/>
+                                            <rect key="frame" x="16" y="243" width="317" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PPP-Uq-IlV">
-                                            <rect key="frame" x="16" y="211.5" width="317" height="20.5"/>
+                                            <rect key="frame" x="16" y="271.5" width="317" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Order Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r16-hM-QIL">
-                                            <rect key="frame" x="16" y="154.5" width="317" height="20.5"/>
+                                            <rect key="frame" x="16" y="214.5" width="317" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="254" verticalCompressionResistancePriority="753" text="Page: _ Page Size: _" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a7O-h9-Tqs">
+                                            <rect key="frame" x="16" y="72" width="317" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -514,8 +520,10 @@
                                     <constraints>
                                         <constraint firstItem="FbP-6Y-KG3" firstAttribute="trailing" secondItem="7BI-sn-nYG" secondAttribute="trailingMargin" id="0R6-XV-Lom"/>
                                         <constraint firstItem="r16-hM-QIL" firstAttribute="leading" secondItem="7BI-sn-nYG" secondAttribute="leadingMargin" id="25X-KB-RYD"/>
-                                        <constraint firstItem="Nwd-fy-nL1" firstAttribute="top" secondItem="9iH-9Y-1Dl" secondAttribute="bottom" constant="8" id="69D-oo-dk1"/>
+                                        <constraint firstItem="Nwd-fy-nL1" firstAttribute="top" secondItem="a7O-h9-Tqs" secondAttribute="bottom" constant="8" id="6ET-JR-bvl"/>
                                         <constraint firstItem="Hlj-bj-6vh" firstAttribute="trailing" secondItem="7BI-sn-nYG" secondAttribute="trailingMargin" id="6eq-vE-ASk"/>
+                                        <constraint firstItem="a7O-h9-Tqs" firstAttribute="leading" secondItem="7BI-sn-nYG" secondAttribute="leadingMargin" id="7g4-vW-QBR"/>
+                                        <constraint firstItem="a7O-h9-Tqs" firstAttribute="top" secondItem="9iH-9Y-1Dl" secondAttribute="bottom" constant="8" id="BO7-PQ-pXC"/>
                                         <constraint firstItem="Hlj-bj-6vh" firstAttribute="leading" secondItem="7BI-sn-nYG" secondAttribute="leadingMargin" id="DfT-nd-WmS"/>
                                         <constraint firstItem="a7O-I2-bDr" firstAttribute="leading" secondItem="7BI-sn-nYG" secondAttribute="leadingMargin" id="INb-Rk-tsm"/>
                                         <constraint firstItem="Hlj-bj-6vh" firstAttribute="top" secondItem="Nwd-fy-nL1" secondAttribute="bottom" constant="8" id="Iks-as-ZgY"/>
@@ -531,6 +539,7 @@
                                         <constraint firstItem="9iH-9Y-1Dl" firstAttribute="leading" secondItem="7BI-sn-nYG" secondAttribute="leadingMargin" id="XzJ-Au-dFA"/>
                                         <constraint firstItem="upe-9W-s1v" firstAttribute="leading" secondItem="7BI-sn-nYG" secondAttribute="leadingMargin" id="a6n-0H-4Yr"/>
                                         <constraint firstItem="upe-9W-s1v" firstAttribute="trailing" secondItem="7BI-sn-nYG" secondAttribute="trailingMargin" id="bV3-Bb-KwK"/>
+                                        <constraint firstItem="a7O-h9-Tqs" firstAttribute="trailing" secondItem="7BI-sn-nYG" secondAttribute="trailingMargin" id="cEp-tX-SNY"/>
                                         <constraint firstItem="r16-hM-QIL" firstAttribute="top" secondItem="FbP-6Y-KG3" secondAttribute="bottom" constant="8" id="dEq-M5-vWp"/>
                                         <constraint firstItem="a7O-I2-bDr" firstAttribute="top" secondItem="Hlj-bj-6vh" secondAttribute="bottom" constant="8" id="mJE-D0-7Sh"/>
                                         <constraint firstItem="9iH-9Y-1Dl" firstAttribute="trailing" secondItem="7BI-sn-nYG" secondAttribute="trailingMargin" id="nNj-Fz-E2f"/>
@@ -546,6 +555,7 @@
                                     <outlet property="dateUsing" destination="a7O-I2-bDr" id="IDw-cx-zpt"/>
                                     <outlet property="orderDate" destination="r16-hM-QIL" id="AEx-AQ-rcx"/>
                                     <outlet property="orderLabel" destination="FbP-6Y-KG3" id="j3J-lY-ANl"/>
+                                    <outlet property="pageInfoLabel" destination="a7O-h9-Tqs" id="q9v-W7-vF3"/>
                                     <outlet property="searchDateLabel" destination="PPP-Uq-IlV" id="kSU-su-yuX"/>
                                     <outlet property="searchQueryLabel" destination="9iH-9Y-1Dl" id="FdV-qt-Ny9"/>
                                     <outlet property="showFeildsLabel" destination="upe-9W-s1v" id="M4d-P7-Uoc"/>
@@ -1287,6 +1297,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="cIT-KK-NpE"/>
-        <segue reference="dGf-5v-fLU"/>
+        <segue reference="5Ol-nk-ZRt"/>
     </inferredMetricsTieBreakers>
 </document>

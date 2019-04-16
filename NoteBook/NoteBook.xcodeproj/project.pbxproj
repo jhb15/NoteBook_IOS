@@ -11,6 +11,7 @@
 		C1169D56226518FB008B4C45 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1169D55226518FB008B4C45 /* SettingsViewController.swift */; };
 		C1266229225BE0110078C5C6 /* GuardianQueryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1266228225BE0110078C5C6 /* GuardianQueryController.swift */; };
 		C127C851226623F2000F4C22 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = C127C850226623F2000F4C22 /* AppConfig.swift */; };
+		C127C86222664CEC000F4C22 /* URLSession+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C127C86122664CEC000F4C22 /* URLSession+extension.swift */; };
 		C128A278225D137700722962 /* GuardianContentDataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C128A276225D137600722962 /* GuardianContentDataTypes.swift */; };
 		C128A279225D137700722962 /* GuardianContentClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C128A277225D137600722962 /* GuardianContentClient.swift */; };
 		C128A27B225D1EFC00722962 /* ShowFieldOptCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C128A27A225D1EFC00722962 /* ShowFieldOptCell.swift */; };
@@ -60,6 +61,7 @@
 		C1169D55226518FB008B4C45 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		C1266228225BE0110078C5C6 /* GuardianQueryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardianQueryController.swift; sourceTree = "<group>"; };
 		C127C850226623F2000F4C22 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		C127C86122664CEC000F4C22 /* URLSession+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLSession+extension.swift"; sourceTree = "<group>"; };
 		C128A276225D137600722962 /* GuardianContentDataTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuardianContentDataTypes.swift; sourceTree = "<group>"; };
 		C128A277225D137600722962 /* GuardianContentClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuardianContentClient.swift; sourceTree = "<group>"; };
 		C128A27A225D1EFC00722962 /* ShowFieldOptCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowFieldOptCell.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				C128A277225D137600722962 /* GuardianContentClient.swift */,
+				C127C86122664CEC000F4C22 /* URLSession+extension.swift */,
 				C13C040F225E04FD00989B1B /* KeyedDecodingContainer+extension.swift */,
 				C128A276225D137600722962 /* GuardianContentDataTypes.swift */,
 			);
@@ -362,6 +365,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C127C86222664CEC000F4C22 /* URLSession+extension.swift in Sources */,
 				C182FFAF22536F2C00B8CF97 /* MyNotesController.swift in Sources */,
 				C128A278225D137700722962 /* GuardianContentDataTypes.swift in Sources */,
 				C1266229225BE0110078C5C6 /* GuardianQueryController.swift in Sources */,

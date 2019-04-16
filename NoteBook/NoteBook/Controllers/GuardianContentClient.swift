@@ -94,7 +94,7 @@ class GuardianContentClient {
             return
         }
         
-        let task = session.dataTask(with: url) {
+        let task = session.dataTask(with: url, debug: false) {
             (data: Data?, response: URLResponse?, error: Error?) -> Void in
             
             if let downloadedData = data {

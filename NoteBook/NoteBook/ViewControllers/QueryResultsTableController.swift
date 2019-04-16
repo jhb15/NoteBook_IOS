@@ -166,6 +166,8 @@ class QueryResultsTableController: UITableViewController {
         
         
         let qPredicate = NSPredicate(format: "query == %@", searchText!)
+        var pPredicate = NSPredicate(format: "page == %@", NSNumber(value: Int32(0)))
+        var psPredicate = NSPredicate(format: "pageSize == %@", NSNumber(value: Int32(0)))
         var dfPredicate = NSPredicate(format: "dateFrom == %@",  0)
         var dtPredicate = NSPredicate(format: "dateTo == %@", 0)
         var udPredicate = NSPredicate(format: "useDate == %@", 0)
@@ -176,6 +178,8 @@ class QueryResultsTableController: UITableViewController {
         if isFiltered && filters != nil {
             
             let toDate = (filters!.toDate)! as NSDate; let fromDate = (filters!.fromDate)! as NSDate
+            pPredicate = NSPredicate(format: "page == %@", NSNumber(value: Int32(filters!.page ?? 0)))
+            psPredicate = NSPredicate(format: "pageSize == %@", NSNumber(value: Int32(filters!.pageSize ?? 0)))
             dfPredicate = NSPredicate(format: "dateFrom == %@",  fromDate)
             dtPredicate = NSPredicate(format: "dateTo == %@", toDate)
             udPredicate = NSPredicate(format: "useDate == %@", filters!.useDate?.rawValue ?? 0)
@@ -191,7 +195,7 @@ class QueryResultsTableController: UITableViewController {
             }
         }
         
-        let pred = NSCompoundPredicate(type: .and, subpredicates: [qPredicate, obPredicate, odPredicate, dfPredicate, dtPredicate, udPredicate, sfPredicate])
+        let pred = NSCompoundPredicate(type: .and, subpredicates: [qPredicate, pPredicate, psPredicate, obPredicate, odPredicate, dfPredicate, dtPredicate, udPredicate, sfPredicate])
         fetchReq.predicate = pred
         
         do {
@@ -217,6 +221,8 @@ class QueryResultsTableController: UITableViewController {
             let historyRecord = HistoricQuery(entity: HistoricQuery.entity(), insertInto: managedContext)
             historyRecord.query = searchText
             if let filt = filters {
+                historyRecord.page = Int32(filt.page ?? 0)
+                historyRecord.pageSize = Int32(filt.pageSize ?? 0)
                 historyRecord.dateFrom = filt.fromDate
                 historyRecord.dateTo = filt.toDate
                 historyRecord.orderBy = filt.orderBy?.rawValue ?? nil

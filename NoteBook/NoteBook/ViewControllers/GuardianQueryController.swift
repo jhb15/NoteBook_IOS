@@ -113,6 +113,7 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
             filters = GuardianContentFilters()
             
             if !scrollView.isHidden {
+                
                 filters!.page = Int(pageNum ?? DEFAULT_PAGE)
                 filters!.pageSize = Int(pageSize ?? DEFAULT_PAGE_SIZE)
                 filters!.fromDate = fromDate
@@ -165,15 +166,36 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
     }
     
     @objc func fromDateChanged(_ sender: UIDatePicker) {
-        fromDate = sender.date
+        fromDate = sanitizeDate(date: sender.date)
         fromDateLabel.text = "Date From: " + dateFormatter.string(from: sender.date)
         toDatePicker.minimumDate = sender.date
     }
     
     @objc func toDateChanged(_ sender: UIDatePicker) {
-        toDate = sender.date
+        toDate = sanitizeDate(date: sender.date)
         toDateLabel.text = "Date To: " + dateFormatter.string(from: sender.date)
         fromDatePicker.maximumDate = sender.date
+    }
+    
+    /**
+     Function for setting the time of a date field to a default value. Couldn't find a better way of doing
+     this wierdly. Its needed to stop duplicte history records when the difference is just the time in the
+     Date object.
+     //TODO improve if there is a better way
+     */
+    func sanitizeDate(date: Date) -> Date? {
+        let df = DateFormatter()
+        
+        let calendar = Calendar.current
+        let day = calendar.component(.day, from: date)
+        let month = calendar.component(.month, from: date)
+        let year = calendar.component(.year, from: date)
+        
+        let dateStr = "\(day)/\(month)/\(year)"
+        
+        df.dateFormat = "dd/MM/yyyy"
+        
+        return df.date(from: dateStr)
     }
     
     func dateUsingChanged(val: GuardianContentDateFilter) {

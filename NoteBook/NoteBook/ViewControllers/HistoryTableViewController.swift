@@ -134,6 +134,7 @@ class HistoryTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "QueryWithFiltersCell", for: indexPath) as! SearchHistoryFilteredTableViewCell
         
         if let q = query?.query { cell.searchQueryLabel?.text = "Search Text: " + q }
+        if let p = query?.page, let ps = query?.pageSize { cell.pageInfoLabel.text = "Page: \(p) Page Size: \(ps)"}
         if let df = query?.dateFrom { cell.dateFromLabel?.text = "Date Form: " + dateFormatter.string(from: df) }
         if let dt = query?.dateTo { cell.dateToLabel?.text = "Date To: " + dateFormatter.string(from: dt) }
         if let ud = query?.useDate { cell.dateUsing?.text = "Date Using " + ud }
@@ -183,9 +184,15 @@ class HistoryTableViewController: UITableViewController {
     
     func rebuildFilters(query: HistoricQuery) -> GuardianContentFilters {
         let filters = GuardianContentFilters()
+        
+        if query.page > 0 { filters.page = Int(query.page) }
+        if query.pageSize >= MIN_PAGE_SIZE && query.pageSize <= MAX_PAGE_SIZE { filters.pageSize = Int(query.pageSize) }
+        
         filters.fromDate = query.dateFrom
         filters.toDate = query.dateTo
         if let order = query.orderBy { filters.orderBy = GuardianContentOrderFilter(rawValue: order)}
+        if let orderDate = query.orderDate { filters.orderDate = GuardianContentOrderDateFilter(rawValue: orderDate)}
+        if let useDate = query.useDate { filters.useDate = GuardianContentDateFilter(rawValue: useDate)}
         if let sFields = query.showFields {
             filters.showFields = []
             for str in sFields {
