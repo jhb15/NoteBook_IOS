@@ -89,13 +89,19 @@ class QueryResultsTableController: UITableViewController {
     // MARK: - Page Change Actions
     
     @IBAction func previousPage(_ sender: Any) {
-        filters?.page = (resultsIn?.response.currentPage)! - 1
+        if filters == nil {                         //Fix for if the filters variable isn't set. //Could be improved
+            filters = GuardianContentFilters()
+        }
+        filters!.page = (resultsIn?.response.currentPage)! - 1
         resultsIn = nil
         queryAPI()
     }
     
     @IBAction func nextPage(_ sender: Any) {
-        filters?.page = (resultsIn?.response.currentPage)! + 1
+        if filters == nil {
+            filters = GuardianContentFilters()
+        }
+        filters!.page = (resultsIn?.response.currentPage)! + 1
         resultsIn = nil
         queryAPI()
     }

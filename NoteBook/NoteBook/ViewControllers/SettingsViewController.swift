@@ -15,6 +15,7 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var cacheSizeLabel: UILabel!
     @IBOutlet weak var clearCacheBtn: UIButton!
     @IBOutlet weak var cacheingSwitch: UISwitch!
+    @IBOutlet weak var clearDefaultsButton: UIButton!
     
     var managedContext: NSManagedObjectContext?
     var fetchedResultsController: NSFetchedResultsController<ResponseCache>?
@@ -86,6 +87,22 @@ class SettingsViewController: UIViewController {
         }
         performFetchForController()
         updateView()
+    }
+    
+    @IBAction func clearDefaults(_ sender: Any) {
+        let alertController = UIAlertController(title: "Clearing User Defaults", message: "To clear the user defaults that app must restart, are you sure you want to continue?", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .destructive) {
+            (action) in
+            let domain = Bundle.main.bundleIdentifier!
+            UserDefaults.standard.removePersistentDomain(forName: domain)
+            UserDefaults.standard.synchronize()
+            exit(0)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     @objc func cacheSwitchedOff(_ sender: UISwitch) {

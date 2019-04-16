@@ -22,6 +22,8 @@ class GuardianContentClient {
     
     let responseCacheCD = UrlResponseCache()
     
+    let defaults:UserDefaults = UserDefaults.standard
+    
     convenience init(apiKey: String) {
         self.init(apiKey: apiKey, verbose: false)
     }
@@ -68,6 +70,8 @@ class GuardianContentClient {
     
     func performDataTask(with urlString: String,
                          withCallback callback: @escaping (_ data: GuardianOpenPlatformData?, _ fromCache: Bool) -> Void) throws  {
+        let isCachingOn = defaults.bool(forKey: "isCachingOn")
+        
         guard let value = urlString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed),
               let url = URL(string: value) else {
                 
@@ -78,11 +82,9 @@ class GuardianContentClient {
             throw GuardianContentClientError.InvalidUrl
         }
         
-        //loading cache
-        
         print("URL: " + value)
         
-        if self.cacheEnabled,
+        if self.cacheEnabled && isCachingOn,
             //let res = responseCache.object(forKey: value as NSString) {
             let res = responseCacheCD.getCachedData(key: value) {
             
