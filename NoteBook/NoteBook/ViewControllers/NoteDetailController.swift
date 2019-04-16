@@ -111,6 +111,11 @@ class NoteDetailController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+        super.touchesBegan(touches, with: event)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let links = noteItem!.links {
             return links.count
