@@ -33,6 +33,8 @@ class QueryResultsTableController: UITableViewController {
         
         nextPageBtn.isEnabled = false
         previousPageBtn.isEnabled = false
+        offlineDataLabel.isHidden = true
+        infoLabel.text = "--"
         
         guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
             print("error - unable to access failure")
