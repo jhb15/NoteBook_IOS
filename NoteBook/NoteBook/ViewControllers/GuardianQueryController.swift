@@ -79,6 +79,9 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
         
     }
     
+    /**
+     Action function for when the add filters button is toggled.
+     */
     @IBAction func toggleFilters(_ sender: Any) {
         if scrollView.isHidden {
             scrollView.isHidden = false
@@ -89,6 +92,9 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
         }
     }
     
+    /**
+     Function that is used to perform the action of specifying the use-date filter for date from and date to.
+     */
     @IBAction func setDateUsing(_ sender: Any) {
         let actionSheet = UIAlertController(title: "Select Using Date", message: "The data used by the date to and date from filters.", preferredStyle: .actionSheet)
         
@@ -107,6 +113,9 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
         present(actionSheet, animated: true, completion: nil)
     }
     
+    /**
+     This function is used to initiate a search request on the guardian API.
+     */
     @IBAction func searchGuardianAPI(_ sender: Any) {
         var errorMsgs: [String] = []
         if validateForm(err: &errorMsgs) {
@@ -135,7 +144,10 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
         }
     }
     
-    //Nolonger needed!
+    /**
+     Function for validateing the input, only fields that really need validateing are the page number and page size
+     fields as they have direct user input.
+     */
     func validateForm(err: inout [String]) -> Bool {
         
         var valid = true
@@ -165,12 +177,18 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
         return valid
     }
     
+    /**
+     Function that is triggered when the from date has been changed on the date picker.
+     */
     @objc func fromDateChanged(_ sender: UIDatePicker) {
         fromDate = sanitizeDate(date: sender.date)
         fromDateLabel.text = "Date From: " + dateFormatter.string(from: sender.date)
         toDatePicker.minimumDate = sender.date
     }
     
+    /**
+     Function that is triggered when the to date has been changed on the date picker.
+     */
     @objc func toDateChanged(_ sender: UIDatePicker) {
         toDate = sanitizeDate(date: sender.date)
         toDateLabel.text = "Date To: " + dateFormatter.string(from: sender.date)
@@ -198,11 +216,17 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
         return df.date(from: dateStr)
     }
     
+    /**
+     Function that is called when the date-using filter has been changed.
+     */
     func dateUsingChanged(val: GuardianContentDateFilter) {
         toFromUsing = val
         useDateLabel.text = "Useing: " + val.rawValue
     }
     
+    /**
+     Function that is called when the order-by value has been changed on the order date picker.
+     */
     func orderByChanged() {
         let orderUsing = orderUsingOptions[orderByPicker.selectedRow(inComponent: 0)]
         let orderBy = orderByOptions[orderByPicker.selectedRow(inComponent: 1)]
@@ -210,6 +234,9 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
         orderByLabel.text = "Order Using: " + orderUsing.rawValue + " By: " + orderBy.rawValue
     }
     
+    /**
+     Function called when there has been a chnge in the Show Field table view.
+     */
     func showFieldsUpdate() {
         var options = [GuardianContentShowFields]()
         var strAry: [String] = []
@@ -229,14 +256,6 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
         }
         showFieldLabel.text = str
     }
-    
-    func listStringArray(strings: [String]) -> String {
-        var out = ""
-        for s in strings {
-            out += " " + s + ","
-        }
-        return out
-    }
 
     // MARK: - Navigation
 
@@ -251,10 +270,15 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
         }
     }
     
+    /**
+     Overrided so that when the user clicks on the view the keyboard will dissapear.
+     */
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
         super.touchesBegan(touches, with: event)
     }
+    
+    // MARK: - Picker View Functions
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 2
@@ -277,6 +301,8 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         orderByChanged()
     }
+    
+    // MARK: - Table View Functions
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return showFieldOptions.count
