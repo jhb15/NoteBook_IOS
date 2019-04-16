@@ -75,7 +75,6 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
         
         orderByPicker.delegate = self; orderByPicker.dataSource = self
         
-        
         showFieldSelector.delegate = self; showFieldSelector.dataSource = self
         
     }

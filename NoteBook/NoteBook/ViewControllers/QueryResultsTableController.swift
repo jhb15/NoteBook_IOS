@@ -76,7 +76,6 @@ class QueryResultsTableController: UITableViewController {
                 offlineDataLabel.isHidden = true
             }
             
-            
             previousPageBtn.isEnabled = true
             nextPageBtn.isEnabled = true
             if response.currentPage == response.pages {
@@ -85,7 +84,7 @@ class QueryResultsTableController: UITableViewController {
             if response.currentPage == 1 {
                 previousPageBtn.isEnabled = false
             }
-            if response.pages == 1 {
+            if response.pages != nil && response.pages! < 1 {
                 previousPageBtn.isEnabled = false
                 nextPageBtn.isEnabled = false
             }
