@@ -55,6 +55,9 @@ class SettingsViewController: UIViewController {
         clearCacheBtn.isEnabled = false
         if cacheingSwitch.isOn {
             clearCacheBtn.isEnabled = true
+            cahingLabel.text = "Caching Enabled"
+        } else {
+            cahingLabel.text = "Caching Disabled"
         }
     }
     

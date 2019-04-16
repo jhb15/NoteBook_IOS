@@ -35,12 +35,12 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
                                     <navigationItem title="New Note" id="qqG-1H-q5e">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="v8L-FK-xvY">
+                                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="cancel" id="v8L-FK-xvY">
                                             <connections>
                                                 <action selector="cancelNote:" destination="Uwx-t8-gaH" id="Q9Q-gy-no8"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="PrT-TV-w1c">
+                                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="PrT-TV-w1c">
                                             <connections>
                                                 <action selector="newNote:" destination="Uwx-t8-gaH" id="hH2-pv-qgY"/>
                                             </connections>
