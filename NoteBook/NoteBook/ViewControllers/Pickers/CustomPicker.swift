@@ -2,8 +2,8 @@
 //  CustomPicker.swift
 //  NoteBook
 //
-//  Created by jhb15 on 15/04/2019.
-//  Copyright © 2019 jhb15. All rights reserved.
+//  Created by (Student Number: 140159095) on 15/04/2019.
+//  Copyright © 2019 Aberystwyth Univerity. All rights reserved.
 //
 
 import UIKit

@@ -2,8 +2,8 @@
 //  AppConfig.swift
 //  NoteBook
 //
-//  Created by jhb15 on 16/04/2019.
-//  Copyright © 2019 jhb15. All rights reserved.
+//  Created by (Student Number: 140159095) on 16/04/2019.
+//  Copyright © 2019 Aberystwyth University. All rights reserved.
 //
 
 import Foundation
