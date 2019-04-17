@@ -18,32 +18,41 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NoteBook App" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eOx-wG-Yyc">
-                                <rect key="frame" x="16" y="142" width="343" height="51.5"/>
+                                <rect key="frame" x="16" y="328" width="343" height="52"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="43"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Student Number: 140159095" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jbu-X9-lNk">
-                                <rect key="frame" x="16" y="231" width="343" height="25.5"/>
+                                <rect key="frame" x="16" y="417.5" width="343" height="26"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="for SEM2220" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gbi-9l-zlY">
-                                <rect key="frame" x="16" y="264.5" width="343" height="25.5"/>
+                                <rect key="frame" x="16" y="451.5" width="343" height="26"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splashIcon" translatesAutoresizingMaskIntoConstraints="NO" id="z6x-0W-Qlo">
+                                <rect key="frame" x="62.5" y="62" width="250" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="5wu-dP-iEb"/>
+                                    <constraint firstAttribute="width" constant="250" id="VLf-dH-Drf"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.93197457900000003" green="0.85455971880000003" blue="0.020839172990000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.93333333330000001" green="0.85098039219999999" blue="0.031372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Gbi-9l-zlY" secondAttribute="trailing" constant="16" id="1A2-Qa-dtZ"/>
-                            <constraint firstItem="eOx-wG-Yyc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="122" id="AcD-xA-5hd"/>
+                            <constraint firstItem="eOx-wG-Yyc" firstAttribute="top" secondItem="z6x-0W-Qlo" secondAttribute="bottom" constant="16" id="9Yt-Dh-Fke"/>
                             <constraint firstItem="Jbu-X9-lNk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="BQc-Tn-ZRw"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Jbu-X9-lNk" secondAttribute="trailing" constant="16" id="C47-CH-CVE"/>
+                            <constraint firstItem="z6x-0W-Qlo" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="42" id="DIU-SC-twL"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="eOx-wG-Yyc" secondAttribute="trailing" constant="16" id="Jid-bn-sZc"/>
                             <constraint firstItem="Gbi-9l-zlY" firstAttribute="top" secondItem="Jbu-X9-lNk" secondAttribute="bottom" constant="8" id="PUE-r2-k9H"/>
+                            <constraint firstItem="z6x-0W-Qlo" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="SS0-Ud-t6i"/>
                             <constraint firstItem="Gbi-9l-zlY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="T1T-Uy-Cj6"/>
                             <constraint firstItem="Jbu-X9-lNk" firstAttribute="top" secondItem="eOx-wG-Yyc" secondAttribute="bottom" constant="37.5" id="dVy-hp-79y"/>
                             <constraint firstItem="eOx-wG-Yyc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="zIK-bk-OiW"/>
@@ -56,4 +65,7 @@
             <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="splashIcon" width="1024" height="1024"/>
+    </resources>
 </document>
