@@ -51,7 +51,7 @@ class SettingsViewController: UIViewController {
     
     func updateView() {
         cacheSizeLabel.text = "Responses Cached: \(fetchedResultsController?.fetchedObjects?.count ?? 0)"
-        cacheingSwitch.isOn = defaults.bool(forKey: "isCachingOn")
+        cacheingSwitch.isOn = defaults.bool(forKey: CACHING_USER_DEFAULT_ID)
         clearCacheBtn.isEnabled = false
         if cacheingSwitch.isOn {
             clearCacheBtn.isEnabled = true
@@ -110,7 +110,7 @@ class SettingsViewController: UIViewController {
     
     @objc func cacheSwitchedOff(_ sender: UISwitch) {
         print(cacheingSwitch.isOn)
-        defaults.set(cacheingSwitch.isOn, forKey: "isCachingOn")
+        defaults.set(cacheingSwitch.isOn, forKey: CACHING_USER_DEFAULT_ID)
         updateView()
     }
     

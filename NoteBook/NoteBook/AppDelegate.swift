@@ -17,8 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        if UserDefaults.standard.object(forKey: "isCachingOn") == nil {
-            UserDefaults().set(true, forKey: "isCachingOn")
+        if UserDefaults.standard.object(forKey: CACHING_USER_DEFAULT_ID) == nil {
+            UserDefaults().set(true, forKey: CACHING_USER_DEFAULT_ID)
         }
         
         Timer.scheduledTimer(withTimeInterval: TimeInterval(60), repeats: true, block: { (timer) in

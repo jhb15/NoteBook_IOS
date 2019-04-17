@@ -8,11 +8,6 @@
 
 import UIKit
 
-let DEFAULT_PAGE = 1
-let DEFAULT_PAGE_SIZE = 10
-let MIN_PAGE_SIZE = 1
-let MAX_PAGE_SIZE = 50
-
 class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITableViewDelegate, UITableViewDataSource {
     //Content
     @IBOutlet weak var scrollView: UIScrollView!
@@ -58,8 +53,8 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
         
         scrollView.isHidden = true
         
-        pageNumberTextField.text = "1"
-        resultsPerTextField.text = "10"
+        pageNumberTextField.text = "\(DEFAULT_PAGE)"
+        resultsPerTextField.text = "\(DEFAULT_PAGE_SIZE)"
         
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none
@@ -139,7 +134,7 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
             performSegue(withIdentifier: "ShowResults", sender: nil)
             
         } else {
-            print("Invalid Input, Canceling") //TODO More Detailed Validation Error Messages Needed
+            print("Invalid Input, Stopping Request")
             alertUser(title: "InValid Input", message: errorMsgs.joined(separator: "\n\n"))
         }
     }
@@ -181,39 +176,45 @@ class GuardianQueryController: UIViewController, UIPickerViewDelegate, UIPickerV
      Function that is triggered when the from date has been changed on the date picker.
      */
     @objc func fromDateChanged(_ sender: UIDatePicker) {
-        fromDate = sanitizeDate(date: sender.date)
-        fromDateLabel.text = "Date From: " + dateFormatter.string(from: sender.date)
-        toDatePicker.minimumDate = sender.date
+        if let date = sanitizeDate(date: sender.date) {
+            fromDate = date
+            fromDateLabel.text = "Date From: " + dateFormatter.string(from: date)
+            toDatePicker.minimumDate = date
+        }
     }
     
     /**
      Function that is triggered when the to date has been changed on the date picker.
      */
     @objc func toDateChanged(_ sender: UIDatePicker) {
-        toDate = sanitizeDate(date: sender.date)
-        toDateLabel.text = "Date To: " + dateFormatter.string(from: sender.date)
-        fromDatePicker.maximumDate = sender.date
+        if let date = sanitizeDate(date: sender.date) {
+            toDate = date
+            toDateLabel.text = "Date To: " + dateFormatter.string(from: date)
+            fromDatePicker.maximumDate = date
+        }
     }
     
     /**
      Function for setting the time of a date field to a default value. Couldn't find a better way of doing
      this wierdly. Its needed to stop duplicte history records when the difference is just the time in the
      Date object.
-     //TODO improve if there is a better way
+     //TODO probably could be improved -- not sure how
      */
     func sanitizeDate(date: Date) -> Date? {
-        let df = DateFormatter()
-        
         let calendar = Calendar.current
         let day = calendar.component(.day, from: date)
         let month = calendar.component(.month, from: date)
         let year = calendar.component(.year, from: date)
         
-        let dateStr = "\(day)/\(month)/\(year)"
+        let dateStr = "\(day)/\(month)/\(year) 00:00:00"
         
-        df.dateFormat = "dd/MM/yyyy"
+        dateFormatter.dateFormat = DATE_FORMAT_WITH_TIME
+        let cleanDate = dateFormatter.date(from: dateStr)
+        dateFormatter.dateFormat = nil
         
-        return df.date(from: dateStr)
+        print(cleanDate!)
+        
+        return cleanDate
     }
     
     /**

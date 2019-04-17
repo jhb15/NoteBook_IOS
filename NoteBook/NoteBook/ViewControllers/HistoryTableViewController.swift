@@ -26,7 +26,7 @@ class HistoryTableViewController: UITableViewController {
         super.viewDidLoad()
         
         clearBtn.isEnabled = false
-        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
+        dateFormatter.dateFormat = DATE_FORMAT_WITH_TIME
 
         guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
             print("error - unable to access failure")
@@ -135,8 +135,10 @@ class HistoryTableViewController: UITableViewController {
         
         if let q = query?.query { cell.searchQueryLabel?.text = "Search Text: " + q }
         if let p = query?.page, let ps = query?.pageSize { cell.pageInfoLabel.text = "Page: \(p) Page Size: \(ps)"}
+        dateFormatter.dateFormat = DATE_FORMAT_NO_TIME
         if let df = query?.dateFrom { cell.dateFromLabel?.text = "Date Form: " + dateFormatter.string(from: df) }
         if let dt = query?.dateTo { cell.dateToLabel?.text = "Date To: " + dateFormatter.string(from: dt) }
+        dateFormatter.dateFormat = DATE_FORMAT_WITH_TIME
         if let ud = query?.useDate { cell.dateUsing?.text = "Date Using " + ud }
         if let ob = query?.orderBy { cell.orderLabel?.text = "Order By: " + ob }
         if let od = query?.orderDate { cell.orderDate?.text = "Order Using: " + od }

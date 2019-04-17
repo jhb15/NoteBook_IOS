@@ -9,6 +9,9 @@
 import UIKit
 import CoreData
 
+/**
+ This class is purely for debugging, not going to be useful in a final product.
+ */
 class CacheTableViewController: UITableViewController {
 
     var managedContext: NSManagedObjectContext?

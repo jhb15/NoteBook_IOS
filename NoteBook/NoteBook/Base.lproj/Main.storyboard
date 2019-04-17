@@ -879,7 +879,7 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.93197457900000003" green="0.85455971880000003" blue="0.020839172990000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <connections>
-                                    <segue destination="vT9-tm-smo" kind="show" id="JZ5-kz-MZh"/>
+                                    <segue destination="vT9-tm-smo" kind="show" identifier="NoteDetailSegue" id="JZ5-kz-MZh"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -1155,7 +1155,7 @@
                                     <constraint firstAttribute="bottom" secondItem="OdS-FM-NIE" secondAttribute="bottom" id="tLp-ww-Del"/>
                                 </constraints>
                             </scrollView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Created/Updated" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fw8-oS-lxi">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Created/Updated" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fw8-oS-lxi">
                                 <rect key="frame" x="16" y="171" width="343" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
@@ -1297,6 +1297,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="cIT-KK-NpE"/>
-        <segue reference="5Ol-nk-ZRt"/>
+        <segue reference="dGf-5v-fLU"/>
     </inferredMetricsTieBreakers>
 </document>

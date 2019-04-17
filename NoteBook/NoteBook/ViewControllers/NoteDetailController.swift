@@ -45,7 +45,7 @@ class NoteDetailController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func showData() {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
+        dateFormatter.dateFormat = DATE_FORMAT_WITH_TIME
         
         linksTable.delegate = self; linksTable.dataSource = self
         
@@ -53,7 +53,7 @@ class NoteDetailController: UIViewController, UITableViewDelegate, UITableViewDa
         var times = ""
         if let cre = noteItem?.created_at,
             let upd = noteItem?.updated_at {
-            times = "Created: " + dateFormatter.string(from: cre) + " Updated: " + dateFormatter.string(from: upd)
+            times = "Created: " + dateFormatter.string(from: cre) + " \nUpdated: " + dateFormatter.string(from: upd)
         } else {
             times = "Created: err Updated: err"
         }
@@ -71,13 +71,13 @@ class NoteDetailController: UIViewController, UITableViewDelegate, UITableViewDa
         contentTextArea.isEditable = !contentTextArea.isEditable
         if isEditable {
             editBtn.setTitle("Edit Note", for: .normal)
-            titleLabel.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.8509803922, blue: 0.03137254902, alpha: 1)
-            contentTextArea.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.8509803922, blue: 0.03137254902, alpha: 1)
+            titleLabel.backgroundColor = PRIMARY_COLOUR
+            contentTextArea.backgroundColor = PRIMARY_COLOUR
             saveChanges()
         } else {
             editBtn.setTitle("Save Changes", for: .normal)
-            titleLabel.backgroundColor = #colorLiteral(red: 0.9050896764, green: 0.9237543344, blue: 0.7370834947, alpha: 1)
-            contentTextArea.backgroundColor = #colorLiteral(red: 0.9050896764, green: 0.9237543344, blue: 0.7370834947, alpha: 1)
+            titleLabel.backgroundColor = SECONDARY_COLOUR
+            contentTextArea.backgroundColor = SECONDARY_COLOUR
         }
         isEditable = !isEditable
         linksTable.reloadData()

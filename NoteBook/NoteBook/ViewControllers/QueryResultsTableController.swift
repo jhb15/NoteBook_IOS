@@ -168,12 +168,12 @@ class QueryResultsTableController: UITableViewController {
         let qPredicate = NSPredicate(format: "query == %@", searchText!)
         var pPredicate = NSPredicate(format: "page == %@", NSNumber(value: Int32(0)))
         var psPredicate = NSPredicate(format: "pageSize == %@", NSNumber(value: Int32(0)))
-        var dfPredicate = NSPredicate(format: "dateFrom == %@",  0)
-        var dtPredicate = NSPredicate(format: "dateTo == %@", 0)
-        var udPredicate = NSPredicate(format: "useDate == %@", 0)
-        var obPredicate = NSPredicate(format: "orderBy == %@",0)
-        var odPredicate = NSPredicate(format: "orderDate == %@", 0)
-        var sfPredicate = NSPredicate(format: "showFields == %@", 0) //0 should mean nil/null
+        var dfPredicate = NSPredicate(format: "dateFrom == %@",  0) //0 means nil
+        var dtPredicate = NSPredicate(format: "dateTo == %@", 0)    //0 means nil
+        var udPredicate = NSPredicate(format: "useDate == %@", 0)   //0 means nil
+        var obPredicate = NSPredicate(format: "orderBy == %@",0)    //0 means nil
+        var odPredicate = NSPredicate(format: "orderDate == %@", 0) //0 means nil
+        var sfPredicate = NSPredicate(format: "showFields == %@", 0)//0 means nil
         
         if isFiltered && filters != nil {
             
@@ -223,8 +223,8 @@ class QueryResultsTableController: UITableViewController {
             if let filt = filters {
                 historyRecord.page = Int32(filt.page ?? 0)
                 historyRecord.pageSize = Int32(filt.pageSize ?? 0)
-                historyRecord.dateFrom = filt.fromDate
-                historyRecord.dateTo = filt.toDate
+                historyRecord.dateFrom = filt.fromDate ?? nil
+                historyRecord.dateTo = filt.toDate ?? nil
                 historyRecord.orderBy = filt.orderBy?.rawValue ?? nil
                 historyRecord.orderDate = filt.orderDate?.rawValue ?? nil
                 historyRecord.useDate = filt.useDate?.rawValue ?? nil
@@ -295,7 +295,7 @@ class QueryResultsTableController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ResultCell", for: indexPath) as! ResultTableCell
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
+        dateFormatter.dateFormat = DATE_FORMAT_WITH_TIME
         
         if let result = resultsIn!.response.results?[indexPath.row] {
             cell.webTitleLabel.text = result.webTitle

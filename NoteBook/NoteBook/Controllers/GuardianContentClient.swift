@@ -70,7 +70,7 @@ class GuardianContentClient {
     
     func performDataTask(with urlString: String,
                          withCallback callback: @escaping (_ data: GuardianOpenPlatformData?, _ fromCache: Bool) -> Void) throws  {
-        let isCachingOn = defaults.bool(forKey: "isCachingOn")
+        let isCachingOn = defaults.bool(forKey: CACHING_USER_DEFAULT_ID)
         
         guard let value = urlString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed),
               let url = URL(string: value) else {
@@ -94,7 +94,7 @@ class GuardianContentClient {
             return
         }
         
-        let task = session.dataTask(with: url, debug: false) {
+        let task = session.dataTask(with: url, debug: DEBUG) {
             (data: Data?, response: URLResponse?, error: Error?) -> Void in
             
             if let downloadedData = data {

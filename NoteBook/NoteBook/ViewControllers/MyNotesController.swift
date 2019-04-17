@@ -10,8 +10,7 @@ import UIKit
 import CoreData
 
 /**
- Help for search bar came from: https://www.ioscreator.com/tutorials/add-search-table-view-ios-tutorial
- this also helped with defining the predicate: https://stackoverflow.com/questions/10611362/ios-coredata-nspredicate-to-query-multiple-properties-at-once#10614749
+ Class connected to the My Notes Table View in the storyboard.
  */
 class MyNotesController: UITableViewController, UISearchResultsUpdating {
     
@@ -21,9 +20,14 @@ class MyNotesController: UITableViewController, UISearchResultsUpdating {
     var filteredTableData = [Note]()
     var resultSearchController = UISearchController()
     
+    var editIndexPath: IndexPath?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // This part of the code initalizes the search bar, I had no idea how to do this. But thanks to
+        // a tutorial by Arthur Knopper at https://www.ioscreator.com/tutorials/add-search-table-view-ios-tutorial
+        // I added this.
         resultSearchController = ({
             let controller = UISearchController(searchResultsController: nil)
             controller.searchResultsUpdater = self
@@ -79,7 +83,6 @@ class MyNotesController: UITableViewController, UISearchResultsUpdating {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         if resultSearchController.isActive {
             return filteredTableData.count
         }
@@ -101,12 +104,12 @@ class MyNotesController: UITableViewController, UISearchResultsUpdating {
      }
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let edit = UITableViewRowAction(style: .normal, title: "Edit") {
+        /*let edit = UITableViewRowAction(style: .normal, title: "Edit") { //Disabled due to not functioning properly. Need to fix
             action, index in
-            //Plan has changed slightly
-            //self.performSegue(withIdentifier: "NewEditNoteSegue", sender: nil)
+            self.editIndexPath = index
+            self.performSegue(withIdentifier: "NoteDetailSegue", sender: action) For some reason prepare for segue isn't called??
         }
-        edit.backgroundColor = UIColor.lightGray
+        edit.backgroundColor = UIColor.lightGray*/
         let delete = UITableViewRowAction(style: .normal, title: "Delete") {
             action, index in
             if let note = self.fetchedResultsController?.object(at: index),
@@ -123,7 +126,7 @@ class MyNotesController: UITableViewController, UISearchResultsUpdating {
             }
         }
         delete.backgroundColor = UIColor.red
-        return [delete, edit]
+        return [delete/*, edit*/]
     }
     
     func performFetchForController() {
@@ -137,10 +140,15 @@ class MyNotesController: UITableViewController, UISearchResultsUpdating {
         }
     }
     
+    /**
+     This function is used to update the list of notes based on what is entered into the search bar. A lot of help
+     for this came from users Onur Var and Peter Kreinz on Stack Overflow.
+     
+     Answer can be found at: https://stackoverflow.com/a/34213751
+     */
     func updateSearchResults(for searchController: UISearchController) {
         filteredTableData.removeAll(keepingCapacity: false)
         
-        //TODO Filtering
         let titlePredicate = NSPredicate(format: "title CONTAINS[c] %@", searchController.searchBar.text!)
         let contentPredicate = NSPredicate(format: "content CONTAINS[c] %@", searchController.searchBar.text!)
         let searchPredicate = NSCompoundPredicate(type: .or, subpredicates: [titlePredicate, contentPredicate])
@@ -152,41 +160,6 @@ class MyNotesController: UITableViewController, UISearchResultsUpdating {
         tableView.reloadData()
     }
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -197,6 +170,13 @@ class MyNotesController: UITableViewController, UISearchResultsUpdating {
             let ctx = managedContext {
             view.managedContext = ctx
             view.noteItem = fetchedResultsController?.object(at: indexPath)
+            /*if let action = sender as? UITableViewRowAction,
+                let title = action.title,
+                title == "Edit" {
+                view.noteItem = fetchedResultsController?.object(at: editIndexPath!)
+                view.isEditable = true
+            }*/
+            
         }
         
         resultSearchController.isActive = false
