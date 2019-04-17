@@ -56,9 +56,9 @@ class MyNotesController: UITableViewController, UISearchResultsUpdating {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        var contentOffset: CGPoint = tableView.contentOffset
+        /*var contentOffset: CGPoint = tableView.contentOffset
         contentOffset.y += (tableView.tableHeaderView?.frame)!.height
-        self.tableView.contentOffset = contentOffset
+        self.tableView.contentOffset = contentOffset*/
         
         performFetchForController()
     }
@@ -90,15 +90,22 @@ class MyNotesController: UITableViewController, UISearchResultsUpdating {
     }
     
      override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "NoteCell", for: indexPath)
-     
+        let cell = tableView.dequeueReusableCell(withIdentifier: "NoteCell", for: indexPath) as! NoteTableViewCell
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = DATE_FORMAT_WITH_TIME
+        
+        let note: Note
         if resultSearchController.isActive {
-            let note = filteredTableData[indexPath.row]
-            cell.textLabel?.text = note.title ?? "Unknown"
+            note = filteredTableData[indexPath.row]
         } else {
-            let note = fetchedResultsController?.object(at: indexPath)
-            cell.textLabel?.text = note?.title ?? "Unknown"
+            note = (fetchedResultsController?.object(at: indexPath))!
         }
+        
+        cell.noteTitleLabel?.text = note.title ?? "Unknown"
+        var createdStr = "Unknown"; var updatedStr = "Unknown"
+        if let created = note.created_at { createdStr = dateFormatter.string(from: created) }
+        if let updated = note.updated_at { updatedStr = dateFormatter.string(from: updated) }
+        cell.noteTimestampsLabel?.text = "Created: " + createdStr +  " Updated: " + updatedStr
      
         return cell
      }

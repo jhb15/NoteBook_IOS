@@ -870,16 +870,41 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93197457900000003" green="0.85455971880000003" blue="0.020839172990000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NoteCell" id="pzW-dU-yTW">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NoteCell" rowHeight="92" id="Q0X-1Q-3VZ" customClass="NoteTableViewCell" customModule="NoteBook" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="92"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pzW-dU-yTW" id="FWR-g3-Qsz">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Q0X-1Q-3VZ" id="YCA-dw-xg1">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="91.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Created Edited" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="avQ-zO-b6m">
+                                            <rect key="frame" x="16" y="65" width="343" height="16"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="NoteTitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UDl-pp-Ihl">
+                                            <rect key="frame" x="16" y="11" width="343" height="46"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="avQ-zO-b6m" firstAttribute="top" secondItem="UDl-pp-Ihl" secondAttribute="bottom" constant="8" id="6NS-hc-SB0"/>
+                                        <constraint firstItem="avQ-zO-b6m" firstAttribute="trailing" secondItem="YCA-dw-xg1" secondAttribute="trailingMargin" id="WH3-pR-Huv"/>
+                                        <constraint firstItem="avQ-zO-b6m" firstAttribute="leading" secondItem="YCA-dw-xg1" secondAttribute="leadingMargin" id="XmG-VF-bPv"/>
+                                        <constraint firstItem="UDl-pp-Ihl" firstAttribute="top" secondItem="YCA-dw-xg1" secondAttribute="topMargin" id="h2U-tb-gwr"/>
+                                        <constraint firstItem="avQ-zO-b6m" firstAttribute="bottom" secondItem="YCA-dw-xg1" secondAttribute="bottomMargin" id="lrE-st-7Z7"/>
+                                        <constraint firstItem="UDl-pp-Ihl" firstAttribute="trailing" secondItem="YCA-dw-xg1" secondAttribute="trailingMargin" id="rwG-Eo-gHC"/>
+                                        <constraint firstItem="UDl-pp-Ihl" firstAttribute="leading" secondItem="YCA-dw-xg1" secondAttribute="leadingMargin" id="uku-Im-YvZ"/>
+                                    </constraints>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" red="0.93197457900000003" green="0.85455971880000003" blue="0.020839172990000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.90850696710000001" green="0.92308937820000003" blue="0.75596813939999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <connections>
-                                    <segue destination="vT9-tm-smo" kind="show" identifier="NoteDetailSegue" id="JZ5-kz-MZh"/>
+                                    <outlet property="noteTimestampsLabel" destination="avQ-zO-b6m" id="mM4-0e-IAS"/>
+                                    <outlet property="noteTitleLabel" destination="UDl-pp-Ihl" id="hCm-Hc-4eO"/>
+                                    <segue destination="vT9-tm-smo" kind="show" id="WZg-FA-9R2"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -898,7 +923,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HOg-1b-DJa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="566" y="-958"/>
+            <point key="canvasLocation" x="565.60000000000002" y="-958.4707646176912"/>
         </scene>
         <!--About-->
         <scene sceneID="qkV-cr-R7g">
@@ -1268,14 +1293,41 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93333333330000001" green="0.85098039219999999" blue="0.031372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NoteCell" id="BlH-9y-kWa">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NoteCell" rowHeight="92" id="BlH-9y-kWa" customClass="NoteTableViewCell" customModule="NoteBook" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="92"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BlH-9y-kWa" id="VM8-DT-PZQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="91.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Created Edited" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qNW-vW-eBC">
+                                            <rect key="frame" x="16" y="65" width="343" height="16"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="NoteTitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MEJ-kd-has">
+                                            <rect key="frame" x="16" y="11" width="343" height="46"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="qNW-vW-eBC" firstAttribute="trailing" secondItem="VM8-DT-PZQ" secondAttribute="trailingMargin" id="3Mk-L0-vax"/>
+                                        <constraint firstItem="qNW-vW-eBC" firstAttribute="top" secondItem="MEJ-kd-has" secondAttribute="bottom" constant="8" id="6oo-z3-vNF"/>
+                                        <constraint firstItem="qNW-vW-eBC" firstAttribute="leading" secondItem="VM8-DT-PZQ" secondAttribute="leadingMargin" id="CnS-rX-nZr"/>
+                                        <constraint firstItem="MEJ-kd-has" firstAttribute="leading" secondItem="VM8-DT-PZQ" secondAttribute="leadingMargin" id="JG7-iU-EMX"/>
+                                        <constraint firstItem="qNW-vW-eBC" firstAttribute="bottom" secondItem="VM8-DT-PZQ" secondAttribute="bottomMargin" id="UzP-KN-Ax6"/>
+                                        <constraint firstItem="MEJ-kd-has" firstAttribute="top" secondItem="VM8-DT-PZQ" secondAttribute="topMargin" id="cf9-Tc-Kz9"/>
+                                        <constraint firstItem="MEJ-kd-has" firstAttribute="trailing" secondItem="VM8-DT-PZQ" secondAttribute="trailingMargin" id="fwb-mB-m6v"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.90850696710000001" green="0.92308937820000003" blue="0.75596813939999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <connections>
+                                    <outlet property="noteTimestampsLabel" destination="qNW-vW-eBC" id="96x-hx-L3B"/>
+                                    <outlet property="noteTitleLabel" destination="MEJ-kd-has" id="fyi-gP-bds"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -1286,7 +1338,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gls-vI-q0x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2970" y="-1866"/>
+            <point key="canvasLocation" x="2968.8000000000002" y="-1866.1169415292354"/>
         </scene>
     </scenes>
     <resources>

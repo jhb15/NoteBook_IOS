@@ -63,18 +63,27 @@ class SelectNoteTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "NoteCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "NoteCell", for: indexPath) as! NoteTableViewCell
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = DATE_FORMAT_WITH_TIME
         
-        let note = fetchedResultsNotes?.object(at: indexPath)
-        
-        if link != nil && (note?.links?.contains(link as Any)) ?? false {  //Disable Cell if Non Linkable
-            cell.isUserInteractionEnabled = false
-            cell.textLabel?.isEnabled = false
-            cell.textLabel?.text = note!.title! + " -- (Already Linked)"
-        } else {
-            cell.isUserInteractionEnabled = true
-            cell.textLabel?.isEnabled = true
-            cell.textLabel?.text = note!.title
+        if let note = fetchedResultsNotes?.object(at: indexPath) {
+            cell.noteTitleLabel?.text = note.title
+            var createdStr = "Unknown"; var updatedStr = "Unknown"
+            if let created = note.created_at { createdStr = dateFormatter.string(from: created) }
+            if let updated = note.updated_at { updatedStr = dateFormatter.string(from: updated) }
+            cell.noteTimestampsLabel?.text = "Created: " + createdStr +  " Updated: " + updatedStr
+            
+            if link != nil && (note.links?.contains(link as Any)) ?? false {  //Disable Cell if Non Linkable
+                cell.isUserInteractionEnabled = false
+                cell.noteTitleLabel?.isEnabled = false
+                cell.noteTimestampsLabel?.isEnabled = false
+                cell.noteTitleLabel?.text?.append(" -- (Already Linked)")
+            } else {
+                cell.isUserInteractionEnabled = true
+                cell.noteTitleLabel?.isEnabled = true
+                cell.noteTimestampsLabel?.isEnabled = true
+            }
         }
 
         return cell

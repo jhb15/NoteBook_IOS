@@ -26,6 +26,8 @@
 		C141FCA42260DCE6007E730A /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C141FCA32260DCE6007E730A /* HistoryTableViewController.swift */; };
 		C141FCA62260E7B4007E730A /* SearchHistoryFilteredTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C141FCA52260E7B4007E730A /* SearchHistoryFilteredTableViewCell.swift */; };
 		C141FCA8226104DA007E730A /* SearchHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C141FCA7226104DA007E730A /* SearchHistoryTableViewCell.swift */; };
+		C1574E762267857900076F7F /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1574E752267857900076F7F /* NoteTableViewCell.swift */; };
+		C1574E78226785D600076F7F /* SlectNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1574E77226785D600076F7F /* SlectNoteTableViewCell.swift */; };
 		C182FFAB22536EE900B8CF97 /* NewNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C182FFAA22536EE900B8CF97 /* NewNoteController.swift */; };
 		C182FFAD22536EFB00B8CF97 /* AboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C182FFAC22536EFB00B8CF97 /* AboutController.swift */; };
 		C182FFAF22536F2C00B8CF97 /* MyNotesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C182FFAE22536F2C00B8CF97 /* MyNotesController.swift */; };
@@ -76,6 +78,8 @@
 		C141FCA32260DCE6007E730A /* HistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
 		C141FCA52260E7B4007E730A /* SearchHistoryFilteredTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryFilteredTableViewCell.swift; sourceTree = "<group>"; };
 		C141FCA7226104DA007E730A /* SearchHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryTableViewCell.swift; sourceTree = "<group>"; };
+		C1574E752267857900076F7F /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
+		C1574E77226785D600076F7F /* SlectNoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlectNoteTableViewCell.swift; sourceTree = "<group>"; };
 		C182FFAA22536EE900B8CF97 /* NewNoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNoteController.swift; sourceTree = "<group>"; };
 		C182FFAC22536EFB00B8CF97 /* AboutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutController.swift; sourceTree = "<group>"; };
 		C182FFAE22536F2C00B8CF97 /* MyNotesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNotesController.swift; sourceTree = "<group>"; };
@@ -156,6 +160,8 @@
 				C141FCA52260E7B4007E730A /* SearchHistoryFilteredTableViewCell.swift */,
 				C141FCA7226104DA007E730A /* SearchHistoryTableViewCell.swift */,
 				C1169D55226518FB008B4C45 /* SettingsViewController.swift */,
+				C1574E752267857900076F7F /* NoteTableViewCell.swift */,
+				C1574E77226785D600076F7F /* SlectNoteTableViewCell.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -366,6 +372,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C127C86222664CEC000F4C22 /* URLSession+extension.swift in Sources */,
+				C1574E762267857900076F7F /* NoteTableViewCell.swift in Sources */,
 				C182FFAF22536F2C00B8CF97 /* MyNotesController.swift in Sources */,
 				C128A278225D137700722962 /* GuardianContentDataTypes.swift in Sources */,
 				C1266229225BE0110078C5C6 /* GuardianQueryController.swift in Sources */,
@@ -375,6 +382,7 @@
 				C141FCA42260DCE6007E730A /* HistoryTableViewController.swift in Sources */,
 				C182FFAB22536EE900B8CF97 /* NewNoteController.swift in Sources */,
 				C1169D542264F13C008B4C45 /* CustomPicker.swift in Sources */,
+				C1574E78226785D600076F7F /* SlectNoteTableViewCell.swift in Sources */,
 				C127C851226623F2000F4C22 /* AppConfig.swift in Sources */,
 				C13C0412225E0B7200989B1B /* QueryResultsTableController.swift in Sources */,
 				C128A27B225D1EFC00722962 /* ShowFieldOptCell.swift in Sources */,
