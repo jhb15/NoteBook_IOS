@@ -8,15 +8,20 @@
 
 import UIKit
 
-class GuardianQueryViewController: UIViewController {
+class GuardianQueryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var queryTextField: UITextField!
     @IBOutlet weak var addFiltersBtn: UIButton!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var filtersTableView: UITableView!
+    
+    let reuseIDd = ["filterCell", "datePickerCell", "pickerCell"]
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        filtersTableView.dataSource = self
+        filtersTableView.delegate = self
 
         // Do any additional setup after loading the view.
     }
@@ -31,6 +36,22 @@ class GuardianQueryViewController: UIViewController {
     
     @IBAction func historyAction(_ sender: Any) {
         
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return reuseIDd.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIDd[indexPath.row], for: indexPath)
+        
+        
+        
+        return cell
     }
     
     /*

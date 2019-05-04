@@ -95,7 +95,6 @@
                                 <state key="normal" title="Search Guardian Website"/>
                                 <connections>
                                     <action selector="executeSearchAction:" destination="Rrx-A2-l2b" eventType="touchUpInside" id="Xu9-lb-1Ug"/>
-                                    <action selector="searchGuardianAPI:" destination="Rrx-A2-l2b" eventType="touchUpInside" id="4My-2t-N2O"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search Text..." textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="4sR-fN-Umk">
@@ -118,7 +117,6 @@
                                 <state key="normal" title="Add Filters"/>
                                 <connections>
                                     <action selector="addFiltersAction:" destination="Rrx-A2-l2b" eventType="touchUpInside" id="PaQ-K3-JMX"/>
-                                    <action selector="toggleFilters:" destination="Rrx-A2-l2b" eventType="touchUpInside" id="3XS-zJ-sj3"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NQz-Ch-6si">
@@ -157,7 +155,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.90699493890000005" green="0.92386573549999995" blue="0.73698765040000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="175" id="Wp1-CX-Ddm">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="pickerCell" rowHeight="175" id="Wp1-CX-Ddm">
                                         <rect key="frame" x="0.0" y="247" width="343" height="175"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Wp1-CX-Ddm" id="LLB-03-3d9">
@@ -215,9 +213,8 @@
                     <size key="freeformSize" width="375" height="1451"/>
                     <connections>
                         <outlet property="addFiltersBtn" destination="9ub-vN-e7v" id="nA8-de-psj"/>
+                        <outlet property="filtersTableView" destination="NQz-Ch-6si" id="0if-WK-ewi"/>
                         <outlet property="queryTextField" destination="4sR-fN-Umk" id="Zug-as-yXw"/>
-                        <outlet property="serchText" destination="4sR-fN-Umk" id="6sH-Ja-Hh5"/>
-                        <outlet property="tableView" destination="NQz-Ch-6si" id="74k-Be-96s"/>
                         <segue destination="82d-Fr-Xvw" kind="show" identifier="ShowResults" id="dGf-5v-fLU"/>
                     </connections>
                 </viewController>
