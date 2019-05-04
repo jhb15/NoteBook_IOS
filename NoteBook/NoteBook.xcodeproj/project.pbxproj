@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84EA30B3227DDE5900AD9703 /* GuardianQueryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EA30B2227DDE5900AD9703 /* GuardianQueryViewController.swift */; };
 		C1169D542264F13C008B4C45 /* CustomPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1169D532264F13C008B4C45 /* CustomPicker.swift */; };
 		C1169D56226518FB008B4C45 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1169D55226518FB008B4C45 /* SettingsViewController.swift */; };
-		C1266229225BE0110078C5C6 /* GuardianQueryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1266228225BE0110078C5C6 /* GuardianQueryController.swift */; };
+		C1266229225BE0110078C5C6 /* GuardianQueryControllerOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1266228225BE0110078C5C6 /* GuardianQueryControllerOld.swift */; };
 		C127C851226623F2000F4C22 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = C127C850226623F2000F4C22 /* AppConfig.swift */; };
 		C127C86222664CEC000F4C22 /* URLSession+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C127C86122664CEC000F4C22 /* URLSession+extension.swift */; };
 		C128A278225D137700722962 /* GuardianContentDataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C128A276225D137600722962 /* GuardianContentDataTypes.swift */; };
@@ -59,9 +60,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		84EA30B2227DDE5900AD9703 /* GuardianQueryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardianQueryViewController.swift; sourceTree = "<group>"; };
 		C1169D532264F13C008B4C45 /* CustomPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPicker.swift; sourceTree = "<group>"; };
 		C1169D55226518FB008B4C45 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		C1266228225BE0110078C5C6 /* GuardianQueryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardianQueryController.swift; sourceTree = "<group>"; };
+		C1266228225BE0110078C5C6 /* GuardianQueryControllerOld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardianQueryControllerOld.swift; sourceTree = "<group>"; };
 		C127C850226623F2000F4C22 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		C127C86122664CEC000F4C22 /* URLSession+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLSession+extension.swift"; sourceTree = "<group>"; };
 		C128A276225D137600722962 /* GuardianContentDataTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuardianContentDataTypes.swift; sourceTree = "<group>"; };
@@ -145,7 +147,7 @@
 			children = (
 				C1169D522264F10D008B4C45 /* Pickers */,
 				C1295D192263909F0077F3E3 /* CacheTableViewController.swift */,
-				C1266228225BE0110078C5C6 /* GuardianQueryController.swift */,
+				C1266228225BE0110078C5C6 /* GuardianQueryControllerOld.swift */,
 				C13C0411225E0B7200989B1B /* QueryResultsTableController.swift */,
 				C13C0416225E364D00989B1B /* ResultDetailViewController.swift */,
 				C13C0418225E5EF100989B1B /* SelectNoteTableViewController.swift */,
@@ -162,6 +164,7 @@
 				C1169D55226518FB008B4C45 /* SettingsViewController.swift */,
 				C1574E752267857900076F7F /* NoteTableViewCell.swift */,
 				C1574E77226785D600076F7F /* SlectNoteTableViewCell.swift */,
+				84EA30B2227DDE5900AD9703 /* GuardianQueryViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -375,10 +378,11 @@
 				C1574E762267857900076F7F /* NoteTableViewCell.swift in Sources */,
 				C182FFAF22536F2C00B8CF97 /* MyNotesController.swift in Sources */,
 				C128A278225D137700722962 /* GuardianContentDataTypes.swift in Sources */,
-				C1266229225BE0110078C5C6 /* GuardianQueryController.swift in Sources */,
+				C1266229225BE0110078C5C6 /* GuardianQueryControllerOld.swift in Sources */,
 				C128A279225D137700722962 /* GuardianContentClient.swift in Sources */,
 				C13C041B225E86F700989B1B /* WebViewController.swift in Sources */,
 				C1295D13226351130077F3E3 /* UrlResponseCache.swift in Sources */,
+				84EA30B3227DDE5900AD9703 /* GuardianQueryViewController.swift in Sources */,
 				C141FCA42260DCE6007E730A /* HistoryTableViewController.swift in Sources */,
 				C182FFAB22536EE900B8CF97 /* NewNoteController.swift in Sources */,
 				C1169D542264F13C008B4C45 /* CustomPicker.swift in Sources */,
